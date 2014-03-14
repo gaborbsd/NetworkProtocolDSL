@@ -7,12 +7,15 @@ start
 
 vardef
 :
-	name = ID ':' type = VARTYPE # variableDef
+	name = ID ':' type = VARTYPE
+	(
+		LPAREN len = NUMBER RPAREN
+	)? # variableDef
 ;
 
 VARTYPE
 :
-	'int' LPAREN NUMBER RPAREN
+	'int'
 	| 'byte'
 	| 'char'
 	| 'timestamp'
@@ -25,7 +28,7 @@ ID
 
 NUMBER
 :
-	[1-9][0-9]+
+	[1-9] [0-9]+
 ;
 
 LBRACE

@@ -9,6 +9,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import org.antlr.v4.runtime.ANTLRFileStream;
 import org.antlr.v4.runtime.CharStream;
@@ -19,6 +21,9 @@ import org.antlr.v4.runtime.tree.ParseTreeWalker;
 public class NetworkProtocolGenerator extends NetworkProtocolBaseListener {
 	File basePath;
 	PrintWriter writer;
+
+	private Map<String, VariableProps> varMap;
+	private byte totalBytes;
 
 	public static String getJavaType(String type) {
 		switch (type) {
@@ -34,8 +39,25 @@ public class NetworkProtocolGenerator extends NetworkProtocolBaseListener {
 		return "byte";
 	}
 
+	public static byte getJavaDefaultLen(String type) {
+		switch (type) {
+		case "int":
+			return Integer.SIZE;
+		case "byte":
+			return Byte.SIZE;
+		case "char":
+			return Character.SIZE;
+		case "timestamp":
+			return Long.SIZE;
+		}
+		return 0;
+	}
+
 	@Override
 	public void enterProtocol(ProtocolContext ctx) {
+		varMap = new LinkedHashMap<>();
+		totalBytes = 0;
+
 		String fileName = ctx.name.getText() + ".java";
 
 		File curFile = new File(basePath, fileName);
@@ -63,6 +85,19 @@ public class NetworkProtocolGenerator extends NetworkProtocolBaseListener {
 	public void enterVariableDef(VariableDefContext ctx) {
 		String type = getJavaType(ctx.type.getText());
 		String name = ctx.name.getText();
+		String len = ctx.len.getText();
+
+		VariableProps props = new VariableProps();
+		props.setType(type);
+		if (len != null && !len.equals("")) {
+			byte byteLen = Byte.parseByte(len);
+			props.setByteLen(byteLen);
+			totalBytes += byteLen;
+		} else {
+			totalBytes += getJavaDefaultLen(type);
+		}
+		varMap.put(name, props);
+
 		writer.append("\tprivate " + type + ' ' + name + ";\n\n");
 		writer.append("\tpublic " + type + " get"
 				+ GeneratorUtil.capitalizeFirst(name) + "() {\n");
