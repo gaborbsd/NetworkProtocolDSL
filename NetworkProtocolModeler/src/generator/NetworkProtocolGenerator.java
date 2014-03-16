@@ -5,11 +5,10 @@ import generator.NetworkProtocolParser.VariableDefContext;
 import generator.util.GeneratorUtil;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.lang.reflect.Type;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -19,16 +18,25 @@ import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
+import org.eclipse.jdt.core.ToolFactory;
+import org.eclipse.jdt.core.formatter.CodeFormatter;
+import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.jface.text.Document;
+import org.eclipse.jface.text.IDocument;
+import org.eclipse.text.edits.MalformedTreeException;
+import org.eclipse.text.edits.TextEdit;
 
 import runtime.VariableProps;
 
 public class NetworkProtocolGenerator extends NetworkProtocolBaseListener {
-	File basePath;
-	PrintWriter writer;
+	private File basePath;
+	private File curFile;
+	private PrintWriter writer;
+	private StringWriter stringWriter;
 
 	private List<VariableProps> varList;
 
-	public static Type getJavaType(String type) {
+	public static Class<?> getJavaType(String type) {
 		switch (type) {
 		case "int":
 			return Integer.class;
@@ -57,8 +65,8 @@ public class NetworkProtocolGenerator extends NetworkProtocolBaseListener {
 	}
 
 	public void generateGetSerializationOrder() {
-		writer.append("\tpublic VariableProps[] getSerializationOrder() {\n");
-		writer.append("\t\treturn new VariableProps[] { ");
+		writer.append("public VariableProps[] getSerializationOrder() {");
+		writer.append("return new VariableProps[] { ");
 
 		VariableProps props = null;
 		for (Iterator<VariableProps> it = varList.iterator(); it.hasNext(); props = it
@@ -66,7 +74,6 @@ public class NetworkProtocolGenerator extends NetworkProtocolBaseListener {
 			writer.append("new " + props.toString());
 			writer.append(it.hasNext() ? ", " : "};");
 		}
-		writer.append("\t\n}");
 	}
 
 	@Override
@@ -75,34 +82,48 @@ public class NetworkProtocolGenerator extends NetworkProtocolBaseListener {
 
 		String fileName = ctx.name.getText() + ".java";
 
-		File curFile = new File(basePath, fileName);
+		curFile = new File(basePath, fileName);
 		try {
 			curFile.createNewFile();
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
 
-		try {
-			writer = new PrintWriter(new FileOutputStream(curFile));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		writer.append("import generator.*;\n\n");
+		stringWriter = new StringWriter();
+		writer = new PrintWriter(stringWriter);
+		writer.append("import runtime.*;");
 		writer.append("public class " + ctx.name.getText()
-				+ "extends OrderedSerializable {\n");
+				+ " extends OrderedSerializable {");
 	}
 
 	@Override
 	public void exitProtocol(ProtocolContext ctx) {
 		writer.append('}');
 		writer.close();
+
+		String code = stringWriter.toString();
+		CodeFormatter formatter = ToolFactory.createCodeFormatter(null);
+		TextEdit textEdit = formatter.format(CodeFormatter.K_COMPILATION_UNIT,
+				code, 0, code.length(), 0, "\n");
+		IDocument doc = new Document(code);
+
+		try (FileWriter fileWriter = new FileWriter(curFile);) {
+			textEdit.apply(doc);
+			fileWriter.write(doc.get());
+		} catch (MalformedTreeException e) {
+			e.printStackTrace();
+		} catch (BadLocationException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void enterVariableDef(VariableDefContext ctx) {
-		Type type = getJavaType(ctx.type.getText());
+		Class<?> type = getJavaType(ctx.type.getText());
 		String name = ctx.name.getText();
-		String len = ctx.len.getText();
+		String len = ""; // XXX
 
 		VariableProps props = new VariableProps();
 		props.setType(type);
@@ -112,14 +133,14 @@ public class NetworkProtocolGenerator extends NetworkProtocolBaseListener {
 		}
 		varList.add(props);
 
-		writer.append("\tprivate " + type + ' ' + name + ";\n\n");
-		writer.append("\tpublic " + type + " get"
-				+ GeneratorUtil.capitalizeFirst(name) + "() {\n");
-		writer.append("\t\treturn " + name + ";\n\t}\n\n");
-		writer.append("\tpublic void " + " set"
-				+ GeneratorUtil.capitalizeFirst(name) + "(" + type + ' ' + name
-				+ ") {\n");
-		writer.append("\t\tthis." + name + " = " + name + ";\n\t}\n\n");
+		writer.append("private " + type.getSimpleName() + ' ' + name + ";");
+		writer.append("public " + type.getSimpleName() + " get"
+				+ GeneratorUtil.capitalizeFirst(name) + "() {");
+		writer.append("return " + name + ";}");
+		writer.append("public void " + " set"
+				+ GeneratorUtil.capitalizeFirst(name) + "("
+				+ type.getSimpleName() + ' ' + name + ") {");
+		writer.append("this." + name + " = " + name + ";}");
 	}
 
 	public static void err(String errMsg) {

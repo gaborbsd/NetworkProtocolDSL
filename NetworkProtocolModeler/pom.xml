@@ -31,5 +31,15 @@
 			<artifactId>antlr4-runtime</artifactId>
 			<version>4.2</version>
 		</dependency>
+		<dependency>
+			<groupId>org.eclipse</groupId>
+			<artifactId>jdt</artifactId>
+			<version>3.3.0-v20070607-1300</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.jdt</groupId>
+			<artifactId>core</artifactId>
+			<version>3.3.0-v_771</version>
+		</dependency>
 	</dependencies>
 </project>
