@@ -1,17 +1,15 @@
-package runtime;
-
-import java.lang.reflect.Type;
+package model;
 
 public class VariableProps {
 	private String name;
 	private byte byteLen;
-	private Type type;
+	private Class<?> type;
 
 	public VariableProps() {
 		super();
 	}
 
-	public VariableProps(String name, Type type, byte byteLen) {
+	public VariableProps(String name, Class<?> type, byte byteLen) {
 		super();
 		this.name = name;
 		this.type = type;
@@ -34,16 +32,16 @@ public class VariableProps {
 		this.byteLen = byteLen;
 	}
 
-	public Type getType() {
+	public Class<?> getType() {
 		return type;
 	}
 
-	public void setType(Type type) {
+	public void setType(Class<?> type) {
 		this.type = type;
 	}
 
 	@Override
 	public String toString() {
-		return "VariableProps(" + name + ", " + type + ", " + byteLen + ")";
+		return "VariableProps(" + name + ", " + type.getSimpleName() + ".class, " + byteLen + ")";
 	}
 }
