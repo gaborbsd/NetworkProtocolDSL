@@ -39,9 +39,4 @@ public class VariableProps {
 	public void setType(Class<?> type) {
 		this.type = type;
 	}
-
-	@Override
-	public String toString() {
-		return "VariableProps(" + name + ", " + type.getSimpleName() + ".class, " + byteLen + ")";
-	}
 }
