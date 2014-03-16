@@ -1,8 +1,8 @@
-package generator;
+package runtime;
 
 import java.lang.reflect.Type;
 
-class VariableProps {
+public class VariableProps {
 	private String name;
 	private byte byteLen;
 	private Type type;
