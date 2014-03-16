@@ -54,9 +54,13 @@ import runtime.*;
 public class «protocol.name» extends OrderedSerializable {
 	
 	«FOR v : protocol.variableProps»
-		«generateVariable(v)»
+		«generateVariableDef(v)»
 	«ENDFOR»
-
+	
+	«FOR v : protocol.variableProps»
+		«generateVariableGetter(v)»
+		«generateVariableSetter(v)»
+	«ENDFOR»
 
 	public VariableProps[] getSerializationOrder() {
 		return new VariableProps[]
@@ -67,13 +71,18 @@ public class «protocol.name» extends OrderedSerializable {
 }
 	'''
 
-	def private generateVariable(VariableProps variable) '''
+	def private generateVariableDef(VariableProps variable) '''
 private «variable.type.simpleName» «variable.name»;
+	'''
 
+	def private generateVariableGetter(VariableProps variable) '''
 public «variable.type.simpleName» get«GeneratorUtil.capitalizeFirst(variable.name)»() {
 	return this.«variable.name»;
 }
 
+	'''
+
+	def private generateVariableSetter(VariableProps variable) '''
 public void set«GeneratorUtil.capitalizeFirst(variable.name)»(«variable.type.simpleName» «variable.name») {
 	this.«variable.name» = «variable.name»;
 }
