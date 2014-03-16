@@ -9,8 +9,10 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import org.antlr.v4.runtime.ANTLRFileStream;
 import org.antlr.v4.runtime.CharStream;
@@ -22,21 +24,20 @@ public class NetworkProtocolGenerator extends NetworkProtocolBaseListener {
 	File basePath;
 	PrintWriter writer;
 
-	private Map<String, VariableProps> varMap;
-	private byte totalBytes;
+	private List<VariableProps> varList;
 
-	public static String getJavaType(String type) {
+	public static Type getJavaType(String type) {
 		switch (type) {
 		case "int":
-			return "int";
+			return Integer.class;
 		case "byte":
-			return "byte";
+			return Byte.class;
 		case "char":
-			return "char";
+			return Character.class;
 		case "timestamp":
-			return "long";
+			return Long.class;
 		}
-		return "byte";
+		return null;
 	}
 
 	public static byte getJavaDefaultLen(String type) {
@@ -53,10 +54,22 @@ public class NetworkProtocolGenerator extends NetworkProtocolBaseListener {
 		return 0;
 	}
 
+	public void generateGetSerializationOrder() {
+		writer.append("\tpublic VariableProps[] getSerializationOrder() {\n");
+		writer.append("\t\treturn new VariableProps[] { ");
+
+		VariableProps props = null;
+		for (Iterator<VariableProps> it = varList.iterator(); it.hasNext(); props = it
+				.next()) {
+			writer.append("new " + props.toString());
+			writer.append(it.hasNext() ? ", " : "};");
+		}
+		writer.append("\t\n}");
+	}
+
 	@Override
 	public void enterProtocol(ProtocolContext ctx) {
-		varMap = new LinkedHashMap<>();
-		totalBytes = 0;
+		varList = new ArrayList<>();
 
 		String fileName = ctx.name.getText() + ".java";
 
@@ -72,7 +85,9 @@ public class NetworkProtocolGenerator extends NetworkProtocolBaseListener {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		writer.append("public class " + ctx.name.getText() + "{\n");
+		writer.append("import generator.*;\n\n");
+		writer.append("public class " + ctx.name.getText()
+				+ "extends OrderedSerializable {\n");
 	}
 
 	@Override
@@ -83,7 +98,7 @@ public class NetworkProtocolGenerator extends NetworkProtocolBaseListener {
 
 	@Override
 	public void enterVariableDef(VariableDefContext ctx) {
-		String type = getJavaType(ctx.type.getText());
+		Type type = getJavaType(ctx.type.getText());
 		String name = ctx.name.getText();
 		String len = ctx.len.getText();
 
@@ -92,11 +107,8 @@ public class NetworkProtocolGenerator extends NetworkProtocolBaseListener {
 		if (len != null && !len.equals("")) {
 			byte byteLen = Byte.parseByte(len);
 			props.setByteLen(byteLen);
-			totalBytes += byteLen;
-		} else {
-			totalBytes += getJavaDefaultLen(type);
 		}
-		varMap.put(name, props);
+		varList.add(props);
 
 		writer.append("\tprivate " + type + ' ' + name + ";\n\n");
 		writer.append("\tpublic " + type + " get"
