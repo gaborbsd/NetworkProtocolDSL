@@ -90,6 +90,14 @@ public «variable.type.simpleName» get«GeneratorUtil.capitalizeFirst(variable.nam
 
 	def private generateVariableSetter(VariableProps variable) '''
 public void set«GeneratorUtil.capitalizeFirst(variable.name)»(«variable.type.simpleName» «variable.name») {
+
+	«IF variable.byteLen > 0»
+		«IF variable.type.simpleName.equals("Long")»
+		if (Long.highestOneBit(«variable.name») > «Math.pow(2, variable.byteLen - 1)»)
+			throw new IllegalArgumentException("Specified value " + «variable.name» + " is out of range.");
+		«ENDIF»
+	«ENDIF»
+
 	this.«variable.name» = «variable.name»;
 }
 
