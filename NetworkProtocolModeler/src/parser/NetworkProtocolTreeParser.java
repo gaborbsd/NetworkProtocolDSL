@@ -1,11 +1,6 @@
 package parser;
 
-import generator.NetworkProtocolBaseListener;
 import generator.NetworkProtocolGenerator;
-import generator.NetworkProtocolLexer;
-import generator.NetworkProtocolParser;
-import generator.NetworkProtocolParser.ProtocolContext;
-import generator.NetworkProtocolParser.VariableDefContext;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,10 +16,15 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
+import parser.NetworkProtocolParser.PkgContext;
+import parser.NetworkProtocolParser.ProtocolContext;
+import parser.NetworkProtocolParser.VariableDefContext;
+
 public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 	private List<ProtocolProps> protocolProps = new ArrayList<>();
 	private ProtocolProps props;
 	private List<VariableProps> varList;
+	private String pkg = "";
 
 	public static Class<?> getJavaType(String type) {
 		switch (type) {
@@ -55,12 +55,17 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 	}
 
 	@Override
+	public void enterPkg(PkgContext ctx) {
+		pkg = ctx.name.getText();
+	}
+
+	@Override
 	public void enterProtocol(ProtocolContext ctx) {
 		varList = new ArrayList<>();
 
 		props = new ProtocolProps();
 		props.setName(ctx.name.getText());
-		props.setPkg("");
+		props.setPkg(pkg);
 		props.setVariableProps(varList);
 		protocolProps.add(props);
 	}

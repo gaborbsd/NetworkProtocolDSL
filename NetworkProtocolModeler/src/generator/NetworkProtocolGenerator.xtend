@@ -9,6 +9,7 @@ import model.VariableProps
 import org.eclipse.jdt.core.ToolFactory
 import org.eclipse.jdt.core.formatter.CodeFormatter
 import org.eclipse.jface.text.Document
+import java.util.StringTokenizer
 
 class NetworkProtocolGenerator {
 	private List<ProtocolProps> model;
@@ -23,10 +24,15 @@ class NetworkProtocolGenerator {
 		for (protocol : model) {
 			var pkgPath = new StringBuilder();
 
-			for (s : protocol.pkg.split(".")) {
-				pkgPath.append(s)
+			var tokenizer = new StringTokenizer(protocol.pkg, ".");
+			while (tokenizer.hasMoreTokens) {
+				pkgPath.append(tokenizer.nextToken)
 				pkgPath.append('/')
 			}
+			var targetDir = new File(pkgPath.toString)
+			if (!targetDir.exists)
+				targetDir.mkdirs
+
 			pkgPath.append(protocol.name)
 			pkgPath.append(".java")
 

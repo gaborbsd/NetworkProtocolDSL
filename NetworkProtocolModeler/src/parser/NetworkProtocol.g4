@@ -2,7 +2,19 @@ grammar NetworkProtocol;
 
 start
 :
-	'protocol' name = ID LBRACE vardef+ RBRACE # protocol
+	(
+		pkg? protocol
+	)+
+;
+
+pkg
+:
+	'package' name = ID('.' ID)*
+;
+
+protocol
+:
+	'protocol' name = ID LBRACE vardef+ RBRACE
 ;
 
 vardef
