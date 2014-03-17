@@ -19,13 +19,13 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 	public static Class<?> getJavaType(String type) {
 		switch (type) {
 		case "int":
-			return Integer.class;
-		case "byte":
-			return Byte.class;
-		case "char":
-			return Character.class;
+		case "uint":
 		case "timestamp":
 			return Long.class;
+		case "binary":
+			return Byte[].class;
+		case "string":
+			return String.class;
 		}
 		return null;
 	}

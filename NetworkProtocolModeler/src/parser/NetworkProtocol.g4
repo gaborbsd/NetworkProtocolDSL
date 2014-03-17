@@ -9,7 +9,10 @@ start
 
 pkg
 :
-	'package' name = ID('.' ID)*
+	'package' name = ID
+	(
+		'.' ID
+	)*
 ;
 
 protocol
@@ -28,9 +31,10 @@ vardef
 VARTYPE
 :
 	'int'
-	| 'byte'
-	| 'char'
+	| 'uint'
 	| 'timestamp'
+	| 'string'
+	| 'binary'
 ;
 
 ID
@@ -40,7 +44,7 @@ ID
 
 NUMBER
 :
-	[1-9][0-9]*
+	[1-9] [0-9]*
 ;
 
 LBRACE
