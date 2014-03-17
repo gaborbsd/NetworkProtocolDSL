@@ -44,5 +44,4 @@ public class App {
 				listener.getModel(), new File("."));
 		generator.process();
 	}
-
 }

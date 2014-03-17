@@ -1,5 +1,6 @@
 package parser;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,18 +30,15 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 		return null;
 	}
 
-	public static byte getJavaDefaultLen(String type) {
-		switch (type) {
-		case "int":
-			return Integer.SIZE;
-		case "byte":
-			return Byte.SIZE;
-		case "char":
-			return Character.SIZE;
-		case "timestamp":
-			return Long.SIZE;
+	public static byte getJavaDefaultLen(Class<?> type) {
+		try {
+			Field f = type.getField("SIZE");
+			f.setAccessible(true);
+			return (byte)(f.getByte(null) / 8);
+		} catch (NoSuchFieldException | SecurityException
+				| IllegalArgumentException | IllegalAccessException e) {
+			return Long.SIZE / 8;
 		}
-		return 0;
 	}
 
 	@Override
@@ -62,15 +60,13 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 	@Override
 	public void enterVariableDef(VariableDefContext ctx) {
 		Class<?> type = getJavaType(ctx.type.getText());
-		String len = ""; // XXX
+		byte len = ctx.len == null ? getJavaDefaultLen(type) : Byte
+				.parseByte(ctx.len.getText());
 
 		VariableProps props = new VariableProps();
 		props.setName(ctx.name.getText());
 		props.setType(type);
-		if (len != null && !len.equals("")) {
-			byte byteLen = Byte.parseByte(len);
-			props.setByteLen(byteLen);
-		}
+		props.setByteLen(len);
 		varList.add(props);
 	}
 
