@@ -16,6 +16,8 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 	private List<VariableProps> varList;
 	private String pkg = "";
 
+	private boolean seenUnbounded;
+
 	public static Class<?> getJavaType(String type) {
 		switch (type) {
 		case "int":
@@ -37,7 +39,14 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 			return (byte) (f.getByte(null) / 8);
 		} catch (NoSuchFieldException | SecurityException
 				| IllegalArgumentException | IllegalAccessException e) {
-			return Long.SIZE / 8;
+			switch (type.getSimpleName()) {
+			case "String":
+			case "Byte[]":
+				return 0;
+			default:
+				return Long.SIZE / 8;
+			}
+
 		}
 	}
 
@@ -55,22 +64,45 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 		props.setPkg(pkg);
 		props.setVariableProps(varList);
 		protocolProps.add(props);
+
+		seenUnbounded = false;
 	}
 
 	@Override
 	public void enterVariableDef(VariableDefContext ctx) {
 		Class<?> type = getJavaType(ctx.type.getText());
-		byte len = ctx.len == null ? getJavaDefaultLen(type) : Byte
-				.parseByte(ctx.len.getText());
+
+		if (seenUnbounded)
+			throw new IllegalArgumentException(
+					"Unbounded fields must be the last.");
+
+		boolean isUnbounded = false;
+		byte len = 0;
+		if (ctx.len != null) {
+			if (ctx.len.getText().equals("*")) {
+				isUnbounded = true;
+				seenUnbounded = true;
+			} else
+				len = Byte.parseByte(ctx.len.getText());
+		} else {
+			len = getJavaDefaultLen(type);
+		}
+
+		if ((type.getSimpleName().equals("String") || type.getSimpleName()
+				.equals("Byte[]")) && !isUnbounded && (len == 0))
+			throw new IllegalArgumentException(
+					"Strings and byte arrays must be unbounded or "
+							+ "must have an explicitly specified length.");
 
 		if (type.getSimpleName().equals("Long") && len > (Long.SIZE / 8))
 			throw new IllegalArgumentException(
 					"Integers do not support length higher than 8 bytes.");
 
-		VariableProps props = new VariableProps();
-		props.setName(ctx.name.getText());
-		props.setType(type);
-		props.setByteLen(len);
+		if (type.getSimpleName().equals("Long") && isUnbounded)
+			throw new IllegalArgumentException("Integers cannot be unbounded.");
+
+		VariableProps props = new VariableProps(ctx.name.getText(), type, len,
+				isUnbounded);
 		varList.add(props);
 	}
 

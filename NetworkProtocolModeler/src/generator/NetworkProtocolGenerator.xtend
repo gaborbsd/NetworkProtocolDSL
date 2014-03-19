@@ -71,7 +71,7 @@ public class «protocol.name» extends OrderedSerializable {
 	public VariableProps[] getSerializationOrder() {
 		return new VariableProps[]
 			«FOR v : protocol.variableProps BEFORE '{' SEPARATOR ', ' AFTER '};'»
-				new VariableProps(«v.name», «v.type.simpleName».class, «v.byteLen»)
+				new VariableProps(«v.name», «v.type.simpleName».class, «v.byteLen», «v.unbounded»)
 			«ENDFOR»
 	}
 }

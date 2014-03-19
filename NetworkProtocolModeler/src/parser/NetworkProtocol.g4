@@ -24,7 +24,7 @@ vardef
 :
 	name = ID ':' type = VARTYPE
 	(
-		LPAREN len = NUMBER RPAREN
+		LPAREN len = (NUMBER|'*') RPAREN
 	)? # variableDef
 ;
 
