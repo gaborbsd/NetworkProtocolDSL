@@ -96,6 +96,11 @@ public void set«GeneratorUtil.capitalizeFirst(variable.name)»(«variable.type.sim
 		if (Long.highestOneBit(«variable.name») > «Math.pow(2, variable.byteLen - 1)»)
 			throw new IllegalArgumentException("Specified value " + «variable.name» + " is out of range.");
 		«ENDIF»
+		
+		«IF variable.type.simpleName.equals("String")»
+		if («variable.name.bytes.length» > «variable.byteLen»)
+			throw new IllegalArgumentException("Specified value " + «variable.name» + " does not fit in string field.");
+		«ENDIF»
 	«ENDIF»
 
 	this.«variable.name» = «variable.name»;
