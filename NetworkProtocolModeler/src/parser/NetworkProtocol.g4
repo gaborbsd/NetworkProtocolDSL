@@ -22,17 +22,15 @@ protocol
 
 vardef
 :
-	name = ID ':' type = VARTYPE
-	(
-		LPAREN len = (NUMBER|'*') RPAREN
-	)? # variableDef
+	name = ID ':' (
+		type = 'int' (LPAREN len = NUMBER RPAREN)? |
+		type = 'string' (LPAREN len = (NUMBER|'*') RPAREN) |
+		type = 'binary' (LPAREN len = (NUMBER|'*') RPAREN)) # variableDef
 ;
 
 VARTYPE
 :
 	'int'
-	| 'uint'
-	| 'timestamp'
 	| 'string'
 	| 'binary'
 ;
