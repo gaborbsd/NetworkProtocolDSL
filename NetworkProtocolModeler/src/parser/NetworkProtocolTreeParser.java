@@ -34,7 +34,7 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 		try {
 			Field f = type.getField("SIZE");
 			f.setAccessible(true);
-			return (byte)(f.getByte(null) / 8);
+			return (byte) (f.getByte(null) / 8);
 		} catch (NoSuchFieldException | SecurityException
 				| IllegalArgumentException | IllegalAccessException e) {
 			return Long.SIZE / 8;
@@ -62,6 +62,10 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 		Class<?> type = getJavaType(ctx.type.getText());
 		byte len = ctx.len == null ? getJavaDefaultLen(type) : Byte
 				.parseByte(ctx.len.getText());
+
+		if (type.getSimpleName().equals("Long") && len > (Long.SIZE / 8))
+			throw new IllegalArgumentException(
+					"Integers do not support length higher than 8 bytes.");
 
 		VariableProps props = new VariableProps();
 		props.setName(ctx.name.getText());
