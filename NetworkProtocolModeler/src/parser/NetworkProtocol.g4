@@ -28,13 +28,6 @@ vardef
 		type = 'binary' (LPAREN len = (NUMBER|'*') RPAREN)) # variableDef
 ;
 
-VARTYPE
-:
-	'int'
-	| 'string'
-	| 'binary'
-;
-
 ID
 :
 	[a-zA-Z]+
