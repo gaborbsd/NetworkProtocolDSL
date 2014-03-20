@@ -11,11 +11,21 @@ public class Serializer {
 			dest[off + i] = (byte) ((val.longValue() >> (i * 8)) & 0b11111111);
 	}
 
-	public static void serializeToBytes(Character val, byte bytes, byte[] dest,
+	public static void serializeToBytes(String val, byte bytes, byte[] dest,
 			byte off) {
+		byte[] src = val.getBytes();
+		if (bytes == 0)
+			bytes = (byte) src.length;
 		for (int i = 0; i < bytes; i++)
-			dest[off + i] = (byte) ((val.charValue() >> (i * 8)) & 0b11111111);
+			dest[off + i] = src[i];
+	}
 
+	public static void serializeToBytes(Byte[] val, byte bytes, byte[] dest,
+			byte off) {
+		if (bytes == 0)
+			bytes = (byte) val.length;
+		for (int i = 0; i < bytes; i++)
+			dest[off + i] = val[i];
 	}
 
 	public static byte[] serialize(OrderedSerializable serializable) {
@@ -29,16 +39,18 @@ public class Serializer {
 			byte off = 0;
 			for (VariableProps props : serializable.getSerializationOrder()) {
 				Field field = serializable.getClass().getField(props.getName());
-				if (props.getType().getClass().getSimpleName()
-						.equals("Character")) {
-					serializeToBytes(field.getChar(serializable),
+				if (props.getType().getClass().getSimpleName().equals("String")) {
+					serializeToBytes((String) field.get(serializable),
 							props.getByteLen(), ret, off);
-					off += props.getByteLen();
+				} else if (props.getType().getClass().getSimpleName()
+						.equals("Byte[]")) {
+					serializeToBytes((Byte[]) field.get(serializable),
+							props.getByteLen(), ret, off);
 				} else {
 					serializeToBytes(field.getLong(serializable),
 							props.getByteLen(), ret, off);
-					off += props.getByteLen();
 				}
+				off += props.getByteLen();
 			}
 			return ret;
 		} catch (NoSuchFieldException | SecurityException
