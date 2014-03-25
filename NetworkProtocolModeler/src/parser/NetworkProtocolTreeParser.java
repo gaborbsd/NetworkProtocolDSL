@@ -23,28 +23,30 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 
 	private boolean seenUnbounded;
 
-	public static Class<?> getJavaType(String type) {
+	public static String getJavaType(String type) {
 		switch (type) {
 		case "int":
 		case "uint":
 		case "timestamp":
-			return Long.class;
+			return "Long";
 		case "binary":
-			return Byte[].class;
+			return "Byte[]";
 		case "string":
-			return String.class;
+			return "String";
 		}
-		return null;
+		return type;
 	}
 
-	public static byte getJavaDefaultLen(Class<?> type) {
+	public static byte getJavaDefaultLen(String type) {
 		try {
-			Field f = type.getField("SIZE");
+			Class<?> c = Class.forName(type);
+			Field f = c.getField("SIZE");
 			f.setAccessible(true);
 			return (byte) (f.getByte(null) / 8);
 		} catch (NoSuchFieldException | SecurityException
-				| IllegalArgumentException | IllegalAccessException e) {
-			switch (type.getSimpleName()) {
+				| IllegalArgumentException | IllegalAccessException
+				| ClassNotFoundException e) {
+			switch (type) {
 			case "String":
 			case "Byte[]":
 				return 0;
@@ -73,7 +75,7 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 		seenUnbounded = false;
 	}
 
-	private void processVariable(Class<?> type, String len, String name) {
+	private void processVariable(String type, String len, String name) {
 		boolean isUnbounded = false;
 		byte byteLen = 0;
 		if (len != null) {
@@ -86,17 +88,17 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 			byteLen = getJavaDefaultLen(type);
 		}
 
-		if ((type.getSimpleName().equals("String") || type.getSimpleName()
-				.equals("Byte[]")) && !isUnbounded && (byteLen == 0))
+		if ((type.equals("String") || type.equals("Byte[]")) && !isUnbounded
+				&& (byteLen == 0))
 			throw new IllegalArgumentException(
 					"Strings and byte arrays must be unbounded or "
 							+ "must have an explicitly specified length.");
 
-		if (type.getSimpleName().equals("Long") && byteLen > (Long.SIZE / 8))
+		if (type.equals("Long") && byteLen > (Long.SIZE / 8))
 			throw new IllegalArgumentException(
 					"Integers do not support length higher than 8 bytes.");
 
-		if (type.getSimpleName().equals("Long") && isUnbounded)
+		if (type.equals("Long") && isUnbounded)
 			throw new IllegalArgumentException("Integers cannot be unbounded.");
 
 		VariableProps props = new VariableProps(name, type, byteLen,

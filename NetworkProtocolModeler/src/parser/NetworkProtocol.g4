@@ -15,7 +15,7 @@ pkg
 
 protocol
 :
-	'protocol' name = ID pkg? LBRACE vardef+ RBRACE
+	('protocol'|'datatype') name = ID pkg? LBRACE vardef+ RBRACE
 ;
 
 vardef
@@ -36,6 +36,10 @@ stringtype:
 
 binarytype:
 	type = 'binary' (LPAREN len = (NUMBER|'*') RPAREN)
+;
+
+embeddedtype:
+	type = ID
 ;
 
 ID

@@ -3,14 +3,14 @@ package model;
 public class VariableProps {
 	private String name;
 	private byte byteLen;
-	private Class<?> type;
+	String type;
 	private boolean unbounded;
 
 	public VariableProps() {
 		super();
 	}
 
-	public VariableProps(String name, Class<?> type, byte byteLen,
+	public VariableProps(String name, String type, byte byteLen,
 			boolean unbounded) {
 		super();
 		this.name = name;
@@ -35,11 +35,11 @@ public class VariableProps {
 		this.byteLen = byteLen;
 	}
 
-	public Class<?> getType() {
+	public String getType() {
 		return type;
 	}
 
-	public void setType(Class<?> type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 

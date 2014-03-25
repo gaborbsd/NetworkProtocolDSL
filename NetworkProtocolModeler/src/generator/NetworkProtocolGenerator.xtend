@@ -71,35 +71,35 @@ public class «protocol.name» extends OrderedSerializable {
 	public VariableProps[] getSerializationOrder() {
 		return new VariableProps[]
 			«FOR v : protocol.variableProps BEFORE '{' SEPARATOR ', ' AFTER '};'»
-				new VariableProps(«v.name», «v.type.simpleName».class, «v.byteLen», «v.unbounded»)
+				new VariableProps(«v.name», «v.type».class, «v.byteLen», «v.unbounded»)
 			«ENDFOR»
 	}
 }
 	'''
 
 	def private generateVariableDef(VariableProps variable) '''
-private «variable.type.simpleName» «variable.name»;
+private «variable.type» «variable.name»;
 	'''
 
 	def private generateVariableGetter(VariableProps variable) '''
-public «variable.type.simpleName» get«GeneratorUtil.capitalizeFirst(variable.name)»() {
+public «variable.type» get«GeneratorUtil.capitalizeFirst(variable.name)»() {
 	return this.«variable.name»;
 }
 
 	'''
 
 	def private generateVariableSetter(VariableProps variable) '''
-public void set«GeneratorUtil.capitalizeFirst(variable.name)»(«variable.type.simpleName» «variable.name») {
+public void set«GeneratorUtil.capitalizeFirst(variable.name)»(«variable.type» «variable.name») {
 	«IF variable.byteLen > 0»
-		«IF variable.type.simpleName.equals("Long")»
+		«IF variable.type.equals("Long")»
 		if (Long.highestOneBit(«variable.name») > «Math.pow(2, variable.byteLen - 1)»)
 			throw new IllegalArgumentException("Specified value " + «variable.name» + " is out of range.");
 		«ENDIF»
-		«IF variable.type.simpleName.equals("String")»
+		«IF variable.type.equals("String")»
 		if («variable.name».getBytes().length > «variable.byteLen»)
 			throw new IllegalArgumentException("Specified value " + «variable.name» + " does not fit in string field.");
 		«ENDIF»
-		«IF variable.type.simpleName.equals("Byte[]")»
+		«IF variable.type.equals("Byte[]")»
 		if («variable.name».length > «variable.byteLen»)
 			throw new IllegalArgumentException("Specified value " + «variable.name» + " does not fit in string field.");
 		«ENDIF»
