@@ -2,9 +2,7 @@ grammar NetworkProtocol;
 
 start
 :
-	(
-		pkg? protocol
-	)+
+	protocol+
 ;
 
 pkg
@@ -17,15 +15,27 @@ pkg
 
 protocol
 :
-	'protocol' name = ID LBRACE vardef+ RBRACE
+	'protocol' name = ID pkg? LBRACE vardef+ RBRACE
 ;
 
 vardef
 :
 	name = ID ':' (
-		type = 'int' (LPAREN len = NUMBER RPAREN)? |
-		type = 'string' (LPAREN len = (NUMBER|'*') RPAREN) |
-		type = 'binary' (LPAREN len = (NUMBER|'*') RPAREN)) # variableDef
+		inttype |
+		stringtype |
+		binarytype) # variableDef
+;
+
+inttype:
+	type = 'int' (LPAREN len = NUMBER RPAREN)?
+;
+
+stringtype:
+	type = 'string' (LPAREN len = (NUMBER|'*') RPAREN)
+;
+
+binarytype:
+	type = 'binary' (LPAREN len = (NUMBER|'*') RPAREN)
 ;
 
 ID

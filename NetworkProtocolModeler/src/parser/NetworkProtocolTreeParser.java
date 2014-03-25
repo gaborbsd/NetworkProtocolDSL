@@ -6,15 +6,20 @@ import java.util.List;
 
 import model.ProtocolProps;
 import model.VariableProps;
+import parser.NetworkProtocolParser.BinarytypeContext;
+import parser.NetworkProtocolParser.InttypeContext;
 import parser.NetworkProtocolParser.PkgContext;
 import parser.NetworkProtocolParser.ProtocolContext;
+import parser.NetworkProtocolParser.StringtypeContext;
 import parser.NetworkProtocolParser.VariableDefContext;
 
 public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 	private List<ProtocolProps> protocolProps = new ArrayList<>();
+
 	private ProtocolProps props;
 	private List<VariableProps> varList;
 	private String pkg = "";
+	private String var = "";
 
 	private boolean seenUnbounded;
 
@@ -68,42 +73,59 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 		seenUnbounded = false;
 	}
 
-	@Override
-	public void enterVariableDef(VariableDefContext ctx) {
-		Class<?> type = getJavaType(ctx.type.getText());
-
-		if (seenUnbounded)
-			throw new IllegalArgumentException(
-					"Unbounded fields must be the last.");
-
+	private void processVariable(Class<?> type, String len, String name) {
 		boolean isUnbounded = false;
-		byte len = 0;
-		if (ctx.len != null) {
-			if (ctx.len.getText().equals("*")) {
+		byte byteLen = 0;
+		if (len != null) {
+			if (len.equals("*")) {
 				isUnbounded = true;
 				seenUnbounded = true;
 			} else
-				len = Byte.parseByte(ctx.len.getText());
+				byteLen = Byte.parseByte(len);
 		} else {
-			len = getJavaDefaultLen(type);
+			byteLen = getJavaDefaultLen(type);
 		}
 
 		if ((type.getSimpleName().equals("String") || type.getSimpleName()
-				.equals("Byte[]")) && !isUnbounded && (len == 0))
+				.equals("Byte[]")) && !isUnbounded && (byteLen == 0))
 			throw new IllegalArgumentException(
 					"Strings and byte arrays must be unbounded or "
 							+ "must have an explicitly specified length.");
 
-		if (type.getSimpleName().equals("Long") && len > (Long.SIZE / 8))
+		if (type.getSimpleName().equals("Long") && byteLen > (Long.SIZE / 8))
 			throw new IllegalArgumentException(
 					"Integers do not support length higher than 8 bytes.");
 
 		if (type.getSimpleName().equals("Long") && isUnbounded)
 			throw new IllegalArgumentException("Integers cannot be unbounded.");
 
-		VariableProps props = new VariableProps(ctx.name.getText(), type, len,
+		VariableProps props = new VariableProps(name, type, byteLen,
 				isUnbounded);
 		varList.add(props);
+	}
+
+	@Override
+	public void enterVariableDef(VariableDefContext ctx) {
+		if (seenUnbounded)
+			throw new IllegalArgumentException(
+					"Unbounded fields must be the last.");
+
+		var = ctx.name.getText();
+	}
+
+	@Override
+	public void enterBinarytype(BinarytypeContext ctx) {
+		processVariable(getJavaType(ctx.type.getText()), ctx.len.getText(), var);
+	}
+
+	@Override
+	public void enterStringtype(StringtypeContext ctx) {
+		processVariable(getJavaType(ctx.type.getText()), ctx.len.getText(), var);
+	}
+
+	@Override
+	public void enterInttype(InttypeContext ctx) {
+		processVariable(getJavaType(ctx.type.getText()), ctx.len.getText(), var);
 	}
 
 	List<ProtocolProps> getModel() {
