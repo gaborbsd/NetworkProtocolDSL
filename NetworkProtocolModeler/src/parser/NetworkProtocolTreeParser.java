@@ -1,25 +1,23 @@
 package parser;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
-
-import model.ProtocolProps;
-import model.VariableProps;
+import model.DataType;
+import model.Field;
+import model.ProtocolFactory;
+import model.ProtocolModel;
 import parser.NetworkProtocolParser.BinarytypeContext;
 import parser.NetworkProtocolParser.InttypeContext;
-import parser.NetworkProtocolParser.PkgContext;
 import parser.NetworkProtocolParser.ProtocolContext;
 import parser.NetworkProtocolParser.StringtypeContext;
 import parser.NetworkProtocolParser.VariableDefContext;
 
 public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
-	private List<ProtocolProps> protocolProps = new ArrayList<>();
 
-	private ProtocolProps props;
-	private List<VariableProps> varList;
-	private String pkg = "";
-	private String var = "";
+	private ProtocolFactory factory = ProtocolFactory.eINSTANCE;
+	private ProtocolModel model = factory.createProtocolModel();
+
+	private DataType currentProtocol;
+	private Field currentField;
+	private String currentFieldName = "";
 
 	private boolean seenUnbounded;
 
@@ -40,7 +38,7 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 	public static byte getJavaDefaultLen(String type) {
 		try {
 			Class<?> c = Class.forName(type);
-			Field f = c.getField("SIZE");
+			java.lang.reflect.Field f = c.getField("SIZE");
 			f.setAccessible(true);
 			return (byte) (f.getByte(null) / 8);
 		} catch (NoSuchFieldException | SecurityException
@@ -58,24 +56,17 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 	}
 
 	@Override
-	public void enterPkg(PkgContext ctx) {
-		pkg = ctx.name.getText();
-	}
-
-	@Override
 	public void enterProtocol(ProtocolContext ctx) {
-		varList = new ArrayList<>();
-
-		props = new ProtocolProps();
-		props.setName(ctx.name.getText());
-		props.setPkg(pkg);
-		props.setVariableProps(varList);
-		protocolProps.add(props);
-
+		currentProtocol = factory.createDataType();
+		currentProtocol.setTypeName(ctx.name.getText());
+		currentProtocol.setPackage((ctx.pkg() != null) ? ctx.pkg().getText()
+				: "");
+		// TODO: addProtocols()
+		model.getProtocols().add(currentProtocol);
 		seenUnbounded = false;
 	}
 
-	private void processVariable(String type, String len, String name) {
+	private void processVariable(String type, String len) {
 		boolean isUnbounded = false;
 		byte byteLen = 0;
 		if (len != null) {
@@ -101,9 +92,11 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 		if (type.equals("Long") && isUnbounded)
 			throw new IllegalArgumentException("Integers cannot be unbounded.");
 
-		VariableProps props = new VariableProps(name, type, byteLen,
-				isUnbounded);
-		varList.add(props);
+		currentField.setByteLen(new Long(byteLen));
+		if (isUnbounded)
+			currentField.setUnbounded(true);
+		// TODO: addField()
+		currentProtocol.getFields().add(currentField);
 	}
 
 	@Override
@@ -111,26 +104,31 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 		if (seenUnbounded)
 			throw new IllegalArgumentException(
 					"Unbounded fields must be the last.");
-
-		var = ctx.name.getText();
+		currentFieldName = ctx.name.getText();
 	}
 
 	@Override
 	public void enterBinarytype(BinarytypeContext ctx) {
-		processVariable(getJavaType(ctx.type.getText()), ctx.len.getText(), var);
+		currentField = factory.createBinaryField();
+		currentField.setName(currentFieldName);
+		processVariable(getJavaType(ctx.type.getText()), ctx.len.getText());
 	}
 
 	@Override
 	public void enterStringtype(StringtypeContext ctx) {
-		processVariable(getJavaType(ctx.type.getText()), ctx.len.getText(), var);
+		currentField = factory.createStringField();
+		currentField.setName(currentFieldName);
+		processVariable(getJavaType(ctx.type.getText()), ctx.len.getText());
 	}
 
 	@Override
 	public void enterInttype(InttypeContext ctx) {
-		processVariable(getJavaType(ctx.type.getText()), ctx.len.getText(), var);
+		currentField = factory.createIntegerField();
+		currentField.setName(currentFieldName);
+		processVariable(getJavaType(ctx.type.getText()), ctx.len.getText());
 	}
 
-	List<ProtocolProps> getModel() {
-		return protocolProps;
+	ProtocolModel getModel() {
+		return model;
 	}
 }

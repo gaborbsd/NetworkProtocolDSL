@@ -3,28 +3,44 @@ package generator
 import generator.util.GeneratorUtil
 import java.io.File
 import java.io.FileWriter
-import java.util.List
-import model.ProtocolProps
-import model.VariableProps
+import java.util.StringTokenizer
+import model.BinaryField
+import model.DataType
+import model.Field
+import model.IntegerField
+import model.ProtocolModel
+import model.StringField
 import org.eclipse.jdt.core.ToolFactory
 import org.eclipse.jdt.core.formatter.CodeFormatter
 import org.eclipse.jface.text.Document
-import java.util.StringTokenizer
 
 class NetworkProtocolGenerator {
-	private List<ProtocolProps> model;
+	private ProtocolModel model;
 	private File basePath;
 
-	new(List<ProtocolProps> model, File basePath) {
+	new(ProtocolModel model, File basePath) {
 		this.model = model
 		this.basePath = basePath
 	}
 
+	def String getType(Field field) {
+		if (field instanceof BinaryField)
+			return "Byte[]";
+		if (field instanceof IntegerField)
+			return "Long";
+		if (field instanceof StringField)
+			return "String";
+		if (field instanceof DataType)
+			return (field as DataType).typeName;
+		throw new RuntimeException("Cannot happen.");
+
+	}
+
 	def process() {
-		for (protocol : model) {
+		for (protocol : model.protocols) {
 			var pkgPath = new StringBuilder();
 
-			var tokenizer = new StringTokenizer(protocol.pkg, ".");
+			var tokenizer = new StringTokenizer(protocol.package, ".");
 			while (tokenizer.hasMoreTokens) {
 				pkgPath.append(tokenizer.nextToken)
 				pkgPath.append('/')
@@ -33,7 +49,7 @@ class NetworkProtocolGenerator {
 			if (!targetDir.exists)
 				targetDir.mkdirs
 
-			pkgPath.append(protocol.name)
+			pkgPath.append(protocol.typeName)
 			pkgPath.append(".java")
 
 			var code = generateProtocol(protocol).toString
@@ -49,46 +65,46 @@ class NetworkProtocolGenerator {
 		}
 	}
 
-	def private generateProtocol(ProtocolProps protocol) '''
-«IF protocol.pkg != null && !protocol.pkg.equals("")»
-package «protocol.pkg»;
+	def private generateProtocol(DataType protocol) '''
+«IF protocol.package != null && !protocol.package.equals("")»
+package «protocol.package»;
 
 «ENDIF»
 import model.*;
 import runtime.*;
 
-public class «protocol.name» extends OrderedSerializable {
+public class «protocol.typeName» extends OrderedSerializable {
 	
-	«FOR v : protocol.variableProps»
+	«FOR v : protocol.fields»
 		«generateVariableDef(v)»
 	«ENDFOR»
 	
-	«FOR v : protocol.variableProps»
+	«FOR v : protocol.fields»
 		«generateVariableGetter(v)»
 		«generateVariableSetter(v)»
 	«ENDFOR»
 
 	public VariableProps[] getSerializationOrder() {
 		return new VariableProps[]
-			«FOR v : protocol.variableProps BEFORE '{' SEPARATOR ', ' AFTER '};'»
+			«FOR v : protocol.fields BEFORE '{' SEPARATOR ', ' AFTER '};'»
 				new VariableProps(«v.name», «v.type».class, «v.byteLen», «v.unbounded»)
 			«ENDFOR»
 	}
 }
 	'''
 
-	def private generateVariableDef(VariableProps variable) '''
+	def private generateVariableDef(Field variable) '''
 private «variable.type» «variable.name»;
 	'''
 
-	def private generateVariableGetter(VariableProps variable) '''
+	def private generateVariableGetter(Field variable) '''
 public «variable.type» get«GeneratorUtil.capitalizeFirst(variable.name)»() {
 	return this.«variable.name»;
 }
 
 	'''
 
-	def private generateVariableSetter(VariableProps variable) '''
+	def private generateVariableSetter(Field variable) '''
 public void set«GeneratorUtil.capitalizeFirst(variable.name)»(«variable.type» «variable.name») {
 	«IF variable.byteLen > 0»
 		«IF variable.type.equals("Long")»

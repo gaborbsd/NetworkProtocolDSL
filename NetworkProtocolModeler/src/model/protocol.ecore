@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    name="model"
+    nsURI="https://github.com/gaborbsd/NetworkProtocolDSL"
+    nsPrefix="proto">
+  <eClassifiers
+      xsi:type="ecore:EClass"
+      name="DataType"
+      eSuperTypes="#//Field">
+    <eStructuralFeatures
+        xsi:type="ecore:EReference"
+        name="fields"
+        upperBound="128"
+        eType="#//Field"
+        containment="true"/>
+    <eStructuralFeatures
+        xsi:type="ecore:EAttribute"
+        name="typeName"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers
+      xsi:type="ecore:EClass"
+      name="Field"
+      abstract="true">
+    <eStructuralFeatures
+        xsi:type="ecore:EAttribute"
+        name="byteLen"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELongObject"
+        defaultValueLiteral="0"/>
+    <eStructuralFeatures
+        xsi:type="ecore:EAttribute"
+        name="name"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures
+        xsi:type="ecore:EAttribute"
+        name="package"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures
+        xsi:type="ecore:EAttribute"
+        name="unbounded"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"
+        defaultValueLiteral="false"/>
+  </eClassifiers>
+  <eClassifiers
+      xsi:type="ecore:EClass"
+      name="IntegerField"
+      eSuperTypes="#//Field"/>
+  <eClassifiers
+      xsi:type="ecore:EClass"
+      name="BinaryField"
+      eSuperTypes="#//Field"/>
+  <eClassifiers
+      xsi:type="ecore:EClass"
+      name="StringField"
+      eSuperTypes="#//Field"/>
+  <eClassifiers
+      xsi:type="ecore:EClass"
+      name="ProtocolModel">
+    <eStructuralFeatures
+        xsi:type="ecore:EReference"
+        name="protocols"
+        upperBound="16"
+        eType="#//DataType"
+        containment="true"/>
+  </eClassifiers>
+</ecore:EPackage>
