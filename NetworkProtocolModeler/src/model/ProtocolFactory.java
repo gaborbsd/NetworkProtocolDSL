@@ -68,6 +68,8 @@ public class ProtocolFactory extends EFactoryImpl {
 			case ProtocolPackage.INTEGER_FIELD: return createIntegerField();
 			case ProtocolPackage.BINARY_FIELD: return createBinaryField();
 			case ProtocolPackage.STRING_FIELD: return createStringField();
+			case ProtocolPackage.BIT_FIELD_COMPONENT: return createBitFieldComponent();
+			case ProtocolPackage.BIT_FIELD: return createBitField();
 			case ProtocolPackage.PROTOCOL_MODEL: return createProtocolModel();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -112,6 +114,26 @@ public class ProtocolFactory extends EFactoryImpl {
 	public StringField createStringField() {
 		StringField stringField = new StringField();
 		return stringField;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BitFieldComponent createBitFieldComponent() {
+		BitFieldComponent bitFieldComponent = new BitFieldComponent();
+		return bitFieldComponent;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BitField createBitField() {
+		BitField bitField = new BitField();
+		return bitField;
 	}
 
 	/**

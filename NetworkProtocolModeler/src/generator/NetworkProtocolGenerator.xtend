@@ -13,6 +13,7 @@ import model.StringField
 import org.eclipse.jdt.core.ToolFactory
 import org.eclipse.jdt.core.formatter.CodeFormatter
 import org.eclipse.jface.text.Document
+import model.BitField
 
 class NetworkProtocolGenerator {
 	private ProtocolModel model;
@@ -25,6 +26,8 @@ class NetworkProtocolGenerator {
 
 	def String getType(Field field) {
 		if (field instanceof BinaryField)
+			return "Byte[]";
+		if (field instanceof BitField)
 			return "Byte[]";
 		if (field instanceof IntegerField)
 			return "Long";
@@ -82,6 +85,18 @@ public class «protocol.typeName» extends OrderedSerializable {
 	«FOR v : protocol.fields»
 		«generateVariableGetter(v)»
 		«generateVariableSetter(v)»
+		
+		«IF v instanceof BitField»
+			«var long offset = 0»
+			«FOR f : (v as BitField).components»
+				«generateBitFieldGetter(v.name, f.name, offset, f.bitLength)»
+				«generateBitFieldSetter(v.name, f.name, offset, f.bitLength)»
+				«{
+		offset += f.bitLength
+		''
+	}»
+			«ENDFOR»
+		«ENDIF»
 	«ENDFOR»
 
 	public VariableProps[] getSerializationOrder() {
@@ -124,4 +139,27 @@ public void set«GeneratorUtil.capitalizeFirst(variable.name)»(«variable.type» «v
 }
 
 	'''
+
+	def private generateBitFieldGetter(String bitField, String component, Long offset, Long len) '''
+public Long get«GeneratorUtil.capitalizeFirst(component)»() {
+	return «bitField»[«offset / 8»] | («len.bitMaskForLen» << (offset % 8));
+}
+		'''
+
+	def private generateBitFieldSetter(String bitField, String component, Long offset, Long len) '''
+public void set«GeneratorUtil.capitalizeFirst(component)»(Long value) {
+	«bitField»[«offset / 8»] &= ~(«len.bitMaskForLen» << (offset % 8));
+	«bitField»[«offset / 8»] |= (value << (offset % 8));
+}
+		'''
+
+	def private String bitMaskForLen(long len) {
+		var sb = new StringBuffer;
+		var count = len;
+		while (count > 0) {
+			sb.append('1')
+			count = count - 1
+		}
+		return sb.toString
+	}
 }

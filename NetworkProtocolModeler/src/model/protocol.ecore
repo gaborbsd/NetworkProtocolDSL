@@ -23,6 +23,22 @@
   <eClassifiers xsi:type="ecore:EClass" name="IntegerField" eSuperTypes="#//Field"/>
   <eClassifiers xsi:type="ecore:EClass" name="BinaryField" eSuperTypes="#//Field"/>
   <eClassifiers xsi:type="ecore:EClass" name="StringField" eSuperTypes="#//Field"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BitFieldComponent">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="BitField"/>
+        <details key="unique" value="false"/>
+        <details key="upper" value="*"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bitLength" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELongObject"
+        defaultValueLiteral="0"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BitField" eSuperTypes="#//Field">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="components" upperBound="-1"
+        eType="#//BitFieldComponent" containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ProtocolModel">
     <eStructuralFeatures xsi:type="ecore:EReference" name="protocols" upperBound="-1"
         eType="#//DataType" containment="true"/>

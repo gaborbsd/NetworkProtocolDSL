@@ -1,10 +1,14 @@
 package parser;
 
+import model.BitField;
+import model.BitFieldComponent;
 import model.DataType;
 import model.Field;
 import model.ProtocolFactory;
 import model.ProtocolModel;
 import parser.NetworkProtocolParser.BinaryTypeContext;
+import parser.NetworkProtocolParser.BitfieldDefinitionContext;
+import parser.NetworkProtocolParser.BitfieldTypeContext;
 import parser.NetworkProtocolParser.EmbeddedTypeContext;
 import parser.NetworkProtocolParser.IntTypeContext;
 import parser.NetworkProtocolParser.ProtocolDefinitionContext;
@@ -21,6 +25,8 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 	private String currentFieldName = "";
 
 	private boolean seenUnbounded;
+	
+	private Long bitFieldTotalLen;
 
 	public static String getJavaType(String type) {
 		switch (type) {
@@ -142,6 +148,28 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 		((DataType) currentField).setTypeName(ctx.type.getText());
 		// TODO: addField()
 		currentProtocol.getFields().add(currentField);
+	}
+
+	@Override
+	public void enterBitfieldType(BitfieldTypeContext ctx) {
+		currentField = factory.createBitField();
+		currentField.setName(currentFieldName);
+		currentField.setUnbounded(false);
+		currentField.setByteLen(0l);
+		// TODO: addField()
+		currentProtocol.getFields().add(currentField);
+		bitFieldTotalLen = 0l;
+	}
+
+	@Override
+	public void enterBitfieldDefinition(BitfieldDefinitionContext ctx) {
+		BitFieldComponent bitFieldComponent = factory.createBitFieldComponent();
+		bitFieldComponent.setName(ctx.name.getText());
+		Long bitLength = Long.parseLong(ctx.bitLength.getText());
+		bitFieldComponent.setBitLength(bitLength);
+		bitFieldTotalLen += bitLength;
+		// TODO: addComponent()
+		((BitField)currentField).getComponents().add(bitFieldComponent);
 	}
 
 	ProtocolModel getModel() {

@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
  * <!-- end-user-doc -->
  * @see model.ProtocolFactory
  * @model kind="package"
+ *        annotation="http://www.eclipse.org/OCL/Import ecore='http://www.eclipse.org/emf/2002/Ecore'"
  * @generated
  */
 public class ProtocolPackage extends EPackageImpl {
@@ -397,6 +398,125 @@ public class ProtocolPackage extends EPackageImpl {
 	public static final int STRING_FIELD_OPERATION_COUNT = FIELD_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link model.BitFieldComponent <em>Bit Field Component</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see model.BitFieldComponent
+	 * @see model.ProtocolPackage#getBitFieldComponent()
+	 * @generated
+	 */
+	public static final int BIT_FIELD_COMPONENT = 5;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BIT_FIELD_COMPONENT__NAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>Bit Length</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BIT_FIELD_COMPONENT__BIT_LENGTH = 1;
+
+	/**
+	 * The number of structural features of the '<em>Bit Field Component</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BIT_FIELD_COMPONENT_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>Bit Field Component</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BIT_FIELD_COMPONENT_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link model.BitField <em>Bit Field</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see model.BitField
+	 * @see model.ProtocolPackage#getBitField()
+	 * @generated
+	 */
+	public static final int BIT_FIELD = 6;
+
+	/**
+	 * The feature id for the '<em><b>Byte Len</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BIT_FIELD__BYTE_LEN = FIELD__BYTE_LEN;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BIT_FIELD__NAME = FIELD__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Package</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BIT_FIELD__PACKAGE = FIELD__PACKAGE;
+
+	/**
+	 * The feature id for the '<em><b>Unbounded</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BIT_FIELD__UNBOUNDED = FIELD__UNBOUNDED;
+
+	/**
+	 * The feature id for the '<em><b>Components</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BIT_FIELD__COMPONENTS = FIELD_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Bit Field</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BIT_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Bit Field</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BIT_FIELD_OPERATION_COUNT = FIELD_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link model.ProtocolModel <em>Model</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -404,7 +524,7 @@ public class ProtocolPackage extends EPackageImpl {
 	 * @see model.ProtocolPackage#getProtocolModel()
 	 * @generated
 	 */
-	public static final int PROTOCOL_MODEL = 5;
+	public static final int PROTOCOL_MODEL = 7;
 
 	/**
 	 * The feature id for the '<em><b>Protocols</b></em>' containment reference list.
@@ -467,6 +587,20 @@ public class ProtocolPackage extends EPackageImpl {
 	 * @generated
 	 */
 	private EClass stringFieldEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass bitFieldComponentEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass bitFieldEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -677,6 +811,74 @@ public class ProtocolPackage extends EPackageImpl {
 	}
 
 	/**
+	 * Returns the meta object for class '{@link model.BitFieldComponent <em>Bit Field Component</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Bit Field Component</em>'.
+	 * @see model.BitFieldComponent
+	 * @generated
+	 */
+	public EClass getBitFieldComponent() {
+		return bitFieldComponentEClass;
+	}
+
+
+	/**
+	 * Returns the meta object for the attribute '{@link model.BitFieldComponent#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see model.BitFieldComponent#getName()
+	 * @see #getBitFieldComponent()
+	 * @generated
+	 */
+	public EAttribute getBitFieldComponent_Name() {
+		return (EAttribute)bitFieldComponentEClass.getEStructuralFeatures().get(0);
+	}
+
+
+	/**
+	 * Returns the meta object for the attribute '{@link model.BitFieldComponent#getBitLength <em>Bit Length</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Bit Length</em>'.
+	 * @see model.BitFieldComponent#getBitLength()
+	 * @see #getBitFieldComponent()
+	 * @generated
+	 */
+	public EAttribute getBitFieldComponent_BitLength() {
+		return (EAttribute)bitFieldComponentEClass.getEStructuralFeatures().get(1);
+	}
+
+
+	/**
+	 * Returns the meta object for class '{@link model.BitField <em>Bit Field</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Bit Field</em>'.
+	 * @see model.BitField
+	 * @generated
+	 */
+	public EClass getBitField() {
+		return bitFieldEClass;
+	}
+
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link model.BitField#getComponents <em>Components</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Components</em>'.
+	 * @see model.BitField#getComponents()
+	 * @see #getBitField()
+	 * @generated
+	 */
+	public EReference getBitField_Components() {
+		return (EReference)bitFieldEClass.getEStructuralFeatures().get(0);
+	}
+
+
+	/**
 	 * Returns the meta object for class '{@link model.ProtocolModel <em>Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -747,6 +949,13 @@ public class ProtocolPackage extends EPackageImpl {
 
 		stringFieldEClass = createEClass(STRING_FIELD);
 
+		bitFieldComponentEClass = createEClass(BIT_FIELD_COMPONENT);
+		createEAttribute(bitFieldComponentEClass, BIT_FIELD_COMPONENT__NAME);
+		createEAttribute(bitFieldComponentEClass, BIT_FIELD_COMPONENT__BIT_LENGTH);
+
+		bitFieldEClass = createEClass(BIT_FIELD);
+		createEReference(bitFieldEClass, BIT_FIELD__COMPONENTS);
+
 		protocolModelEClass = createEClass(PROTOCOL_MODEL);
 		createEReference(protocolModelEClass, PROTOCOL_MODEL__PROTOCOLS);
 	}
@@ -783,16 +992,17 @@ public class ProtocolPackage extends EPackageImpl {
 		integerFieldEClass.getESuperTypes().add(this.getField());
 		binaryFieldEClass.getESuperTypes().add(this.getField());
 		stringFieldEClass.getESuperTypes().add(this.getField());
+		bitFieldEClass.getESuperTypes().add(this.getField());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(dataTypeEClass, DataType.class, "DataType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getDataType_Fields(), this.getField(), null, "fields", null, 0, 128, DataType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDataType_Fields(), this.getField(), null, "fields", null, 0, -1, DataType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDataType_TypeName(), ecorePackage.getEString(), "typeName", null, 0, 1, DataType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(fieldEClass, Field.class, "Field", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getField_ByteLen(), ecorePackage.getELongObject(), "byteLen", "0", 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getField_Name(), ecorePackage.getEString(), "name", "", 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getField_Package(), ecorePackage.getEString(), "package", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getField_Package(), ecorePackage.getEString(), "package", "", 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getField_Unbounded(), ecorePackage.getEBooleanObject(), "unbounded", "false", 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(integerFieldEClass, IntegerField.class, "IntegerField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -801,11 +1011,59 @@ public class ProtocolPackage extends EPackageImpl {
 
 		initEClass(stringFieldEClass, StringField.class, "StringField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+		initEClass(bitFieldComponentEClass, BitFieldComponent.class, "BitFieldComponent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getBitFieldComponent_Name(), ecorePackage.getEString(), "name", "", 0, 1, BitFieldComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBitFieldComponent_BitLength(), ecorePackage.getELongObject(), "bitLength", "0", 0, 1, BitFieldComponent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(bitFieldEClass, BitField.class, "BitField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getBitField_Components(), this.getBitFieldComponent(), null, "components", null, 0, -1, BitField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(protocolModelEClass, ProtocolModel.class, "ProtocolModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getProtocolModel_Protocols(), this.getDataType(), null, "protocols", null, 0, 16, ProtocolModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getProtocolModel_Protocols(), this.getDataType(), null, "protocols", null, 0, -1, ProtocolModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
+
+		// Create annotations
+		// http://www.eclipse.org/OCL/Import
+		createImportAnnotations();
+		// http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName
+		createEmofAnnotations();
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/OCL/Import</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createImportAnnotations() {
+		String source = "http://www.eclipse.org/OCL/Import";	
+		addAnnotation
+		  (this, 
+		   source, 
+		   new String[] {
+			 "ecore", "http://www.eclipse.org/emf/2002/Ecore"
+		   });
+	}
+
+
+	/**
+	 * Initializes the annotations for <b>http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createEmofAnnotations() {
+		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";	
+		addAnnotation
+		  (getBitFieldComponent_Name(), 
+		   source, 
+		   new String[] {
+			 "body", "BitField",
+			 "unique", "false",
+			 "upper", "*"
+		   });
 	}
 
 	/**
@@ -919,6 +1177,50 @@ public class ProtocolPackage extends EPackageImpl {
 		 * @generated
 		 */
 		public static final EClass STRING_FIELD = eINSTANCE.getStringField();
+
+		/**
+		 * The meta object literal for the '{@link model.BitFieldComponent <em>Bit Field Component</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see model.BitFieldComponent
+		 * @see model.ProtocolPackage#getBitFieldComponent()
+		 * @generated
+		 */
+		public static final EClass BIT_FIELD_COMPONENT = eINSTANCE.getBitFieldComponent();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		public static final EAttribute BIT_FIELD_COMPONENT__NAME = eINSTANCE.getBitFieldComponent_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Bit Length</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		public static final EAttribute BIT_FIELD_COMPONENT__BIT_LENGTH = eINSTANCE.getBitFieldComponent_BitLength();
+
+		/**
+		 * The meta object literal for the '{@link model.BitField <em>Bit Field</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see model.BitField
+		 * @see model.ProtocolPackage#getBitField()
+		 * @generated
+		 */
+		public static final EClass BIT_FIELD = eINSTANCE.getBitField();
+
+		/**
+		 * The meta object literal for the '<em><b>Components</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		public static final EReference BIT_FIELD__COMPONENTS = eINSTANCE.getBitField_Components();
 
 		/**
 		 * The meta object literal for the '{@link model.ProtocolModel <em>Model</em>}' class.

@@ -24,7 +24,8 @@ variableDefinition
 		intType |
 		stringType |
 		binaryType |
-		embeddedType)
+		embeddedType |
+		bitfieldType)
 ;
 
 intType:
@@ -41,6 +42,14 @@ binaryType:
 
 embeddedType:
 	(type = ID)
+;
+
+bitfieldType:
+	type = 'bitfield' LBRACE bitfieldDefinition+ RBRACE
+;
+
+bitfieldDefinition:
+	name = ID ':' bitLength = NUMBER
 ;
 
 ID

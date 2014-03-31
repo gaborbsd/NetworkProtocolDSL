@@ -92,7 +92,7 @@ public class DataType extends Field {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Fields</em>' containment reference list.
 	 * @see model.ProtocolPackage#getDataType_Fields()
-	 * @model containment="true" upper="128"
+	 * @model containment="true"
 	 * @generated
 	 */
 	public EList<Field> getFields() {

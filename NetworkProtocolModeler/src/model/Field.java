@@ -75,7 +75,7 @@ public abstract class Field extends MinimalEObjectImpl.Container implements EObj
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String PACKAGE_EDEFAULT = null;
+	protected static final String PACKAGE_EDEFAULT = "";
 
 	/**
 	 * The cached value of the '{@link #getPackage() <em>Package</em>}' attribute.
@@ -190,6 +190,7 @@ public abstract class Field extends MinimalEObjectImpl.Container implements EObj
 
 	/**
 	 * Returns the value of the '<em><b>Package</b></em>' attribute.
+	 * The default value is <code>""</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Package</em>' attribute isn't clear,
@@ -199,7 +200,7 @@ public abstract class Field extends MinimalEObjectImpl.Container implements EObj
 	 * @return the value of the '<em>Package</em>' attribute.
 	 * @see #setPackage(String)
 	 * @see model.ProtocolPackage#getField_Package()
-	 * @model
+	 * @model default=""
 	 * @generated
 	 */
 	public String getPackage() {

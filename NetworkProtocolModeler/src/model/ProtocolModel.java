@@ -74,7 +74,7 @@ public class ProtocolModel extends MinimalEObjectImpl.Container implements EObje
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Protocols</em>' containment reference list.
 	 * @see model.ProtocolPackage#getProtocolModel_Protocols()
-	 * @model containment="true" upper="16"
+	 * @model containment="true"
 	 * @generated
 	 */
 	public EList<DataType> getProtocols() {
