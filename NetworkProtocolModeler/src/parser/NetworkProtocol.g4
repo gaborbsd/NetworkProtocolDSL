@@ -2,10 +2,15 @@ grammar NetworkProtocol;
 
 start
 :
-	protocol+
+	protocolDefinition+
 ;
 
-pkg
+protocolDefinition
+:
+	('protocol'|'datatype') name = ID packageDefinition? LBRACE variableDefinition+ RBRACE
+;
+
+packageDefinition
 :
 	'package' name = ID
 	(
@@ -13,33 +18,29 @@ pkg
 	)*
 ;
 
-protocol
-:
-	('protocol'|'datatype') name = ID pkg? LBRACE vardef+ RBRACE
-;
-
-vardef
+variableDefinition
 :
 	name = ID ':' (
-		inttype |
-		stringtype |
-		binarytype) # variableDef
+		intType |
+		stringType |
+		binaryType |
+		embeddedType)
 ;
 
-inttype:
+intType:
 	type = 'int' (LPAREN len = NUMBER RPAREN)?
 ;
 
-stringtype:
+stringType:
 	type = 'string' (LPAREN len = (NUMBER|'*') RPAREN)
 ;
 
-binarytype:
+binaryType:
 	type = 'binary' (LPAREN len = (NUMBER|'*') RPAREN)
 ;
 
-embeddedtype:
-	type = ID
+embeddedType:
+	(type = ID)
 ;
 
 ID

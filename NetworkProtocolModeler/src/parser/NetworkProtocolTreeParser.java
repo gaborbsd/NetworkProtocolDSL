@@ -4,11 +4,12 @@ import model.DataType;
 import model.Field;
 import model.ProtocolFactory;
 import model.ProtocolModel;
-import parser.NetworkProtocolParser.BinarytypeContext;
-import parser.NetworkProtocolParser.InttypeContext;
-import parser.NetworkProtocolParser.ProtocolContext;
-import parser.NetworkProtocolParser.StringtypeContext;
-import parser.NetworkProtocolParser.VariableDefContext;
+import parser.NetworkProtocolParser.BinaryTypeContext;
+import parser.NetworkProtocolParser.EmbeddedTypeContext;
+import parser.NetworkProtocolParser.IntTypeContext;
+import parser.NetworkProtocolParser.ProtocolDefinitionContext;
+import parser.NetworkProtocolParser.StringTypeContext;
+import parser.NetworkProtocolParser.VariableDefinitionContext;
 
 public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 
@@ -56,11 +57,11 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 	}
 
 	@Override
-	public void enterProtocol(ProtocolContext ctx) {
+	public void enterProtocolDefinition(ProtocolDefinitionContext ctx) {
 		currentProtocol = factory.createDataType();
 		currentProtocol.setTypeName(ctx.name.getText());
-		currentProtocol.setPackage((ctx.pkg() != null) ? ctx.pkg().getText()
-				: "");
+		currentProtocol.setPackage((ctx.packageDefinition() != null) ? ctx
+				.packageDefinition().getText() : "");
 		// TODO: addProtocols()
 		model.getProtocols().add(currentProtocol);
 		seenUnbounded = false;
@@ -95,12 +96,10 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 		currentField.setByteLen(new Long(byteLen));
 		if (isUnbounded)
 			currentField.setUnbounded(true);
-		// TODO: addField()
-		currentProtocol.getFields().add(currentField);
 	}
 
 	@Override
-	public void enterVariableDef(VariableDefContext ctx) {
+	public void enterVariableDefinition(VariableDefinitionContext ctx) {
 		if (seenUnbounded)
 			throw new IllegalArgumentException(
 					"Unbounded fields must be the last.");
@@ -108,24 +107,41 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 	}
 
 	@Override
-	public void enterBinarytype(BinarytypeContext ctx) {
+	public void enterBinaryType(BinaryTypeContext ctx) {
 		currentField = factory.createBinaryField();
 		currentField.setName(currentFieldName);
 		processVariable(getJavaType(ctx.type.getText()), ctx.len.getText());
+		// TODO: addField()
+		currentProtocol.getFields().add(currentField);
 	}
 
 	@Override
-	public void enterStringtype(StringtypeContext ctx) {
+	public void enterStringType(StringTypeContext ctx) {
 		currentField = factory.createStringField();
 		currentField.setName(currentFieldName);
 		processVariable(getJavaType(ctx.type.getText()), ctx.len.getText());
+		// TODO: addField()
+		currentProtocol.getFields().add(currentField);
 	}
 
 	@Override
-	public void enterInttype(InttypeContext ctx) {
+	public void enterIntType(IntTypeContext ctx) {
 		currentField = factory.createIntegerField();
 		currentField.setName(currentFieldName);
 		processVariable(getJavaType(ctx.type.getText()), ctx.len.getText());
+		// TODO: addField()
+		currentProtocol.getFields().add(currentField);
+	}
+
+	@Override
+	public void exitEmbeddedType(EmbeddedTypeContext ctx) {
+		currentField = factory.createDataType();
+		currentField.setName(currentFieldName);
+		currentField.setByteLen(0l);
+		currentField.setUnbounded(false);
+		((DataType) currentField).setTypeName(ctx.type.getText());
+		// TODO: addField()
+		currentProtocol.getFields().add(currentField);
 	}
 
 	ProtocolModel getModel() {
