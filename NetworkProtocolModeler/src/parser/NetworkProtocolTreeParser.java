@@ -90,12 +90,10 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 	public void exitProtocolDefinition(ProtocolDefinitionContext ctx) {
 		for (Field f : currentProtocol.getFields()) {
 			if (f instanceof ListField) {
-				for (Field other : currentProtocol.getFields()) {
-					if (other instanceof DataType) {
-						if (((DataType) other).getTypeName().equals(
-								listReferences.get(f.getName()))) {
-							((ListField) f).setElementType(other);
-						}
+				for (DataType dt : model.getProtocols()) {
+					if (dt.getTypeName()
+							.equals(listReferences.get(f.getName()))) {
+						((ListField) f).setElementType(dt);
 					}
 				}
 			}
