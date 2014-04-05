@@ -2,11 +2,6 @@ package generator.util;
 
 public final class GeneratorUtil {
 
-	public static String capitalizeFirst(String text) {
-		char first = Character.toUpperCase(text.charAt(0));
-		return first + text.substring(1);
-	}
-
 	public static byte[] serializeToBytes(int val, byte bytes) {
 		byte[] ret = new byte[bytes];
 

@@ -1,21 +1,20 @@
 package generator
 
-import generator.util.GeneratorUtil
 import java.io.File
 import java.io.FileWriter
 import java.util.StringTokenizer
 import model.BinaryField
+import model.BitField
+import model.CountField
 import model.DataType
 import model.Field
 import model.IntegerField
+import model.ListField
 import model.ProtocolModel
 import model.StringField
 import org.eclipse.jdt.core.ToolFactory
 import org.eclipse.jdt.core.formatter.CodeFormatter
 import org.eclipse.jface.text.Document
-import model.BitField
-import model.ListField
-import model.CountField
 
 class NetworkProtocolGenerator {
 	private ProtocolModel model;
@@ -126,14 +125,14 @@ private «variable.type» «variable.name»;
 	'''
 
 	def private generateVariableGetter(Field variable) '''
-public «variable.type» get«GeneratorUtil.capitalizeFirst(variable.name)»() {
+public «variable.type» get«variable.name.capitalizeFirst»() {
 	return this.«variable.name»;
 }
 
 	'''
 
 	def private generateVariableSetter(Field variable) '''
-public void set«GeneratorUtil.capitalizeFirst(variable.name)»(«variable.type» «variable.name») {
+public void set«variable.name.capitalizeFirst»(«variable.type» «variable.name») {
 	«IF variable.byteLen > 0»
 		«IF variable.type.equals("Long")»
 		if (Long.highestOneBit(«variable.name») > «Math.pow(2, variable.byteLen - 1)»)
@@ -154,13 +153,13 @@ public void set«GeneratorUtil.capitalizeFirst(variable.name)»(«variable.type» «v
 	'''
 
 	def private generateBitFieldGetter(String bitField, String component, Long offset, Long len) '''
-public Long get«GeneratorUtil.capitalizeFirst(component)»() {
+public Long get«component.capitalizeFirst»() {
 	return «bitField»[«offset / 8»] | («len.bitMaskForLen» << (offset % 8));
 }
 		'''
 
 	def private generateBitFieldSetter(String bitField, String component, Long offset, Long len) '''
-public void set«GeneratorUtil.capitalizeFirst(component)»(Long value) {
+public void set«component.capitalizeFirst»(Long value) {
 	«bitField»[«offset / 8»] &= ~(«len.bitMaskForLen» << (offset % 8));
 	«bitField»[«offset / 8»] |= (value << (offset % 8));
 }
