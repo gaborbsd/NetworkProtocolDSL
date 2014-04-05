@@ -25,7 +25,9 @@ variableDefinition
 		stringType |
 		binaryType |
 		embeddedType |
-		bitfieldType)
+		bitfieldType |
+		listType |
+		countType)
 ;
 
 intType:
@@ -46,6 +48,14 @@ embeddedType:
 
 bitfieldType:
 	type = 'bitfield' LBRACE bitfieldDefinition+ RBRACE
+;
+
+listType:
+	type = 'list' LPAREN (listElement = ID) RPAREN
+;
+
+countType:
+	type = 'count' LPAREN countedList = ID RPAREN
 ;
 
 bitfieldDefinition:

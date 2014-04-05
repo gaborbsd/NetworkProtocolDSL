@@ -14,6 +14,8 @@ import org.eclipse.jdt.core.ToolFactory
 import org.eclipse.jdt.core.formatter.CodeFormatter
 import org.eclipse.jface.text.Document
 import model.BitField
+import model.ListField
+import model.CountField
 
 class NetworkProtocolGenerator {
 	private ProtocolModel model;
@@ -33,6 +35,10 @@ class NetworkProtocolGenerator {
 			return "Long";
 		if (field instanceof StringField)
 			return "String";
+		if (field instanceof ListField)
+			return "List<" + field.elementType + ">";
+		if (field instanceof CountField)
+			return "Long";
 		if (field instanceof DataType)
 			return (field as DataType).typeName;
 		throw new RuntimeException("Cannot happen.");
@@ -59,11 +65,11 @@ class NetworkProtocolGenerator {
 			var formatter = ToolFactory.createCodeFormatter(null)
 			var textEdit = formatter.format(CodeFormatter.K_COMPILATION_UNIT, code, 0, code.length(), 0, "\n")
 			var doc = new Document(code)
-			textEdit.apply(doc)
 
+			//textEdit.apply(doc)
 			var sourceFile = new File(basePath, pkgPath.toString)
 			var writer = new FileWriter(sourceFile)
-			writer.append(doc.get)
+			writer.append(code)
 			writer.close
 		}
 	}
@@ -73,6 +79,8 @@ class NetworkProtocolGenerator {
 package «protocol.package»;
 
 «ENDIF»
+import java.util.*;
+
 import model.*;
 import runtime.*;
 
@@ -83,8 +91,13 @@ public class «protocol.typeName» extends OrderedSerializable {
 	«ENDFOR»
 	
 	«FOR v : protocol.fields»
+	
+		«IF !(v instanceof ListField)»
 		«generateVariableGetter(v)»
 		«generateVariableSetter(v)»
+		«ELSE»
+		«generateListAccessors(v.name, v.type)»
+		«ENDIF»
 		
 		«IF v instanceof BitField»
 			«var long offset = 0»
@@ -153,6 +166,24 @@ public void set«GeneratorUtil.capitalizeFirst(component)»(Long value) {
 }
 		'''
 
+	def private generateListAccessors(String varName, String listType) '''
+public void add«varName.singularize.capitalizeFirst»(«listType» e) {
+	«varName».add(e);
+}
+
+public void get«varName.singularize.capitalizeFirst»(int no) {
+	«varName».get(no);
+}
+
+public void clear«varName.capitalizeFirst»() {
+	«varName».clear;
+}
+
+public void remove«varName.singularize.capitalizeFirst»(int no) {
+	«varName».remove(no);
+}
+	'''
+
 	def private String bitMaskForLen(long len) {
 		var sb = new StringBuffer;
 		var count = len;
@@ -161,5 +192,18 @@ public void set«GeneratorUtil.capitalizeFirst(component)»(Long value) {
 			count = count - 1
 		}
 		return sb.toString
+	}
+
+	def private String singularize(String str) {
+		if (str.substring(str.length - 3, str.length).equals("ies"))
+			return str.substring(0, str.length - 3) + "y";
+		if (str.charAt(str.length - 1) == 's')
+			return str.substring(0, str.length - 1)
+		return str;
+	}
+
+	def private String capitalizeFirst(String str) {
+		var first = Character.toUpperCase(str.charAt(0));
+		return first + str.substring(1);
 	}
 }

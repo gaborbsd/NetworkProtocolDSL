@@ -1,16 +1,23 @@
 package parser;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import model.BitField;
 import model.BitFieldComponent;
+import model.CountField;
 import model.DataType;
 import model.Field;
+import model.ListField;
 import model.ProtocolFactory;
 import model.ProtocolModel;
 import parser.NetworkProtocolParser.BinaryTypeContext;
 import parser.NetworkProtocolParser.BitfieldDefinitionContext;
 import parser.NetworkProtocolParser.BitfieldTypeContext;
+import parser.NetworkProtocolParser.CountTypeContext;
 import parser.NetworkProtocolParser.EmbeddedTypeContext;
 import parser.NetworkProtocolParser.IntTypeContext;
+import parser.NetworkProtocolParser.ListTypeContext;
 import parser.NetworkProtocolParser.ProtocolDefinitionContext;
 import parser.NetworkProtocolParser.StringTypeContext;
 import parser.NetworkProtocolParser.VariableDefinitionContext;
@@ -25,8 +32,12 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 	private String currentFieldName = "";
 
 	private boolean seenUnbounded;
-	
+
 	private Long bitFieldTotalLen;
+
+	private Map<String, String> listReferences;
+
+	private Map<String, String> countReferences;
 
 	public static String getJavaType(String type) {
 		switch (type) {
@@ -71,6 +82,34 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 		// TODO: addProtocols()
 		model.getProtocols().add(currentProtocol);
 		seenUnbounded = false;
+		listReferences = new HashMap<String, String>();
+		countReferences = new HashMap<String, String>();
+	}
+
+	@Override
+	public void exitProtocolDefinition(ProtocolDefinitionContext ctx) {
+		for (Field f : currentProtocol.getFields()) {
+			if (f instanceof ListField) {
+				for (Field other : currentProtocol.getFields()) {
+					if (other instanceof DataType) {
+						if (((DataType) other).getTypeName().equals(
+								listReferences.get(f.getName()))) {
+							((ListField) f).setElementType(other);
+						}
+					}
+				}
+			}
+			if (f instanceof CountField) {
+				for (Field other : currentProtocol.getFields()) {
+					if (other instanceof ListField) {
+						if (((ListField) other).getName().equals(
+								countReferences.get(f.getName()))) {
+							((CountField) f).setRef((ListField) other);
+						}
+					}
+				}
+			}
+		}
 	}
 
 	private void processVariable(String type, String len) {
@@ -162,6 +201,28 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 	}
 
 	@Override
+	public void enterListType(ListTypeContext ctx) {
+		currentField = factory.createListField();
+		currentField.setName(currentFieldName);
+		currentField.setUnbounded(true);
+		currentField.setByteLen(0l);
+		// TODO: addField()
+		currentProtocol.getFields().add(currentField);
+		listReferences.put(currentFieldName, ctx.listElement.getText());
+	}
+
+	@Override
+	public void enterCountType(CountTypeContext ctx) {
+		currentField = factory.createCountField();
+		currentField.setName(currentFieldName);
+		currentField.setUnbounded(true);
+		currentField.setByteLen(0l);
+		// TODO: addField()
+		currentProtocol.getFields().add(currentField);
+		countReferences.put(currentFieldName, ctx.countedList.getText());
+	}
+
+	@Override
 	public void enterBitfieldDefinition(BitfieldDefinitionContext ctx) {
 		BitFieldComponent bitFieldComponent = factory.createBitFieldComponent();
 		bitFieldComponent.setName(ctx.name.getText());
@@ -169,7 +230,7 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 		bitFieldComponent.setBitLength(bitLength);
 		bitFieldTotalLen += bitLength;
 		// TODO: addComponent()
-		((BitField)currentField).getComponents().add(bitFieldComponent);
+		((BitField) currentField).getComponents().add(bitFieldComponent);
 	}
 
 	ProtocolModel getModel() {

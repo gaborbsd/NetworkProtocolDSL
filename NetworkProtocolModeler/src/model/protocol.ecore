@@ -39,6 +39,13 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="components" upperBound="-1"
         eType="#//BitFieldComponent" containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ListField" eSuperTypes="#//Field">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elementType" lowerBound="1"
+        eType="#//Field"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CountField" eSuperTypes="#//Field">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" lowerBound="1" eType="#//ListField"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ProtocolModel">
     <eStructuralFeatures xsi:type="ecore:EReference" name="protocols" upperBound="-1"
         eType="#//DataType" containment="true"/>

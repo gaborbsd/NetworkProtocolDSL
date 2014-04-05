@@ -517,6 +517,152 @@ public class ProtocolPackage extends EPackageImpl {
 	public static final int BIT_FIELD_OPERATION_COUNT = FIELD_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link model.ListField <em>List Field</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see model.ListField
+	 * @see model.ProtocolPackage#getListField()
+	 * @generated
+	 */
+	public static final int LIST_FIELD = 7;
+
+	/**
+	 * The feature id for the '<em><b>Byte Len</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LIST_FIELD__BYTE_LEN = FIELD__BYTE_LEN;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LIST_FIELD__NAME = FIELD__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Package</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LIST_FIELD__PACKAGE = FIELD__PACKAGE;
+
+	/**
+	 * The feature id for the '<em><b>Unbounded</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LIST_FIELD__UNBOUNDED = FIELD__UNBOUNDED;
+
+	/**
+	 * The feature id for the '<em><b>Element Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LIST_FIELD__ELEMENT_TYPE = FIELD_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>List Field</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LIST_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>List Field</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LIST_FIELD_OPERATION_COUNT = FIELD_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link model.CountField <em>Count Field</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see model.CountField
+	 * @see model.ProtocolPackage#getCountField()
+	 * @generated
+	 */
+	public static final int COUNT_FIELD = 8;
+
+	/**
+	 * The feature id for the '<em><b>Byte Len</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int COUNT_FIELD__BYTE_LEN = FIELD__BYTE_LEN;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int COUNT_FIELD__NAME = FIELD__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Package</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int COUNT_FIELD__PACKAGE = FIELD__PACKAGE;
+
+	/**
+	 * The feature id for the '<em><b>Unbounded</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int COUNT_FIELD__UNBOUNDED = FIELD__UNBOUNDED;
+
+	/**
+	 * The feature id for the '<em><b>Ref</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int COUNT_FIELD__REF = FIELD_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Count Field</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int COUNT_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Count Field</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int COUNT_FIELD_OPERATION_COUNT = FIELD_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link model.ProtocolModel <em>Model</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -524,7 +670,7 @@ public class ProtocolPackage extends EPackageImpl {
 	 * @see model.ProtocolPackage#getProtocolModel()
 	 * @generated
 	 */
-	public static final int PROTOCOL_MODEL = 7;
+	public static final int PROTOCOL_MODEL = 9;
 
 	/**
 	 * The feature id for the '<em><b>Protocols</b></em>' containment reference list.
@@ -601,6 +747,20 @@ public class ProtocolPackage extends EPackageImpl {
 	 * @generated
 	 */
 	private EClass bitFieldEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass listFieldEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass countFieldEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -879,6 +1039,60 @@ public class ProtocolPackage extends EPackageImpl {
 
 
 	/**
+	 * Returns the meta object for class '{@link model.ListField <em>List Field</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>List Field</em>'.
+	 * @see model.ListField
+	 * @generated
+	 */
+	public EClass getListField() {
+		return listFieldEClass;
+	}
+
+
+	/**
+	 * Returns the meta object for the reference '{@link model.ListField#getElementType <em>Element Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Element Type</em>'.
+	 * @see model.ListField#getElementType()
+	 * @see #getListField()
+	 * @generated
+	 */
+	public EReference getListField_ElementType() {
+		return (EReference)listFieldEClass.getEStructuralFeatures().get(0);
+	}
+
+
+	/**
+	 * Returns the meta object for class '{@link model.CountField <em>Count Field</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Count Field</em>'.
+	 * @see model.CountField
+	 * @generated
+	 */
+	public EClass getCountField() {
+		return countFieldEClass;
+	}
+
+
+	/**
+	 * Returns the meta object for the reference '{@link model.CountField#getRef <em>Ref</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Ref</em>'.
+	 * @see model.CountField#getRef()
+	 * @see #getCountField()
+	 * @generated
+	 */
+	public EReference getCountField_Ref() {
+		return (EReference)countFieldEClass.getEStructuralFeatures().get(0);
+	}
+
+
+	/**
 	 * Returns the meta object for class '{@link model.ProtocolModel <em>Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -956,6 +1170,12 @@ public class ProtocolPackage extends EPackageImpl {
 		bitFieldEClass = createEClass(BIT_FIELD);
 		createEReference(bitFieldEClass, BIT_FIELD__COMPONENTS);
 
+		listFieldEClass = createEClass(LIST_FIELD);
+		createEReference(listFieldEClass, LIST_FIELD__ELEMENT_TYPE);
+
+		countFieldEClass = createEClass(COUNT_FIELD);
+		createEReference(countFieldEClass, COUNT_FIELD__REF);
+
 		protocolModelEClass = createEClass(PROTOCOL_MODEL);
 		createEReference(protocolModelEClass, PROTOCOL_MODEL__PROTOCOLS);
 	}
@@ -993,6 +1213,8 @@ public class ProtocolPackage extends EPackageImpl {
 		binaryFieldEClass.getESuperTypes().add(this.getField());
 		stringFieldEClass.getESuperTypes().add(this.getField());
 		bitFieldEClass.getESuperTypes().add(this.getField());
+		listFieldEClass.getESuperTypes().add(this.getField());
+		countFieldEClass.getESuperTypes().add(this.getField());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(dataTypeEClass, DataType.class, "DataType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1017,6 +1239,12 @@ public class ProtocolPackage extends EPackageImpl {
 
 		initEClass(bitFieldEClass, BitField.class, "BitField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getBitField_Components(), this.getBitFieldComponent(), null, "components", null, 0, -1, BitField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(listFieldEClass, ListField.class, "ListField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getListField_ElementType(), this.getField(), null, "elementType", null, 1, 1, ListField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(countFieldEClass, CountField.class, "CountField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCountField_Ref(), this.getListField(), null, "ref", null, 1, 1, CountField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(protocolModelEClass, ProtocolModel.class, "ProtocolModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getProtocolModel_Protocols(), this.getDataType(), null, "protocols", null, 0, -1, ProtocolModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1221,6 +1449,42 @@ public class ProtocolPackage extends EPackageImpl {
 		 * @generated
 		 */
 		public static final EReference BIT_FIELD__COMPONENTS = eINSTANCE.getBitField_Components();
+
+		/**
+		 * The meta object literal for the '{@link model.ListField <em>List Field</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see model.ListField
+		 * @see model.ProtocolPackage#getListField()
+		 * @generated
+		 */
+		public static final EClass LIST_FIELD = eINSTANCE.getListField();
+
+		/**
+		 * The meta object literal for the '<em><b>Element Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		public static final EReference LIST_FIELD__ELEMENT_TYPE = eINSTANCE.getListField_ElementType();
+
+		/**
+		 * The meta object literal for the '{@link model.CountField <em>Count Field</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see model.CountField
+		 * @see model.ProtocolPackage#getCountField()
+		 * @generated
+		 */
+		public static final EClass COUNT_FIELD = eINSTANCE.getCountField();
+
+		/**
+		 * The meta object literal for the '<em><b>Ref</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		public static final EReference COUNT_FIELD__REF = eINSTANCE.getCountField_Ref();
 
 		/**
 		 * The meta object literal for the '{@link model.ProtocolModel <em>Model</em>}' class.
