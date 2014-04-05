@@ -55,7 +55,7 @@ listType:
 ;
 
 countType:
-	type = 'count' LPAREN countedList = ID RPAREN
+	type = 'count' LPAREN len = NUMBER ',' countedList = ID RPAREN
 ;
 
 bitfieldDefinition:

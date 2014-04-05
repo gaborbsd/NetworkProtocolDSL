@@ -213,8 +213,7 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 	public void enterCountType(CountTypeContext ctx) {
 		currentField = factory.createCountField();
 		currentField.setName(currentFieldName);
-		currentField.setUnbounded(true);
-		currentField.setByteLen(0l);
+		processVariable("Long", ctx.len.getText());
 		// TODO: addField()
 		currentProtocol.getFields().add(currentField);
 		countReferences.put(currentFieldName, ctx.countedList.getText());

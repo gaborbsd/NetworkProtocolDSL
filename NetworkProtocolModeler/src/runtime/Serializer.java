@@ -1,7 +1,6 @@
 package runtime;
 
 import java.lang.reflect.Field;
-import model.VariableProps;
 
 public class Serializer {
 
