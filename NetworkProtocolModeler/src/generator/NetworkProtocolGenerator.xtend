@@ -86,16 +86,21 @@ import runtime.*;
 public class «protocol.typeName» extends OrderedSerializable {
 	
 	«FOR v : protocol.fields»
-		«generateVariableDef(v)»
+		«IF !(v instanceof CountField)»
+			«generateVariableDef(v)»
+		«ENDIF»
 	«ENDFOR»
 	
 	«FOR v : protocol.fields»
 	
-		«IF !(v instanceof ListField)»
-		«generateVariableGetter(v)»
-		«generateVariableSetter(v)»
+		«IF v instanceof ListField»
+			«generateListAccessors(v.name, v.type)»
+		«ELSEIF v instanceof CountField»
+			«generateCountGetter(v.name, (v as CountField).ref.name)»
 		«ELSE»
-		«generateListAccessors(v.name, v.type)»
+			«generateVariableGetter(v)»
+			«generateVariableSetter(v)»
+			
 		«ENDIF»
 		
 		«IF v instanceof BitField»
@@ -180,6 +185,12 @@ public void clear«varName.capitalizeFirst»() {
 
 public void remove«varName.singularize.capitalizeFirst»(int no) {
 	«varName».remove(no);
+}
+	'''
+	
+	def private generateCountGetter(String countName, String ref) '''
+public Long get«countName.capitalizeFirst»() {
+	return «ref».size();
 }
 	'''
 
