@@ -3,20 +3,22 @@ package runtime;
 public class VariableProps {
 	private String name;
 	private byte byteLen;
-	String type;
+	private String type;
 	private boolean unbounded;
+	private String formatter;
 
 	public VariableProps() {
 		super();
 	}
 
 	public VariableProps(String name, String type, byte byteLen,
-			boolean unbounded) {
+			boolean unbounded, String formatter) {
 		super();
 		this.name = name;
 		this.type = type;
 		this.byteLen = byteLen;
 		this.unbounded = unbounded;
+		this.formatter = formatter;
 	}
 
 	public String getName() {
@@ -49,5 +51,13 @@ public class VariableProps {
 
 	public void setUnbounded(boolean unbounded) {
 		this.unbounded = unbounded;
+	}
+
+	public String getFormatter() {
+		return formatter;
+	}
+
+	public void setFormatter(String formatter) {
+		this.formatter = formatter;
 	}
 }

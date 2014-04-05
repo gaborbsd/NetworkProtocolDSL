@@ -19,6 +19,7 @@
         defaultValueLiteral=""/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="unbounded" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"
         defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="formatter" eType="#//Formatter"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="IntegerField" eSuperTypes="#//Field"/>
   <eClassifiers xsi:type="ecore:EClass" name="BinaryField" eSuperTypes="#//Field"/>
@@ -49,5 +50,11 @@
   <eClassifiers xsi:type="ecore:EClass" name="ProtocolModel">
     <eStructuralFeatures xsi:type="ecore:EReference" name="protocols" upperBound="-1"
         eType="#//DataType" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="formatters" upperBound="-1"
+        eType="#//Formatter" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Formatter">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
   </eClassifiers>
 </ecore:EPackage>

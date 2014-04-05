@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are supported:
  * <ul>
  *   <li>{@link model.ProtocolModel#getProtocols <em>Protocols</em>}</li>
+ *   <li>{@link model.ProtocolModel#getFormatters <em>Formatters</em>}</li>
  * </ul>
  * </p>
  *
@@ -43,6 +44,16 @@ public class ProtocolModel extends MinimalEObjectImpl.Container implements EObje
 	 * @ordered
 	 */
 	protected EList<DataType> protocols;
+
+	/**
+	 * The cached value of the '{@link #getFormatters() <em>Formatters</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFormatters()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Formatter> formatters;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -85,6 +96,27 @@ public class ProtocolModel extends MinimalEObjectImpl.Container implements EObje
 	}
 
 	/**
+	 * Returns the value of the '<em><b>Formatters</b></em>' containment reference list.
+	 * The list contents are of type {@link model.Formatter}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Formatters</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Formatters</em>' containment reference list.
+	 * @see model.ProtocolPackage#getProtocolModel_Formatters()
+	 * @model containment="true"
+	 * @generated
+	 */
+	public EList<Formatter> getFormatters() {
+		if (formatters == null) {
+			formatters = new BasicInternalEList<Formatter>(Formatter.class);
+		}
+		return formatters;
+	}
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -94,6 +126,8 @@ public class ProtocolModel extends MinimalEObjectImpl.Container implements EObje
 		switch (featureID) {
 			case ProtocolPackage.PROTOCOL_MODEL__PROTOCOLS:
 				return ((InternalEList<?>)getProtocols()).basicRemove(otherEnd, msgs);
+			case ProtocolPackage.PROTOCOL_MODEL__FORMATTERS:
+				return ((InternalEList<?>)getFormatters()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -108,6 +142,8 @@ public class ProtocolModel extends MinimalEObjectImpl.Container implements EObje
 		switch (featureID) {
 			case ProtocolPackage.PROTOCOL_MODEL__PROTOCOLS:
 				return getProtocols();
+			case ProtocolPackage.PROTOCOL_MODEL__FORMATTERS:
+				return getFormatters();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -125,6 +161,10 @@ public class ProtocolModel extends MinimalEObjectImpl.Container implements EObje
 				getProtocols().clear();
 				getProtocols().addAll((Collection<? extends DataType>)newValue);
 				return;
+			case ProtocolPackage.PROTOCOL_MODEL__FORMATTERS:
+				getFormatters().clear();
+				getFormatters().addAll((Collection<? extends Formatter>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -140,6 +180,9 @@ public class ProtocolModel extends MinimalEObjectImpl.Container implements EObje
 			case ProtocolPackage.PROTOCOL_MODEL__PROTOCOLS:
 				getProtocols().clear();
 				return;
+			case ProtocolPackage.PROTOCOL_MODEL__FORMATTERS:
+				getFormatters().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -154,6 +197,8 @@ public class ProtocolModel extends MinimalEObjectImpl.Container implements EObje
 		switch (featureID) {
 			case ProtocolPackage.PROTOCOL_MODEL__PROTOCOLS:
 				return protocols != null && !protocols.isEmpty();
+			case ProtocolPackage.PROTOCOL_MODEL__FORMATTERS:
+				return formatters != null && !formatters.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

@@ -5,6 +5,7 @@ package model;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
@@ -19,6 +20,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  *   <li>{@link model.Field#getName <em>Name</em>}</li>
  *   <li>{@link model.Field#getPackage <em>Package</em>}</li>
  *   <li>{@link model.Field#getUnbounded <em>Unbounded</em>}</li>
+ *   <li>{@link model.Field#getFormatter <em>Formatter</em>}</li>
  * </ul>
  * </p>
  *
@@ -106,6 +108,16 @@ public abstract class Field extends MinimalEObjectImpl.Container implements EObj
 	 * @ordered
 	 */
 	protected Boolean unbounded = UNBOUNDED_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getFormatter() <em>Formatter</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFormatter()
+	 * @generated
+	 * @ordered
+	 */
+	protected Formatter formatter;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -251,6 +263,51 @@ public abstract class Field extends MinimalEObjectImpl.Container implements EObj
 	}
 
 	/**
+	 * Returns the value of the '<em><b>Formatter</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Formatter</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Formatter</em>' reference.
+	 * @see #setFormatter(Formatter)
+	 * @see model.ProtocolPackage#getField_Formatter()
+	 * @model
+	 * @generated
+	 */
+	public Formatter getFormatter() {
+		if (formatter != null && formatter.eIsProxy()) {
+			InternalEObject oldFormatter = (InternalEObject)formatter;
+			formatter = (Formatter)eResolveProxy(oldFormatter);
+			if (formatter != oldFormatter) {
+			}
+		}
+		return formatter;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Formatter basicGetFormatter() {
+		return formatter;
+	}
+
+	/**
+	 * Sets the value of the '{@link model.Field#getFormatter <em>Formatter</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Formatter</em>' reference.
+	 * @see #getFormatter()
+	 * @generated
+	 */
+	public void setFormatter(Formatter newFormatter) {
+		formatter = newFormatter;
+	}
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -266,6 +323,9 @@ public abstract class Field extends MinimalEObjectImpl.Container implements EObj
 				return getPackage();
 			case ProtocolPackage.FIELD__UNBOUNDED:
 				return getUnbounded();
+			case ProtocolPackage.FIELD__FORMATTER:
+				if (resolve) return getFormatter();
+				return basicGetFormatter();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -289,6 +349,9 @@ public abstract class Field extends MinimalEObjectImpl.Container implements EObj
 				return;
 			case ProtocolPackage.FIELD__UNBOUNDED:
 				setUnbounded((Boolean)newValue);
+				return;
+			case ProtocolPackage.FIELD__FORMATTER:
+				setFormatter((Formatter)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -314,6 +377,9 @@ public abstract class Field extends MinimalEObjectImpl.Container implements EObj
 			case ProtocolPackage.FIELD__UNBOUNDED:
 				setUnbounded(UNBOUNDED_EDEFAULT);
 				return;
+			case ProtocolPackage.FIELD__FORMATTER:
+				setFormatter((Formatter)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -334,6 +400,8 @@ public abstract class Field extends MinimalEObjectImpl.Container implements EObj
 				return PACKAGE_EDEFAULT == null ? package_ != null : !PACKAGE_EDEFAULT.equals(package_);
 			case ProtocolPackage.FIELD__UNBOUNDED:
 				return UNBOUNDED_EDEFAULT == null ? unbounded != null : !UNBOUNDED_EDEFAULT.equals(unbounded);
+			case ProtocolPackage.FIELD__FORMATTER:
+				return formatter != null;
 		}
 		return super.eIsSet(featureID);
 	}

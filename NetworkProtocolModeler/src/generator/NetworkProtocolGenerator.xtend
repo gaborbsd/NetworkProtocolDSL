@@ -43,6 +43,10 @@ class NetworkProtocolGenerator {
 		throw new RuntimeException("Cannot happen.");
 
 	}
+	
+	def String formatterClass(Field field) {
+		return if (field.formatter != null) field.formatter.name else "null";
+	}
 
 	def process() {
 		for (protocol : model.protocols) {
@@ -120,7 +124,7 @@ public class «protocol.typeName» extends OrderedSerializable {
 	public VariableProps[] getSerializationOrder() {
 		return new VariableProps[]
 			«FOR v : protocol.fields BEFORE '{' SEPARATOR ', ' AFTER '};'»
-				new VariableProps(«v.name», «v.type».class, «v.byteLen», «v.unbounded»)
+				new VariableProps(«v.name», «v.type».class, «v.byteLen», «v.unbounded», «v.formatterClass»)
 			«ENDFOR»
 	}
 }

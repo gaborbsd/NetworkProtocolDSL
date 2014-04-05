@@ -106,13 +106,22 @@ public class ProtocolPackage extends EPackageImpl {
 	public static final int FIELD__UNBOUNDED = 3;
 
 	/**
+	 * The feature id for the '<em><b>Formatter</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int FIELD__FORMATTER = 4;
+
+	/**
 	 * The number of structural features of the '<em>Field</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	public static final int FIELD_FEATURE_COUNT = 4;
+	public static final int FIELD_FEATURE_COUNT = 5;
 
 	/**
 	 * The number of operations of the '<em>Field</em>' class.
@@ -168,6 +177,15 @@ public class ProtocolPackage extends EPackageImpl {
 	 * @ordered
 	 */
 	public static final int DATA_TYPE__UNBOUNDED = FIELD__UNBOUNDED;
+
+	/**
+	 * The feature id for the '<em><b>Formatter</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int DATA_TYPE__FORMATTER = FIELD__FORMATTER;
 
 	/**
 	 * The feature id for the '<em><b>Fields</b></em>' containment reference list.
@@ -252,6 +270,15 @@ public class ProtocolPackage extends EPackageImpl {
 	public static final int INTEGER_FIELD__UNBOUNDED = FIELD__UNBOUNDED;
 
 	/**
+	 * The feature id for the '<em><b>Formatter</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int INTEGER_FIELD__FORMATTER = FIELD__FORMATTER;
+
+	/**
 	 * The number of structural features of the '<em>Integer Field</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -316,6 +343,15 @@ public class ProtocolPackage extends EPackageImpl {
 	public static final int BINARY_FIELD__UNBOUNDED = FIELD__UNBOUNDED;
 
 	/**
+	 * The feature id for the '<em><b>Formatter</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BINARY_FIELD__FORMATTER = FIELD__FORMATTER;
+
+	/**
 	 * The number of structural features of the '<em>Binary Field</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -378,6 +414,15 @@ public class ProtocolPackage extends EPackageImpl {
 	 * @ordered
 	 */
 	public static final int STRING_FIELD__UNBOUNDED = FIELD__UNBOUNDED;
+
+	/**
+	 * The feature id for the '<em><b>Formatter</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int STRING_FIELD__FORMATTER = FIELD__FORMATTER;
 
 	/**
 	 * The number of structural features of the '<em>String Field</em>' class.
@@ -490,6 +535,15 @@ public class ProtocolPackage extends EPackageImpl {
 	public static final int BIT_FIELD__UNBOUNDED = FIELD__UNBOUNDED;
 
 	/**
+	 * The feature id for the '<em><b>Formatter</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BIT_FIELD__FORMATTER = FIELD__FORMATTER;
+
+	/**
 	 * The feature id for the '<em><b>Components</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -561,6 +615,15 @@ public class ProtocolPackage extends EPackageImpl {
 	 * @ordered
 	 */
 	public static final int LIST_FIELD__UNBOUNDED = FIELD__UNBOUNDED;
+
+	/**
+	 * The feature id for the '<em><b>Formatter</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LIST_FIELD__FORMATTER = FIELD__FORMATTER;
 
 	/**
 	 * The feature id for the '<em><b>Element Type</b></em>' reference.
@@ -636,6 +699,15 @@ public class ProtocolPackage extends EPackageImpl {
 	public static final int COUNT_FIELD__UNBOUNDED = FIELD__UNBOUNDED;
 
 	/**
+	 * The feature id for the '<em><b>Formatter</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int COUNT_FIELD__FORMATTER = FIELD__FORMATTER;
+
+	/**
 	 * The feature id for the '<em><b>Ref</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -682,13 +754,22 @@ public class ProtocolPackage extends EPackageImpl {
 	public static final int PROTOCOL_MODEL__PROTOCOLS = 0;
 
 	/**
+	 * The feature id for the '<em><b>Formatters</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int PROTOCOL_MODEL__FORMATTERS = 1;
+
+	/**
 	 * The number of structural features of the '<em>Model</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	public static final int PROTOCOL_MODEL_FEATURE_COUNT = 1;
+	public static final int PROTOCOL_MODEL_FEATURE_COUNT = 2;
 
 	/**
 	 * The number of operations of the '<em>Model</em>' class.
@@ -698,6 +779,43 @@ public class ProtocolPackage extends EPackageImpl {
 	 * @ordered
 	 */
 	public static final int PROTOCOL_MODEL_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link model.Formatter <em>Formatter</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see model.Formatter
+	 * @see model.ProtocolPackage#getFormatter()
+	 * @generated
+	 */
+	public static final int FORMATTER = 10;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int FORMATTER__NAME = 0;
+
+	/**
+	 * The number of structural features of the '<em>Formatter</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int FORMATTER_FEATURE_COUNT = 1;
+
+	/**
+	 * The number of operations of the '<em>Formatter</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int FORMATTER_OPERATION_COUNT = 0;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -768,6 +886,13 @@ public class ProtocolPackage extends EPackageImpl {
 	 * @generated
 	 */
 	private EClass protocolModelEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass formatterEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -931,6 +1056,20 @@ public class ProtocolPackage extends EPackageImpl {
 	 */
 	public EAttribute getField_Unbounded() {
 		return (EAttribute)fieldEClass.getEStructuralFeatures().get(3);
+	}
+
+
+	/**
+	 * Returns the meta object for the reference '{@link model.Field#getFormatter <em>Formatter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Formatter</em>'.
+	 * @see model.Field#getFormatter()
+	 * @see #getField()
+	 * @generated
+	 */
+	public EReference getField_Formatter() {
+		return (EReference)fieldEClass.getEStructuralFeatures().get(4);
 	}
 
 
@@ -1118,6 +1257,47 @@ public class ProtocolPackage extends EPackageImpl {
 	}
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link model.ProtocolModel#getFormatters <em>Formatters</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Formatters</em>'.
+	 * @see model.ProtocolModel#getFormatters()
+	 * @see #getProtocolModel()
+	 * @generated
+	 */
+	public EReference getProtocolModel_Formatters() {
+		return (EReference)protocolModelEClass.getEStructuralFeatures().get(1);
+	}
+
+
+	/**
+	 * Returns the meta object for class '{@link model.Formatter <em>Formatter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Formatter</em>'.
+	 * @see model.Formatter
+	 * @generated
+	 */
+	public EClass getFormatter() {
+		return formatterEClass;
+	}
+
+
+	/**
+	 * Returns the meta object for the attribute '{@link model.Formatter#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see model.Formatter#getName()
+	 * @see #getFormatter()
+	 * @generated
+	 */
+	public EAttribute getFormatter_Name() {
+		return (EAttribute)formatterEClass.getEStructuralFeatures().get(0);
+	}
+
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1156,6 +1336,7 @@ public class ProtocolPackage extends EPackageImpl {
 		createEAttribute(fieldEClass, FIELD__NAME);
 		createEAttribute(fieldEClass, FIELD__PACKAGE);
 		createEAttribute(fieldEClass, FIELD__UNBOUNDED);
+		createEReference(fieldEClass, FIELD__FORMATTER);
 
 		integerFieldEClass = createEClass(INTEGER_FIELD);
 
@@ -1178,6 +1359,10 @@ public class ProtocolPackage extends EPackageImpl {
 
 		protocolModelEClass = createEClass(PROTOCOL_MODEL);
 		createEReference(protocolModelEClass, PROTOCOL_MODEL__PROTOCOLS);
+		createEReference(protocolModelEClass, PROTOCOL_MODEL__FORMATTERS);
+
+		formatterEClass = createEClass(FORMATTER);
+		createEAttribute(formatterEClass, FORMATTER__NAME);
 	}
 
 	/**
@@ -1226,6 +1411,7 @@ public class ProtocolPackage extends EPackageImpl {
 		initEAttribute(getField_Name(), ecorePackage.getEString(), "name", "", 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getField_Package(), ecorePackage.getEString(), "package", "", 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getField_Unbounded(), ecorePackage.getEBooleanObject(), "unbounded", "false", 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getField_Formatter(), this.getFormatter(), null, "formatter", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(integerFieldEClass, IntegerField.class, "IntegerField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1248,6 +1434,10 @@ public class ProtocolPackage extends EPackageImpl {
 
 		initEClass(protocolModelEClass, ProtocolModel.class, "ProtocolModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getProtocolModel_Protocols(), this.getDataType(), null, "protocols", null, 0, -1, ProtocolModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getProtocolModel_Formatters(), this.getFormatter(), null, "formatters", null, 0, -1, ProtocolModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(formatterEClass, Formatter.class, "Formatter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getFormatter_Name(), ecorePackage.getEString(), "name", "", 0, 1, Formatter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -1377,6 +1567,14 @@ public class ProtocolPackage extends EPackageImpl {
 		public static final EAttribute FIELD__UNBOUNDED = eINSTANCE.getField_Unbounded();
 
 		/**
+		 * The meta object literal for the '<em><b>Formatter</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		public static final EReference FIELD__FORMATTER = eINSTANCE.getField_Formatter();
+
+		/**
 		 * The meta object literal for the '{@link model.IntegerField <em>Integer Field</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1503,6 +1701,32 @@ public class ProtocolPackage extends EPackageImpl {
 		 * @generated
 		 */
 		public static final EReference PROTOCOL_MODEL__PROTOCOLS = eINSTANCE.getProtocolModel_Protocols();
+
+		/**
+		 * The meta object literal for the '<em><b>Formatters</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		public static final EReference PROTOCOL_MODEL__FORMATTERS = eINSTANCE.getProtocolModel_Formatters();
+
+		/**
+		 * The meta object literal for the '{@link model.Formatter <em>Formatter</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see model.Formatter
+		 * @see model.ProtocolPackage#getFormatter()
+		 * @generated
+		 */
+		public static final EClass FORMATTER = eINSTANCE.getFormatter();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		public static final EAttribute FORMATTER__NAME = eINSTANCE.getFormatter_Name();
 
 	}
 

@@ -8,14 +8,17 @@ import model.BitFieldComponent;
 import model.CountField;
 import model.DataType;
 import model.Field;
+import model.Formatter;
 import model.ListField;
 import model.ProtocolFactory;
 import model.ProtocolModel;
+import model.StringField;
 import parser.NetworkProtocolParser.BinaryTypeContext;
 import parser.NetworkProtocolParser.BitfieldDefinitionContext;
 import parser.NetworkProtocolParser.BitfieldTypeContext;
 import parser.NetworkProtocolParser.CountTypeContext;
 import parser.NetworkProtocolParser.EmbeddedTypeContext;
+import parser.NetworkProtocolParser.FormatterDefinitionContext;
 import parser.NetworkProtocolParser.IntTypeContext;
 import parser.NetworkProtocolParser.ListTypeContext;
 import parser.NetworkProtocolParser.ProtocolDefinitionContext;
@@ -36,6 +39,8 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 	private Map<String, String> listReferences;
 
 	private Map<String, String> countReferences;
+
+	private Map<String, Formatter> formatterCache = new HashMap<String, Formatter>();
 
 	public static String getJavaType(String type) {
 		switch (type) {
@@ -104,6 +109,10 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 					}
 				}
 			}
+		}
+		for (Formatter formatter : formatterCache.values()) {
+			// XXX: addFormatter()
+			model.getFormatters().add(formatter);
 		}
 	}
 
@@ -179,7 +188,7 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 
 	@Override
 	public void exitBitfieldType(BitfieldTypeContext ctx) {
-		currentField.setByteLen((long)Math.ceil(bitFieldTotalLen / 8.0));
+		currentField.setByteLen((long) Math.ceil(bitFieldTotalLen / 8.0));
 	}
 
 	@Override
@@ -212,6 +221,19 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 		bitFieldTotalLen += bitLength;
 		// TODO: addComponent()
 		((BitField) currentField).getComponents().add(bitFieldComponent);
+	}
+
+	@Override
+	public void enterFormatterDefinition(FormatterDefinitionContext ctx) {
+		String name = ctx.name.getText();
+		if (formatterCache.containsKey(name)) {
+			currentField.setFormatter(formatterCache.get(name));
+		} else {
+			Formatter formatter = factory.createFormatter();
+			formatter.setName(name);
+			formatterCache.put(name, formatter);
+			currentField.setFormatter(formatter);
+		}
 	}
 
 	ProtocolModel getModel() {

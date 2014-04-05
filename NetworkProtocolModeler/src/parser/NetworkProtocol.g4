@@ -35,7 +35,7 @@ intType:
 ;
 
 stringType:
-	type = 'string' (LPAREN len = (NUMBER|'*') RPAREN)
+	type = 'string' (LPAREN len = (NUMBER|'*') RPAREN) formatterDefinition?
 ;
 
 binaryType:
@@ -60,6 +60,10 @@ countType:
 
 bitfieldDefinition:
 	name = ID ':' bitLength = NUMBER
+;
+
+formatterDefinition:
+	'formatter' name = ID
 ;
 
 ID

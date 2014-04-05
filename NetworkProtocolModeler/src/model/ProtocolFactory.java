@@ -73,6 +73,7 @@ public class ProtocolFactory extends EFactoryImpl {
 			case ProtocolPackage.LIST_FIELD: return createListField();
 			case ProtocolPackage.COUNT_FIELD: return createCountField();
 			case ProtocolPackage.PROTOCOL_MODEL: return createProtocolModel();
+			case ProtocolPackage.FORMATTER: return createFormatter();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -166,6 +167,16 @@ public class ProtocolFactory extends EFactoryImpl {
 	public ProtocolModel createProtocolModel() {
 		ProtocolModel protocolModel = new ProtocolModel();
 		return protocolModel;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Formatter createFormatter() {
+		Formatter formatter = new Formatter();
+		return formatter;
 	}
 
 	/**
