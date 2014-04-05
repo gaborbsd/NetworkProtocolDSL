@@ -192,10 +192,14 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 		currentField = factory.createBitField();
 		currentField.setName(currentFieldName);
 		currentField.setUnbounded(false);
-		currentField.setByteLen(0l);
 		// TODO: addField()
 		currentProtocol.getFields().add(currentField);
 		bitFieldTotalLen = 0l;
+	}
+
+	@Override
+	public void exitBitfieldType(BitfieldTypeContext ctx) {
+		currentField.setByteLen((long)Math.ceil(bitFieldTotalLen / 8.0));
 	}
 
 	@Override

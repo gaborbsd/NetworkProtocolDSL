@@ -170,7 +170,7 @@ public void set«variable.name.capitalizeFirst»(«variable.type» «variable.name») 
 
 	def private generateBitFieldGetter(String bitField, String component, Long offset, Long len) '''
 public Long get«component.capitalizeFirst»() {
-	return «bitField»[«offset / 8»] | («len.bitMaskForLen» << (offset % 8));
+	return «bitField»[«offset / 8»] | («len.bitMaskForLen» << «offset % 8»);
 }
 		'''
 
@@ -179,8 +179,8 @@ public void set«component.capitalizeFirst»(Long value) {
 	if (Long.highestOneBit(value) > «Math.pow(2, len - 1)»)
 		throw new IllegalArgumentException("Specified value " + value + " is out of range.");
 			
-	«bitField»[«offset / 8»] &= ~(«len.bitMaskForLen» << (offset % 8));
-	«bitField»[«offset / 8»] |= (value << (offset % 8));
+	«bitField»[«offset / 8»] &= ~(«len.bitMaskForLen» << «offset % 8»);
+	«bitField»[«offset / 8»] |= (value << «offset % 8»);
 }
 		'''
 
