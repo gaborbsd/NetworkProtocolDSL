@@ -31,8 +31,6 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 	private Field currentField;
 	private String currentFieldName = "";
 
-	private boolean seenUnbounded;
-
 	private Long bitFieldTotalLen;
 
 	private Map<String, String> listReferences;
@@ -81,7 +79,6 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 				.packageDefinition().getText() : "");
 		// TODO: addProtocols()
 		model.getProtocols().add(currentProtocol);
-		seenUnbounded = false;
 		listReferences = new HashMap<String, String>();
 		countReferences = new HashMap<String, String>();
 	}
@@ -116,25 +113,11 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 		if (len != null) {
 			if (len.equals("*")) {
 				isUnbounded = true;
-				seenUnbounded = true;
 			} else
 				byteLen = Byte.parseByte(len);
 		} else {
 			byteLen = getJavaDefaultLen(type);
 		}
-
-		if ((type.equals("String") || type.equals("Byte[]")) && !isUnbounded
-				&& (byteLen == 0))
-			throw new IllegalArgumentException(
-					"Strings and byte arrays must be unbounded or "
-							+ "must have an explicitly specified length.");
-
-		if (type.equals("Long") && byteLen > (Long.SIZE / 8))
-			throw new IllegalArgumentException(
-					"Integers do not support length higher than 8 bytes.");
-
-		if (type.equals("Long") && isUnbounded)
-			throw new IllegalArgumentException("Integers cannot be unbounded.");
 
 		currentField.setByteLen(new Long(byteLen));
 		if (isUnbounded)
@@ -143,9 +126,6 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 
 	@Override
 	public void enterVariableDefinition(VariableDefinitionContext ctx) {
-		if (seenUnbounded)
-			throw new IllegalArgumentException(
-					"Unbounded fields must be the last.");
 		currentFieldName = ctx.name.getText();
 	}
 
