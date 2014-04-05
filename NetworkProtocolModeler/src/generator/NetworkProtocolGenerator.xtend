@@ -35,7 +35,7 @@ class NetworkProtocolGenerator {
 		if (field instanceof StringField)
 			return "String";
 		if (field instanceof ListField)
-			return "List<" + field.elementType + ">";
+			return "List<" + (field.elementType as DataType).typeName + ">";
 		if (field instanceof CountField)
 			return "Long";
 		if (field instanceof DataType)
@@ -84,12 +84,13 @@ import model.*;
 import runtime.*;
 
 public class «protocol.typeName» extends OrderedSerializable {
-	
 	«FOR v : protocol.fields»
 		«IF !(v instanceof CountField)»
 			«generateVariableDef(v)»
 		«ENDIF»
 	«ENDFOR»
+	
+	«generateInitialization(protocol)»
 	
 	«FOR v : protocol.fields»
 	
@@ -123,6 +124,16 @@ public class «protocol.typeName» extends OrderedSerializable {
 			«ENDFOR»
 	}
 }
+	'''
+
+	def private generateInitialization(DataType protocol) '''
+	{
+		«FOR v : protocol.fields»
+			«IF v instanceof ListField»
+				«v.name» = new ArrayList<>();
+			«ENDIF»
+		«ENDFOR»
+	}
 	'''
 
 	def private generateVariableDef(Field variable) '''
@@ -165,6 +176,9 @@ public Long get«component.capitalizeFirst»() {
 
 	def private generateBitFieldSetter(String bitField, String component, Long offset, Long len) '''
 public void set«component.capitalizeFirst»(Long value) {
+	if (Long.highestOneBit(value) > «Math.pow(2, len - 1)»)
+		throw new IllegalArgumentException("Specified value " + value + " is out of range.");
+			
 	«bitField»[«offset / 8»] &= ~(«len.bitMaskForLen» << (offset % 8));
 	«bitField»[«offset / 8»] |= (value << (offset % 8));
 }
