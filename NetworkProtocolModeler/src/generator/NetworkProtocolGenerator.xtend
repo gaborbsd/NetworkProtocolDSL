@@ -225,7 +225,7 @@ public Long get«countName.capitalizeFirst»() {
 	def private String singularize(String str) {
 		if (str.substring(str.length - 3, str.length).equals("ies"))
 			return str.substring(0, str.length - 3) + "y";
-		if (str.charAt(str.length - 1) == 's')
+		if (str.substring(str.length - 1, str.length).equals("s"))
 			return str.substring(0, str.length - 1)
 		return str;
 	}
