@@ -84,10 +84,9 @@ package «protocol.package»;
 «ENDIF»
 import java.util.*;
 
-import model.*;
 import runtime.*;
 
-public class «protocol.typeName» extends OrderedSerializable {
+public class «protocol.typeName» implements OrderedSerializable {
 	«FOR v : protocol.fields»
 		«IF !(v instanceof CountField)»
 			«generateVariableDef(v)»
@@ -174,7 +173,7 @@ public void set«variable.name.capitalizeFirst»(«variable.type» «variable.name») 
 
 	def private generateBitFieldGetter(String bitField, String component, Long offset, Long len) '''
 public Long get«component.capitalizeFirst»() {
-	return «bitField»[«offset / 8»] | («len.bitMaskForLen» << «offset % 8»);
+	return (long)(«bitField»[«offset / 8»] | («len.bitMaskForLen» << «offset % 8»));
 }
 		'''
 
@@ -183,8 +182,8 @@ public void set«component.capitalizeFirst»(Long value) {
 	if (Long.highestOneBit(value) > «Math.pow(2, len - 1)»)
 		throw new IllegalArgumentException("Specified value " + value + " is out of range.");
 			
-	«bitField»[«offset / 8»] &= ~(«len.bitMaskForLen» << «offset % 8»);
-	«bitField»[«offset / 8»] |= (value << «offset % 8»);
+	«bitField»[«offset / 8»] = (byte)(«bitField»[«offset / 8»] & ~(«len.bitMaskForLen» << «offset % 8»));
+	«bitField»[«offset / 8»] = (byte)(«bitField»[«offset / 8»] | (value << «offset % 8»));
 }
 		'''
 
@@ -198,7 +197,7 @@ public «listType» get«varName.singularize.capitalizeFirst»(int no) {
 }
 
 public void clear«varName.capitalizeFirst»() {
-	«varName».clear;
+	«varName».clear();
 }
 
 public void remove«varName.singularize.capitalizeFirst»(int no) {
@@ -208,7 +207,7 @@ public void remove«varName.singularize.capitalizeFirst»(int no) {
 	
 	def private generateCountGetter(String countName, String ref) '''
 public Long get«countName.capitalizeFirst»() {
-	return «ref».size();
+	return (long)«ref».size();
 }
 	'''
 
