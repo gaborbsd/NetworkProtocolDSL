@@ -12,10 +12,7 @@ protocolDefinition
 
 packageDefinition
 :
-	'package' name = ID
-	(
-		'.' ID
-	)*
+	'package' name = (ID ('.' ID)*)
 ;
 
 variableDefinition

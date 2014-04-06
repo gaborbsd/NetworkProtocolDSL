@@ -81,7 +81,7 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 		currentProtocol = factory.createDataType();
 		currentProtocol.setTypeName(ctx.name.getText());
 		currentProtocol.setPackage((ctx.packageDefinition() != null) ? ctx
-				.packageDefinition().getText() : "");
+				.packageDefinition().name.getText() : "");
 		// TODO: addProtocols()
 		model.getProtocols().add(currentProtocol);
 		listReferences = new HashMap<String, String>();
