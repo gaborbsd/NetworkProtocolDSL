@@ -99,7 +99,7 @@ public class «protocol.typeName» extends OrderedSerializable {
 	«FOR v : protocol.fields»
 	
 		«IF v instanceof ListField»
-			«generateListAccessors(v.name, v.type)»
+			«generateListAccessors(v.name, v.elementType.type)»
 		«ELSEIF v instanceof CountField»
 			«generateCountGetter(v.name, (v as CountField).ref.name)»
 		«ELSE»
@@ -193,8 +193,8 @@ public void add«varName.singularize.capitalizeFirst»(«listType» e) {
 	«varName».add(e);
 }
 
-public void get«varName.singularize.capitalizeFirst»(int no) {
-	«varName».get(no);
+public «listType» get«varName.singularize.capitalizeFirst»(int no) {
+	return «varName».get(no);
 }
 
 public void clear«varName.capitalizeFirst»() {
