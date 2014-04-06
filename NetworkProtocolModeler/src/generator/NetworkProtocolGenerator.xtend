@@ -35,17 +35,22 @@ class NetworkProtocolGenerator {
 		if (field instanceof StringField)
 			return "String";
 		if (field instanceof ListField)
-			return "List<" + (field.elementType as DataType).typeName + ">";
+			return "List";
 		if (field instanceof CountField)
 			return "Long";
 		if (field instanceof DataType)
 			return (field as DataType).typeName;
 		throw new RuntimeException("Cannot happen.");
-
 	}
-	
+
+	def String getCollectionType(Field field) {
+		if (field instanceof ListField)
+			return (field.elementType as DataType).typeName;
+		return null;
+	}
+
 	def String formatterClass(Field field) {
-		return if (field.formatter != null) field.formatter.name else "null";
+		return if(field.formatter != null) field.formatter.name else "null";
 	}
 
 	def process() {
@@ -98,7 +103,7 @@ public class «protocol.typeName» implements OrderedSerializable {
 	«FOR v : protocol.fields»
 	
 		«IF v instanceof ListField»
-			«generateListAccessors(v.name, v.elementType.type)»
+			«generateListAccessors(v.name, v.collectionType)»
 		«ELSEIF v instanceof CountField»
 			«generateCountGetter(v.name, (v as CountField).ref.name)»
 		«ELSE»
@@ -123,24 +128,28 @@ public class «protocol.typeName» implements OrderedSerializable {
 	public VariableProps[] getSerializationOrder() {
 		return new VariableProps[]
 			«FOR v : protocol.fields BEFORE '{' SEPARATOR ', ' AFTER '};'»
-				new VariableProps(«v.name», «v.type».class, «v.byteLen», «v.unbounded», «v.formatterClass»)
+				new VariableProps("«v.name»", "«v.type»", "«v.collectionType»", (byte)«v.byteLen», «v.unbounded», «v.formatterClass»)
 			«ENDFOR»
 	}
 }
 	'''
 
 	def private generateInitialization(DataType protocol) '''
-	{
-		«FOR v : protocol.fields»
-			«IF v instanceof ListField»
-				«v.name» = new ArrayList<>();
-			«ENDIF»
-		«ENDFOR»
-	}
+		{
+			«FOR v : protocol.fields»
+				«IF v instanceof ListField»
+					«v.name» = new ArrayList<>();
+				«ENDIF»
+			«ENDFOR»
+		}
 	'''
 
 	def private generateVariableDef(Field variable) '''
-private «variable.type» «variable.name»;
+		«IF variable instanceof ListField»
+			private «variable.type»<«variable.collectionType»> «variable.name»;
+		«ELSE»
+			private «variable.type» «variable.name»;
+		«ENDIF»
 	'''
 
 	def private generateVariableGetter(Field variable) '''
@@ -204,7 +213,7 @@ public void remove«varName.singularize.capitalizeFirst»(int no) {
 	«varName».remove(no);
 }
 	'''
-	
+
 	def private generateCountGetter(String countName, String ref) '''
 public Long get«countName.capitalizeFirst»() {
 	return (long)«ref».size();

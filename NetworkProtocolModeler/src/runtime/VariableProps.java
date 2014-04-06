@@ -4,6 +4,7 @@ public class VariableProps {
 	private String name;
 	private byte byteLen;
 	private String type;
+	private String collectionType;
 	private boolean unbounded;
 	private String formatter;
 
@@ -11,11 +12,12 @@ public class VariableProps {
 		super();
 	}
 
-	public VariableProps(String name, String type, byte byteLen,
-			boolean unbounded, String formatter) {
+	public VariableProps(String name, String type, String collectionType,
+			byte byteLen, boolean unbounded, String formatter) {
 		super();
 		this.name = name;
 		this.type = type;
+		this.collectionType = collectionType;
 		this.byteLen = byteLen;
 		this.unbounded = unbounded;
 		this.formatter = formatter;
@@ -43,6 +45,14 @@ public class VariableProps {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public String getCollectionType() {
+		return collectionType;
+	}
+
+	public void setCollectionType(String collectionType) {
+		this.collectionType = collectionType;
 	}
 
 	public boolean isUnbounded() {
