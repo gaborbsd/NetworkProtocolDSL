@@ -238,6 +238,7 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 		} else {
 			Formatter formatter = factory.createFormatter();
 			formatter.setName(name);
+			formatter.setPackage(currentPackage);
 			formatterCache.put(name, formatter);
 			currentField.setFormatter(formatter);
 		}

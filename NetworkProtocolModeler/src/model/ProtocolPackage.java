@@ -800,13 +800,22 @@ public class ProtocolPackage extends EPackageImpl {
 	public static final int FORMATTER__NAME = 0;
 
 	/**
+	 * The feature id for the '<em><b>Package</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int FORMATTER__PACKAGE = 1;
+
+	/**
 	 * The number of structural features of the '<em>Formatter</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	public static final int FORMATTER_FEATURE_COUNT = 1;
+	public static final int FORMATTER_FEATURE_COUNT = 2;
 
 	/**
 	 * The number of operations of the '<em>Formatter</em>' class.
@@ -1298,6 +1307,20 @@ public class ProtocolPackage extends EPackageImpl {
 
 
 	/**
+	 * Returns the meta object for the attribute '{@link model.Formatter#getPackage <em>Package</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Package</em>'.
+	 * @see model.Formatter#getPackage()
+	 * @see #getFormatter()
+	 * @generated
+	 */
+	public EAttribute getFormatter_Package() {
+		return (EAttribute)formatterEClass.getEStructuralFeatures().get(1);
+	}
+
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1363,6 +1386,7 @@ public class ProtocolPackage extends EPackageImpl {
 
 		formatterEClass = createEClass(FORMATTER);
 		createEAttribute(formatterEClass, FORMATTER__NAME);
+		createEAttribute(formatterEClass, FORMATTER__PACKAGE);
 	}
 
 	/**
@@ -1438,6 +1462,7 @@ public class ProtocolPackage extends EPackageImpl {
 
 		initEClass(formatterEClass, Formatter.class, "Formatter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getFormatter_Name(), ecorePackage.getEString(), "name", "", 0, 1, Formatter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFormatter_Package(), ecorePackage.getEString(), "package", "", 0, 1, Formatter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -1727,6 +1752,14 @@ public class ProtocolPackage extends EPackageImpl {
 		 * @generated
 		 */
 		public static final EAttribute FORMATTER__NAME = eINSTANCE.getFormatter_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Package</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		public static final EAttribute FORMATTER__PACKAGE = eINSTANCE.getFormatter_Package();
 
 	}
 

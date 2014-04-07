@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * The following features are supported:
  * <ul>
  *   <li>{@link model.Formatter#getName <em>Name</em>}</li>
+ *   <li>{@link model.Formatter#getPackage <em>Package</em>}</li>
  * </ul>
  * </p>
  *
@@ -43,6 +44,26 @@ public class Formatter extends MinimalEObjectImpl.Container implements EObject {
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getPackage() <em>Package</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPackage()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String PACKAGE_EDEFAULT = "";
+
+	/**
+	 * The cached value of the '{@link #getPackage() <em>Package</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPackage()
+	 * @generated
+	 * @ordered
+	 */
+	protected String package_ = PACKAGE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -95,6 +116,37 @@ public class Formatter extends MinimalEObjectImpl.Container implements EObject {
 	}
 
 	/**
+	 * Returns the value of the '<em><b>Package</b></em>' attribute.
+	 * The default value is <code>""</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Package</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Package</em>' attribute.
+	 * @see #setPackage(String)
+	 * @see model.ProtocolPackage#getFormatter_Package()
+	 * @model default=""
+	 * @generated
+	 */
+	public String getPackage() {
+		return package_;
+	}
+
+	/**
+	 * Sets the value of the '{@link model.Formatter#getPackage <em>Package</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Package</em>' attribute.
+	 * @see #getPackage()
+	 * @generated
+	 */
+	public void setPackage(String newPackage) {
+		package_ = newPackage;
+	}
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -104,6 +156,8 @@ public class Formatter extends MinimalEObjectImpl.Container implements EObject {
 		switch (featureID) {
 			case ProtocolPackage.FORMATTER__NAME:
 				return getName();
+			case ProtocolPackage.FORMATTER__PACKAGE:
+				return getPackage();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -118,6 +172,9 @@ public class Formatter extends MinimalEObjectImpl.Container implements EObject {
 		switch (featureID) {
 			case ProtocolPackage.FORMATTER__NAME:
 				setName((String)newValue);
+				return;
+			case ProtocolPackage.FORMATTER__PACKAGE:
+				setPackage((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -134,6 +191,9 @@ public class Formatter extends MinimalEObjectImpl.Container implements EObject {
 			case ProtocolPackage.FORMATTER__NAME:
 				setName(NAME_EDEFAULT);
 				return;
+			case ProtocolPackage.FORMATTER__PACKAGE:
+				setPackage(PACKAGE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -148,6 +208,8 @@ public class Formatter extends MinimalEObjectImpl.Container implements EObject {
 		switch (featureID) {
 			case ProtocolPackage.FORMATTER__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case ProtocolPackage.FORMATTER__PACKAGE:
+				return PACKAGE_EDEFAULT == null ? package_ != null : !PACKAGE_EDEFAULT.equals(package_);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -164,6 +226,8 @@ public class Formatter extends MinimalEObjectImpl.Container implements EObject {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
 		result.append(name);
+		result.append(", package: ");
+		result.append(package_);
 		result.append(')');
 		return result.toString();
 	}
