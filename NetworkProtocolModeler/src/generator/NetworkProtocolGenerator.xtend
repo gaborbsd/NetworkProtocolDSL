@@ -264,9 +264,14 @@ public class «formatter.name» implements Formatter<String> {
 	}
 	
 	@Override
-	public String fromBytes(Byte[] bytes) {
+	public int parseFromBytes(Byte[] bytes, int off, String value) {
 		// TODO: implement formatter logic here
-		return null;
+		// bytes: bytebuffer to parse from
+		// off: offset where parsing must start
+		// value: parsed data as String
+		// return value: bytes consumed from the buffer
+		
+		return 0;
 	}
 }
 	'''
