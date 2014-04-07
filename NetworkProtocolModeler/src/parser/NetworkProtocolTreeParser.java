@@ -21,6 +21,7 @@ import parser.NetworkProtocolParser.EmbeddedTypeContext;
 import parser.NetworkProtocolParser.FormatterDefinitionContext;
 import parser.NetworkProtocolParser.IntTypeContext;
 import parser.NetworkProtocolParser.ListTypeContext;
+import parser.NetworkProtocolParser.PackageDefinitionContext;
 import parser.NetworkProtocolParser.ProtocolDefinitionContext;
 import parser.NetworkProtocolParser.StringTypeContext;
 import parser.NetworkProtocolParser.VariableDefinitionContext;
@@ -30,6 +31,8 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 	private ProtocolFactory factory = ProtocolFactory.eINSTANCE;
 	private ProtocolModel model = factory.createProtocolModel();
 
+	private String currentPackage = "";
+	
 	private DataType currentProtocol;
 	private Field currentField;
 	private String currentFieldName = "";
@@ -77,11 +80,15 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 	}
 
 	@Override
+	public void enterPackageDefinition(PackageDefinitionContext ctx) {
+		currentPackage = ctx.name.getText();
+	}
+
+	@Override
 	public void enterProtocolDefinition(ProtocolDefinitionContext ctx) {
 		currentProtocol = factory.createDataType();
 		currentProtocol.setTypeName(ctx.name.getText());
-		currentProtocol.setPackage((ctx.packageDefinition() != null) ? ctx
-				.packageDefinition().name.getText() : "");
+		currentProtocol.setPackage(currentPackage);
 		// TODO: addProtocols()
 		model.getProtocols().add(currentProtocol);
 		listReferences = new HashMap<String, String>();

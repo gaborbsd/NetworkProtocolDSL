@@ -2,17 +2,17 @@ grammar NetworkProtocol;
 
 start
 :
-	protocolDefinition+
-;
-
-protocolDefinition
-:
-	('protocol'|'datatype') name = ID packageDefinition? LBRACE variableDefinition+ RBRACE
+	packageDefinition? protocolDefinition+
 ;
 
 packageDefinition
 :
-	'package' name = COMPOUND_ID
+	'package' name = ID
+;
+
+protocolDefinition
+:
+	('protocol'|'datatype') name = ID LBRACE variableDefinition+ RBRACE
 ;
 
 variableDefinition
@@ -61,10 +61,6 @@ bitfieldDefinition:
 
 formatterDefinition:
 	'formatter' name = ID
-;
-
-COMPOUND_ID:
-	[a-zA-Z]+ ('.' [a-zA-Z]+)*
 ;
 
 ID
