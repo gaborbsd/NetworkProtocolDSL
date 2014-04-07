@@ -8,6 +8,7 @@ import model.BitField
 import model.CountField
 import model.DataType
 import model.Field
+import model.Formatter
 import model.IntegerField
 import model.ListField
 import model.ProtocolModel
@@ -69,9 +70,9 @@ class NetworkProtocolGenerator {
 			pkgPath.append(protocol.typeName)
 			pkgPath.append(".java")
 
-			var code = generateProtocol(protocol).toString
-			var formatter = ToolFactory.createCodeFormatter(null)
-			var textEdit = formatter.format(CodeFormatter.K_COMPILATION_UNIT, code, 0, code.length(), 0, "\n")
+			var String code = generateProtocol(protocol).toString
+			var codeFormatter = ToolFactory.createCodeFormatter(null)
+			var textEdit = codeFormatter.format(CodeFormatter.K_COMPILATION_UNIT, code, 0, code.length(), 0, "\n")
 			var doc = new Document(code)
 
 			//textEdit.apply(doc)
@@ -79,6 +80,35 @@ class NetworkProtocolGenerator {
 			var writer = new FileWriter(sourceFile)
 			writer.append(code)
 			writer.close
+		}
+
+		for (formatter : model.formatters) {
+			var pkgPath = new StringBuilder();
+
+			var tokenizer = new StringTokenizer(formatter.package, ".");
+			while (tokenizer.hasMoreTokens) {
+				pkgPath.append(tokenizer.nextToken)
+				pkgPath.append('/')
+			}
+			var targetDir = new File(pkgPath.toString)
+			if (!targetDir.exists)
+				targetDir.mkdirs
+
+			pkgPath.append(formatter.name)
+			pkgPath.append(".java")
+
+			if (!(new File(pkgPath.toString).exists)) {
+				var String code = generateFormatterSkeleton(formatter).toString
+				var codeFormatter = ToolFactory.createCodeFormatter(null)
+				var textEdit = codeFormatter.format(CodeFormatter.K_COMPILATION_UNIT, code, 0, code.length(), 0, "\n")
+				var doc = new Document(code)
+
+				//textEdit.apply(doc)
+				var sourceFile = new File(basePath, pkgPath.toString)
+				var writer = new FileWriter(sourceFile)
+				writer.append(code)
+				writer.close
+			}
 		}
 	}
 
@@ -128,7 +158,8 @@ public class «protocol.typeName» implements OrderedSerializable {
 	public VariableProps[] getSerializationOrder() {
 		return new VariableProps[]
 			«FOR v : protocol.fields BEFORE '{' SEPARATOR ', ' AFTER '};'»
-				new VariableProps("«v.name»", "«v.type»", "«v.collectionType»", (byte)«v.byteLen», «v.unbounded», "«v.formatterClass»")
+				new VariableProps("«v.name»", "«v.type»", "«v.collectionType»", (byte)«v.byteLen», «v.unbounded», "«v.
+		formatterClass»")
 			«ENDFOR»
 	}
 }
@@ -217,6 +248,26 @@ public void remove«varName.singularize.capitalizeFirst»(int no) {
 	def private generateCountGetter(String countName, String ref) '''
 public Long get«countName.capitalizeFirst»() {
 	return (long)«ref».size();
+}
+	'''
+
+	def private generateFormatterSkeleton(Formatter formatter) '''
+package «formatter.package»;
+
+import runtime.*;
+
+public class «formatter.name» implements Formatter<String> {
+	@Override
+	public Byte[] toBytes(String t) {
+		// TODO: implement formatter logic here
+		return null;
+	}
+	
+	@Override
+	public String fromBytes(Byte[] bytes) {
+		// TODO: implement formatter logic here
+		return null;
+	}
 }
 	'''
 
