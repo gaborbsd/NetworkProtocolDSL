@@ -12,7 +12,7 @@ protocolDefinition
 
 packageDefinition
 :
-	'package' name = (ID ('.' ID)*)
+	'package' name = COMPOUND_ID
 ;
 
 variableDefinition
@@ -61,6 +61,10 @@ bitfieldDefinition:
 
 formatterDefinition:
 	'formatter' name = ID
+;
+
+COMPOUND_ID:
+	[a-zA-Z]+ ('.' [a-zA-Z]+)*
 ;
 
 ID
