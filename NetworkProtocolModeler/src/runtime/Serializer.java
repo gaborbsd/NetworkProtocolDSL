@@ -19,7 +19,7 @@ public class Serializer {
 			dest[off + i] = src[i];
 	}
 
-	public static void serializeToBytes(Byte[] val, byte bytes, byte[] dest,
+	public static void serializeToBytes(byte[] val, byte bytes, byte[] dest,
 			byte off) {
 		if (bytes == 0)
 			bytes = (byte) val.length;
@@ -37,17 +37,21 @@ public class Serializer {
 			byte[] ret = new byte[totalBytes];
 			byte off = 0;
 			for (VariableProps props : serializable.getSerializationOrder()) {
-				Field field = serializable.getClass().getField(props.getName());
-				if (props.getType().getClass().getSimpleName().equals("String")) {
+				Field field = serializable.getClass().getDeclaredField(props.getName());
+				field.setAccessible(true);
+				if (props.getType().equals("Long")) {
+					serializeToBytes((Long)field.get(serializable),
+							props.getByteLen(), ret, off);
+				} else if (props.getType().equals("String")) {
 					serializeToBytes((String) field.get(serializable),
 							props.getByteLen(), ret, off);
-				} else if (props.getType().getClass().getSimpleName()
-						.equals("Byte[]")) {
-					serializeToBytes((Byte[]) field.get(serializable),
+				} else if (props.getType().equals("byte[]")) {
+					serializeToBytes((byte[]) field.get(serializable),
 							props.getByteLen(), ret, off);
+				} else if (props.getType().equals("List")) {
+					// TODO
 				} else {
-					serializeToBytes(field.getLong(serializable),
-							props.getByteLen(), ret, off);
+					// TODO
 				}
 				off += props.getByteLen();
 			}
