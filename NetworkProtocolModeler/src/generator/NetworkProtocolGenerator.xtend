@@ -28,9 +28,9 @@ class NetworkProtocolGenerator {
 
 	def String getType(Field field) {
 		if (field instanceof BinaryField)
-			return "Byte[]";
+			return "byte[]";
 		if (field instanceof BitField)
-			return "Byte[]";
+			return "byte[]";
 		if (field instanceof IntegerField)
 			return "Long";
 		if (field instanceof StringField)
@@ -170,6 +170,10 @@ public class «protocol.typeName» implements OrderedSerializable {
 			«FOR v : protocol.fields»
 				«IF v instanceof ListField»
 					«v.name» = new ArrayList<>();
+				«ELSEIF v instanceof BitField»
+					«v.name» = new byte[«v.byteLen»];
+				«ELSEIF v instanceof BinaryField»
+					«v.name» = new byte[«v.byteLen»];
 				«ENDIF»
 			«ENDFOR»
 		}
@@ -258,7 +262,7 @@ import runtime.*;
 
 public class «formatter.name» implements Formatter<String> {
 	@Override
-	public Byte[] toBytes(String t) {
+	public byte[] toBytes(String t) {
 		// TODO: implement formatter logic here
 		return null;
 	}
