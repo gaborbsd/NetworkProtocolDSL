@@ -4,10 +4,10 @@ import java.lang.reflect.Field;
 
 public class Serializer {
 
-	public static void serializeToBytes(Number val, byte bytes, byte[] dest,
+	public static void serializeToBytes(long val, byte bytes, byte[] dest,
 			byte off) {
 		for (int i = 0; i < bytes; i++)
-			dest[off + i] = (byte) ((val.longValue() >> (i * 8)) & 0b11111111);
+			dest[off + i] = (byte) ((val >> (i * 8)) & 0b11111111);
 	}
 
 	public static void serializeToBytes(String val, byte bytes, byte[] dest,
@@ -39,8 +39,8 @@ public class Serializer {
 			for (VariableProps props : serializable.getSerializationOrder()) {
 				Field field = serializable.getClass().getDeclaredField(props.getName());
 				field.setAccessible(true);
-				if (props.getType().equals("Long")) {
-					serializeToBytes((Long)field.get(serializable),
+				if (props.getType().equals("long")) {
+					serializeToBytes(field.getLong(serializable),
 							props.getByteLen(), ret, off);
 				} else if (props.getType().equals("String")) {
 					serializeToBytes((String) field.get(serializable),

@@ -32,13 +32,13 @@ class NetworkProtocolGenerator {
 		if (field instanceof BitField)
 			return "byte[]";
 		if (field instanceof IntegerField)
-			return "Long";
+			return "long";
 		if (field instanceof StringField)
 			return "String";
 		if (field instanceof ListField)
 			return "List";
 		if (field instanceof CountField)
-			return "Long";
+			return "long";
 		if (field instanceof DataType)
 			return (field as DataType).typeName;
 		throw new RuntimeException("Cannot happen.");
@@ -197,7 +197,7 @@ public «variable.type» get«variable.name.capitalizeFirst»() {
 	def private generateVariableSetter(Field variable) '''
 public void set«variable.name.capitalizeFirst»(«variable.type» «variable.name») {
 	«IF variable.byteLen > 0»
-		«IF variable.type.equals("Long")»
+		«IF variable.type.equals("long")»
 		if (Long.highestOneBit(«variable.name») > «Math.pow(2, variable.byteLen - 1)»)
 			throw new IllegalArgumentException("Specified value " + «variable.name» + " is out of range.");
 		«ENDIF»
@@ -215,14 +215,14 @@ public void set«variable.name.capitalizeFirst»(«variable.type» «variable.name») 
 
 	'''
 
-	def private generateBitFieldGetter(String bitField, String component, Long offset, Long len) '''
-public Long get«component.capitalizeFirst»() {
-	return (long)(«bitField»[«offset / 8»] | («len.bitMaskForLen» << «offset % 8»));
+	def private generateBitFieldGetter(String bitField, String component, long offset, long len) '''
+public long get«component.capitalizeFirst»() {
+	return «bitField»[«offset / 8»] | («len.bitMaskForLen» << «offset % 8»);
 }
 		'''
 
 	def private generateBitFieldSetter(String bitField, String component, Long offset, Long len) '''
-public void set«component.capitalizeFirst»(Long value) {
+public void set«component.capitalizeFirst»(long value) {
 	if (Long.highestOneBit(value) > «Math.pow(2, len - 1)»)
 		throw new IllegalArgumentException("Specified value " + value + " is out of range.");
 			
@@ -250,8 +250,8 @@ public void remove«varName.singularize.capitalizeFirst»(int no) {
 	'''
 
 	def private generateCountGetter(String countName, String ref) '''
-public Long get«countName.capitalizeFirst»() {
-	return (long)«ref».size();
+public long get«countName.capitalizeFirst»() {
+	return «ref».size();
 }
 	'''
 
@@ -268,7 +268,7 @@ public class «formatter.name» implements Formatter<String> {
 	}
 	
 	@Override
-	public int parseFromBytes(Byte[] bytes, int off, String value) {
+	public int parseFromBytes(byte[] bytes, int off, String value) {
 		// TODO: implement formatter logic here
 		// bytes: bytebuffer to parse from
 		// off: offset where parsing must start
