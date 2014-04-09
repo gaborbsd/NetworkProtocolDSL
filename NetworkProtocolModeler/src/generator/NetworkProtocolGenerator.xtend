@@ -51,7 +51,7 @@ class NetworkProtocolGenerator {
 	}
 
 	def String formatterClass(Field field) {
-		return if(field.formatter != null) field.formatter.name else "null";
+		return if(field.formatter != null) "\"" + field.formatter.name + "\"" else "null";
 	}
 
 	def process() {
@@ -158,8 +158,7 @@ public class «protocol.typeName» implements OrderedSerializable {
 	public VariableProps[] getSerializationOrder() {
 		return new VariableProps[]
 			«FOR v : protocol.fields BEFORE '{' SEPARATOR ', ' AFTER '};'»
-				new VariableProps("«v.name»", "«v.type»", "«v.collectionType»", (byte)«v.byteLen», «v.unbounded», "«v.
-		formatterClass»")
+				new VariableProps("«v.name»", "«v.type»", "«v.collectionType»", «v.byteLen», «v.unbounded», «v.formatterClass»)
 			«ENDFOR»
 	}
 }

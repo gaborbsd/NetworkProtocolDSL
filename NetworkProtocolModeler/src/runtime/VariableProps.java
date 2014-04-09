@@ -2,7 +2,7 @@ package runtime;
 
 public class VariableProps {
 	private String name;
-	private byte byteLen;
+	private int byteLen;
 	private String type;
 	private String collectionType;
 	private boolean unbounded;
@@ -13,7 +13,7 @@ public class VariableProps {
 	}
 
 	public VariableProps(String name, String type, String collectionType,
-			byte byteLen, boolean unbounded, String formatter) {
+			int byteLen, boolean unbounded, String formatter) {
 		super();
 		this.name = name;
 		this.type = type;
@@ -31,11 +31,11 @@ public class VariableProps {
 		this.name = name;
 	}
 
-	public byte getByteLen() {
+	public int getByteLen() {
 		return byteLen;
 	}
 
-	public void setByteLen(byte byteLen) {
+	public void setByteLen(int byteLen) {
 		this.byteLen = byteLen;
 	}
 
