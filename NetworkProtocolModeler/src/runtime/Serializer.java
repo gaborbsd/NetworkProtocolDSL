@@ -1,63 +1,66 @@
 package runtime;
 
-import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.nio.ByteBuffer;
+import java.util.List;
 
 public class Serializer {
 
-	public static void serializeToBytes(long val, int bytes, byte[] dest,
-			byte off) {
-		for (int i = 0; i < bytes; i++)
-			dest[off + i] = (byte) ((val >> (i * 8)) & 0b11111111);
+	public static String getter(String fieldName) {
+		return "get" + fieldName.substring(0, 1).toUpperCase()
+				+ fieldName.substring(1);
 	}
 
-	public static void serializeToBytes(String val, int bytes, byte[] dest,
-			byte off) {
+	public static void putBytesFromLong(ByteBuffer buffer, long val, int bytes) {
+		for (int i = 0; i < bytes; i++)
+			buffer.put((byte) ((val >> (i * 8)) & 0b11111111));
+	}
+
+	public static void putBytesFromString(ByteBuffer buffer, String val,
+			int bytes) {
 		byte[] src = val.getBytes();
 		if (bytes == 0)
 			bytes = (byte) src.length;
 		for (int i = 0; i < bytes; i++)
-			dest[off + i] = src[i];
+			buffer.put(src[i]);
 	}
 
-	public static void serializeToBytes(byte[] val, int bytes, byte[] dest,
-			byte off) {
-		if (bytes == 0)
-			bytes = (byte) val.length;
-		for (int i = 0; i < bytes; i++)
-			dest[off + i] = val[i];
-	}
-
-	public static byte[] serialize(OrderedSerializable serializable) {
-		byte totalBytes = 0;
-
-		for (VariableProps props : serializable.getSerializationOrder())
-			totalBytes += props.getByteLen();
+	public static ByteBuffer serialize(OrderedSerializable serializable) {
+		ByteBuffer buffer = ByteBuffer.allocate(2048);
 
 		try {
-			byte[] ret = new byte[totalBytes];
-			byte off = 0;
 			for (VariableProps props : serializable.getSerializationOrder()) {
-				Field field = serializable.getClass().getDeclaredField(props.getName());
-				field.setAccessible(true);
+				Class<?> srcClass = serializable.getClass();
+				Method method = srcClass.getDeclaredMethod(getter(props
+						.getName()));
+				System.out.println(method.getName());
 				if (props.getType().equals("long")) {
-					serializeToBytes(field.getLong(serializable),
-							props.getByteLen(), ret, off);
+					putBytesFromLong(buffer,
+							(long) method.invoke(serializable),
+							props.getByteLen());
 				} else if (props.getType().equals("String")) {
-					serializeToBytes((String) field.get(serializable),
-							props.getByteLen(), ret, off);
+					putBytesFromString(buffer,
+							(String) method.invoke(serializable),
+							props.getByteLen());
 				} else if (props.getType().equals("byte[]")) {
-					serializeToBytes((byte[]) field.get(serializable),
-							props.getByteLen(), ret, off);
+					buffer.put((byte[]) method.invoke(serializable));
 				} else if (props.getType().equals("List")) {
-					// TODO
+					List<?> list = (List<?>) method.invoke(serializable);
+					for (Object o : list) {
+						ByteBuffer data = serialize((OrderedSerializable) o);
+						buffer.put(data);
+					}
 				} else {
-					// TODO
+					Object o = (Object) method.invoke(serializable);
+					ByteBuffer data = serialize((OrderedSerializable) o);
+					buffer.put(data);
 				}
-				off += props.getByteLen();
 			}
-			return ret;
-		} catch (NoSuchFieldException | SecurityException
-				| IllegalArgumentException | IllegalAccessException e) {
+			return buffer;
+		} catch (SecurityException | IllegalArgumentException
+				| IllegalAccessException | NoSuchMethodException
+				| InvocationTargetException e) {
 			e.printStackTrace();
 		}
 		return null;
