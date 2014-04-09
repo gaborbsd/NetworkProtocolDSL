@@ -1,5 +1,6 @@
 package runtime;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.nio.ByteBuffer;
@@ -40,27 +41,44 @@ public class Serializer {
 							(long) method.invoke(serializable),
 							props.getByteLen());
 				} else if (props.getType().equals("String")) {
-					putBytesFromString(buffer,
-							(String) method.invoke(serializable),
-							props.getByteLen());
+					byte[] data = null;
+					String str = (String) method.invoke(serializable);
+					String formatterName = props.getFormatter();
+					if (formatterName != null) {
+						Package pkg = serializable.getClass().getPackage();
+						Class<?> formatterClass = Class.forName(pkg.getName()
+								+ "." + formatterName);
+						Constructor<?> formatterConstructor = formatterClass
+								.getConstructor();
+						@SuppressWarnings("unchecked")
+						Formatter<String> formatter = (Formatter<String>) formatterConstructor
+								.newInstance();
+						data = formatter.toBytes(str);
+						buffer.put(data);
+					} else {
+						putBytesFromString(buffer, str, props.getByteLen());
+					}
 				} else if (props.getType().equals("byte[]")) {
 					buffer.put((byte[]) method.invoke(serializable));
 				} else if (props.getType().equals("List")) {
 					List<?> list = (List<?>) method.invoke(serializable);
 					for (Object o : list) {
 						ByteBuffer data = serialize((OrderedSerializable) o);
+						data.flip();
 						buffer.put(data);
 					}
 				} else {
 					Object o = (Object) method.invoke(serializable);
 					ByteBuffer data = serialize((OrderedSerializable) o);
+					data.flip();
 					buffer.put(data);
 				}
 			}
 			return buffer;
 		} catch (SecurityException | IllegalArgumentException
 				| IllegalAccessException | NoSuchMethodException
-				| InvocationTargetException e) {
+				| InvocationTargetException | ClassNotFoundException
+				| InstantiationException e) {
 			e.printStackTrace();
 		}
 		return null;

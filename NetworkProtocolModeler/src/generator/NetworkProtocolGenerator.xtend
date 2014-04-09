@@ -246,6 +246,10 @@ public void clear«varName.capitalizeFirst»() {
 public void remove«varName.singularize.capitalizeFirst»(int no) {
 	«varName».remove(no);
 }
+
+public List<«listType»> get«varName.capitalizeFirst»() {
+	return Collections.unmodifiableList(«varName»);
+}
 	'''
 
 	def private generateCountGetter(String countName, String ref) '''
