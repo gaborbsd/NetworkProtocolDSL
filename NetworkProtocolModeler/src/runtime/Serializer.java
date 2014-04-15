@@ -14,7 +14,7 @@ public class Serializer {
 	}
 
 	public static void putBytesFromLong(ByteBuffer buffer, long val, int bytes) {
-		for (int i = 0; i < bytes; i++)
+		for (int i = bytes - 1; i >= 0; i--)
 			buffer.put((byte) ((val >> (i * 8)) & 0b11111111));
 	}
 
@@ -23,7 +23,12 @@ public class Serializer {
 		byte[] src = val.getBytes();
 		if (bytes == 0)
 			bytes = (byte) src.length;
-		for (int i = 0; i < bytes; i++)
+		for (int i = bytes - 1; i >= 0; i--)
+			buffer.put(src[i]);
+	}
+
+	public static void putBytesFromByteArray(ByteBuffer buffer, byte[] src) {
+		for (int i = 0; i < src.length; i++)
 			buffer.put(src[i]);
 	}
 
@@ -35,7 +40,6 @@ public class Serializer {
 				Class<?> srcClass = serializable.getClass();
 				Method method = srcClass.getDeclaredMethod(getter(props
 						.getName()));
-				System.out.println(method.getName());
 				if (props.getType().equals("long")) {
 					putBytesFromLong(buffer,
 							(long) method.invoke(serializable),
@@ -59,7 +63,8 @@ public class Serializer {
 						putBytesFromString(buffer, str, props.getByteLen());
 					}
 				} else if (props.getType().equals("byte[]")) {
-					buffer.put((byte[]) method.invoke(serializable));
+					putBytesFromByteArray(buffer,
+							(byte[]) method.invoke(serializable));
 				} else if (props.getType().equals("List")) {
 					List<?> list = (List<?>) method.invoke(serializable);
 					for (Object o : list) {
