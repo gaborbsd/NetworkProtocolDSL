@@ -7,13 +7,14 @@ public class VariableProps {
 	private String collectionType;
 	private boolean unbounded;
 	private String formatter;
+	private String countOf;
 
 	public VariableProps() {
 		super();
 	}
 
 	public VariableProps(String name, String type, String collectionType,
-			int byteLen, boolean unbounded, String formatter) {
+			int byteLen, boolean unbounded, String formatter, String countOf) {
 		super();
 		this.name = name;
 		this.type = type;
@@ -21,6 +22,7 @@ public class VariableProps {
 		this.byteLen = byteLen;
 		this.unbounded = unbounded;
 		this.formatter = formatter;
+		this.countOf = countOf;
 	}
 
 	public String getName() {
@@ -69,5 +71,13 @@ public class VariableProps {
 
 	public void setFormatter(String formatter) {
 		this.formatter = formatter;
+	}
+
+	public String getCountOf() {
+		return countOf;
+	}
+
+	public void setCountOf(String countOf) {
+		this.countOf = countOf;
 	}
 }
