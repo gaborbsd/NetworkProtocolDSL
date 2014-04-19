@@ -125,7 +125,7 @@ import java.util.*;
 
 import runtime.*;
 
-public class «protocol.typeName» implements OrderedSerializable {
+public class «protocol.typeName» implements Cloneable, OrderedSerializable {
 	«FOR v : protocol.fields»
 		«IF !(v instanceof CountField)»
 			«generateVariableDef(v)»
@@ -163,6 +163,8 @@ public class «protocol.typeName» implements OrderedSerializable {
 		«generateEquals(protocol)»
 		«generateHashCode(protocol)»
 	«ENDIF»
+	
+		«generateClone(protocol)»
 
 	public VariableProps[] getSerializationOrder() {
 		return new VariableProps[]
@@ -187,7 +189,7 @@ public class «protocol.typeName» implements OrderedSerializable {
 			«ENDFOR»
 		}
 	'''
-	
+
 	def private generateEquals(DataType protocol) '''
 		@Override
 		public boolean equals(Object obj) {
@@ -206,7 +208,7 @@ public class «protocol.typeName» implements OrderedSerializable {
 			«ENDFOR»
 		}
 	'''
-	
+
 	def private generateHashCode(DataType protocol) '''
 		@Override
 		public int hashCode() {
@@ -220,6 +222,19 @@ public class «protocol.typeName» implements OrderedSerializable {
 			«ENDFOR»
 			ret *= 31;
 			return ret;
+		}
+	'''
+
+	def private generateClone(DataType protocol) '''
+		@Override
+		protected Object clone() throws CloneNotSupportedException {
+			«protocol.typeName» clone = («protocol.typeName»)super.clone();
+			«FOR v : protocol.fields»
+				«IF (v.identityField && !(v instanceof CountField) && !(v instanceof IntegerField) && !(v instanceof StringField))»
+					clone.«v.name» = («v.type»)«v.name».clone();
+				«ENDIF»
+			«ENDFOR»
+			return clone;
 		}
 	'''
 
