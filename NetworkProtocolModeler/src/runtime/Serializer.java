@@ -1,10 +1,14 @@
 package runtime;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Serializer {
 
@@ -87,5 +91,112 @@ public class Serializer {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	public static long getLongFromBytes(ByteBuffer buffer, int bytes) {
+		long ret = 0;
+		byte[] data = new byte[bytes];
+		buffer.get(data);
+		for (int i = data.length - 1; i >= 0; i--) {
+			ret |= data[i] << (data.length - i - 1);
+		}
+		return ret;
+	}
+
+	public static byte[] getByteArrayFromBytes(ByteBuffer buffer, int bytes) {
+		byte[] data = new byte[bytes == 0 ? buffer.remaining() : bytes];
+		buffer.get(data);
+		return data;
+	}
+
+	public static String getBoundedStringFromBytes(ByteBuffer buffer, int bytes) {
+		byte[] data = new byte[bytes];
+		buffer.get(data);
+		return new String(data);
+	}
+
+	public static String getTrailingStringFromBytes(ByteBuffer buffer) {
+		byte[] data = new byte[buffer.remaining()];
+		buffer.get(data);
+		return new String(data);
+	}
+
+	public static void deserialize(OrderedSerializable serializable,
+			ByteBuffer buffer) {
+
+		Map<String, Long> counters = new HashMap<>();
+
+		try {
+			for (VariableProps props : serializable.getSerializationOrder()) {
+				if (props.getType().equals("long")) {
+					long ret = getLongFromBytes(buffer, props.getByteLen());
+					if (props.getCountOf() != null) {
+						counters.put(props.getCountOf(), ret);
+					} else {
+						Class<?> srcClass = serializable.getClass();
+						Field field = srcClass
+								.getDeclaredField(props.getName());
+						field.setAccessible(true);
+						field.setLong(serializable, ret);
+					}
+					continue;
+				}
+
+				Class<?> srcClass = serializable.getClass();
+				Field field = srcClass.getDeclaredField(props.getName());
+				field.setAccessible(true);
+				if (props.getType().equals("String")) {
+					String str = null;
+					String formatterName = props.getFormatter();
+					if (formatterName != null) {
+						Package pkg = serializable.getClass().getPackage();
+						Class<?> formatterClass = Class.forName(pkg.getName()
+								+ "." + formatterName);
+						Constructor<?> formatterConstructor = formatterClass
+								.getConstructor();
+						@SuppressWarnings("unchecked")
+						Formatter<String> formatter = (Formatter<String>) formatterConstructor
+								.newInstance();
+						str = formatter.parseFromBytes(buffer);
+					} else if (props.getByteLen() != 0) {
+						str = getBoundedStringFromBytes(buffer,
+								props.getByteLen());
+					} else {
+						str = getTrailingStringFromBytes(buffer);
+					}
+					field.set(serializable, str);
+				} else if (props.getType().equals("byte[]")) {
+					field.set(serializable,
+							getByteArrayFromBytes(buffer, props.getByteLen()));
+				} else if (props.getType().equals("List")) {
+					long count = counters.get(props.getName());
+					Package pkg = serializable.getClass().getPackage();
+					Class<?> listElementClass = Class.forName(pkg.getName()
+							+ "." + props.getCollectionType());
+					Constructor<?> listElementConstructor = listElementClass
+							.getConstructor();
+					List<OrderedSerializable> list = new ArrayList<>();
+					for (int i = 0; i < count; i++) {
+						OrderedSerializable o = (OrderedSerializable) listElementConstructor
+								.newInstance();
+						deserialize(o, buffer);
+						list.add(o);
+					}
+					field.set(serializable, list);
+				} else {
+					Class<?> objectClass = Class.forName(props.getType());
+					Constructor<?> objectConstructor = objectClass
+							.getConstructor();
+					OrderedSerializable o = (OrderedSerializable) objectConstructor
+							.newInstance();
+					deserialize(o, buffer);
+				}
+			}
+		} catch (SecurityException | IllegalArgumentException
+				| IllegalAccessException | NoSuchMethodException
+				| InvocationTargetException | ClassNotFoundException
+				| InstantiationException | NoSuchFieldException e) {
+			e.printStackTrace();
+		}
 	}
 }
