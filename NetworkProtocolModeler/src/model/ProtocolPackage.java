@@ -888,6 +888,106 @@ public class ProtocolPackage extends EPackageImpl {
 	public static final int COUNT_FIELD_OPERATION_COUNT = FIELD_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link model.LengthField <em>Length Field</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see model.LengthField
+	 * @see model.ProtocolPackage#getLengthField()
+	 * @generated
+	 */
+	public static final int LENGTH_FIELD = 9;
+
+	/**
+	 * The feature id for the '<em><b>Byte Len</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LENGTH_FIELD__BYTE_LEN = FIELD__BYTE_LEN;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LENGTH_FIELD__NAME = FIELD__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Package</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LENGTH_FIELD__PACKAGE = FIELD__PACKAGE;
+
+	/**
+	 * The feature id for the '<em><b>Unbounded</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LENGTH_FIELD__UNBOUNDED = FIELD__UNBOUNDED;
+
+	/**
+	 * The feature id for the '<em><b>Identity Field</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LENGTH_FIELD__IDENTITY_FIELD = FIELD__IDENTITY_FIELD;
+
+	/**
+	 * The feature id for the '<em><b>Transient Field</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LENGTH_FIELD__TRANSIENT_FIELD = FIELD__TRANSIENT_FIELD;
+
+	/**
+	 * The feature id for the '<em><b>Formatter</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LENGTH_FIELD__FORMATTER = FIELD__FORMATTER;
+
+	/**
+	 * The feature id for the '<em><b>Ref</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LENGTH_FIELD__REF = FIELD_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Length Field</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LENGTH_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Length Field</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LENGTH_FIELD_OPERATION_COUNT = FIELD_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link model.ProtocolModel <em>Model</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -895,7 +995,7 @@ public class ProtocolPackage extends EPackageImpl {
 	 * @see model.ProtocolPackage#getProtocolModel()
 	 * @generated
 	 */
-	public static final int PROTOCOL_MODEL = 9;
+	public static final int PROTOCOL_MODEL = 10;
 
 	/**
 	 * The feature id for the '<em><b>Protocols</b></em>' containment reference list.
@@ -941,7 +1041,7 @@ public class ProtocolPackage extends EPackageImpl {
 	 * @see model.ProtocolPackage#getFormatter()
 	 * @generated
 	 */
-	public static final int FORMATTER = 10;
+	public static final int FORMATTER = 11;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1041,6 +1141,13 @@ public class ProtocolPackage extends EPackageImpl {
 	 * @generated
 	 */
 	private EClass countFieldEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass lengthFieldEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1436,6 +1543,33 @@ public class ProtocolPackage extends EPackageImpl {
 
 
 	/**
+	 * Returns the meta object for class '{@link model.LengthField <em>Length Field</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Length Field</em>'.
+	 * @see model.LengthField
+	 * @generated
+	 */
+	public EClass getLengthField() {
+		return lengthFieldEClass;
+	}
+
+
+	/**
+	 * Returns the meta object for the reference '{@link model.LengthField#getRef <em>Ref</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Ref</em>'.
+	 * @see model.LengthField#getRef()
+	 * @see #getLengthField()
+	 * @generated
+	 */
+	public EReference getLengthField_Ref() {
+		return (EReference)lengthFieldEClass.getEStructuralFeatures().get(0);
+	}
+
+
+	/**
 	 * Returns the meta object for class '{@link model.ProtocolModel <em>Model</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1578,6 +1712,9 @@ public class ProtocolPackage extends EPackageImpl {
 		countFieldEClass = createEClass(COUNT_FIELD);
 		createEReference(countFieldEClass, COUNT_FIELD__REF);
 
+		lengthFieldEClass = createEClass(LENGTH_FIELD);
+		createEReference(lengthFieldEClass, LENGTH_FIELD__REF);
+
 		protocolModelEClass = createEClass(PROTOCOL_MODEL);
 		createEReference(protocolModelEClass, PROTOCOL_MODEL__PROTOCOLS);
 		createEReference(protocolModelEClass, PROTOCOL_MODEL__FORMATTERS);
@@ -1622,6 +1759,7 @@ public class ProtocolPackage extends EPackageImpl {
 		bitFieldEClass.getESuperTypes().add(this.getField());
 		listFieldEClass.getESuperTypes().add(this.getField());
 		countFieldEClass.getESuperTypes().add(this.getField());
+		lengthFieldEClass.getESuperTypes().add(this.getField());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(dataTypeEClass, DataType.class, "DataType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1656,6 +1794,9 @@ public class ProtocolPackage extends EPackageImpl {
 
 		initEClass(countFieldEClass, CountField.class, "CountField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCountField_Ref(), this.getListField(), null, "ref", null, 1, 1, CountField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(lengthFieldEClass, LengthField.class, "LengthField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getLengthField_Ref(), this.getBinaryField(), null, "ref", null, 1, 1, LengthField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(protocolModelEClass, ProtocolModel.class, "ProtocolModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getProtocolModel_Protocols(), this.getDataType(), null, "protocols", null, 0, -1, ProtocolModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1933,6 +2074,24 @@ public class ProtocolPackage extends EPackageImpl {
 		 * @generated
 		 */
 		public static final EReference COUNT_FIELD__REF = eINSTANCE.getCountField_Ref();
+
+		/**
+		 * The meta object literal for the '{@link model.LengthField <em>Length Field</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see model.LengthField
+		 * @see model.ProtocolPackage#getLengthField()
+		 * @generated
+		 */
+		public static final EClass LENGTH_FIELD = eINSTANCE.getLengthField();
+
+		/**
+		 * The meta object literal for the '<em><b>Ref</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		public static final EReference LENGTH_FIELD__REF = eINSTANCE.getLengthField_Ref();
 
 		/**
 		 * The meta object literal for the '{@link model.ProtocolModel <em>Model</em>}' class.

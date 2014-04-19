@@ -17,18 +17,18 @@ public class Serializer {
 				+ fieldName.substring(1);
 	}
 
-	public static void putBytesFromLong(ByteBuffer buffer, long val, int bytes) {
-		for (int i = bytes - 1; i >= 0; i--)
+	public static void putBytesFromLong(ByteBuffer buffer, long val, long bytes) {
+		for (long i = bytes - 1; i >= 0; i--)
 			buffer.put((byte) ((val >> (i * 8)) & 0b11111111));
 	}
 
 	public static void putBytesFromString(ByteBuffer buffer, String val,
-			int bytes) {
+			long bytes) {
 		byte[] src = val.getBytes();
 		if (bytes == 0)
 			bytes = (byte) src.length;
-		for (int i = bytes - 1; i >= 0; i--)
-			buffer.put(src[i]);
+		for (long i = bytes - 1; i >= 0; i--)
+			buffer.put(src[(int) i]);
 	}
 
 	public static void putBytesFromByteArray(ByteBuffer buffer, byte[] src) {
@@ -93,9 +93,9 @@ public class Serializer {
 		return null;
 	}
 
-	public static long getLongFromBytes(ByteBuffer buffer, int bytes) {
+	public static long getLongFromBytes(ByteBuffer buffer, long bytes) {
 		long ret = 0;
-		byte[] data = new byte[bytes];
+		byte[] data = new byte[(int) bytes];
 		buffer.get(data);
 		for (int i = data.length - 1; i >= 0; i--) {
 			ret |= data[i] << (data.length - i - 1);
@@ -103,14 +103,14 @@ public class Serializer {
 		return ret;
 	}
 
-	public static byte[] getByteArrayFromBytes(ByteBuffer buffer, int bytes) {
-		byte[] data = new byte[bytes == 0 ? buffer.remaining() : bytes];
+	public static byte[] getByteArrayFromBytes(ByteBuffer buffer, long bytes) {
+		byte[] data = new byte[(int) (bytes == 0 ? buffer.remaining() : bytes)];
 		buffer.get(data);
 		return data;
 	}
 
-	public static String getBoundedStringFromBytes(ByteBuffer buffer, int bytes) {
-		byte[] data = new byte[bytes];
+	public static String getBoundedStringFromBytes(ByteBuffer buffer, long bytes) {
+		byte[] data = new byte[(int) bytes];
 		buffer.get(data);
 		return new String(data);
 	}
@@ -125,6 +125,7 @@ public class Serializer {
 			ByteBuffer buffer) {
 
 		Map<String, Long> counters = new HashMap<>();
+		Map<String, Long> lengths = new HashMap<>();
 
 		try {
 			for (VariableProps props : serializable.getSerializationOrder()) {
@@ -132,6 +133,8 @@ public class Serializer {
 					long ret = getLongFromBytes(buffer, props.getByteLen());
 					if (props.getCountOf() != null) {
 						counters.put(props.getCountOf(), ret);
+					} else if (props.getLengthOf() != null) {
+						lengths.put(props.getLengthOf(), ret);
 					} else {
 						Class<?> srcClass = serializable.getClass();
 						Field field = srcClass
@@ -166,8 +169,10 @@ public class Serializer {
 					}
 					field.set(serializable, str);
 				} else if (props.getType().equals("byte[]")) {
+					long count = lengths.containsKey(props.getName()) ? lengths
+							.get(props.getName()) : props.getByteLen();
 					field.set(serializable,
-							getByteArrayFromBytes(buffer, props.getByteLen()));
+							getByteArrayFromBytes(buffer, count));
 				} else if (props.getType().equals("List")) {
 					long count = counters.get(props.getName());
 					Package pkg = serializable.getClass().getPackage();

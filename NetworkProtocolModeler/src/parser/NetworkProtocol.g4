@@ -24,7 +24,8 @@ variableDefinition
 		embeddedType |
 		bitfieldType |
 		listType |
-		countType)
+		countType |
+		lenType)
 ;
 
 intType:
@@ -53,6 +54,10 @@ listType:
 
 countType:
 	type = 'count' LPAREN len = NUMBER ',' countedList = ID RPAREN
+;
+
+lenType:
+	type = 'length' LPAREN len = NUMBER ',' countedField = ID RPAREN
 ;
 
 bitfieldDefinition:

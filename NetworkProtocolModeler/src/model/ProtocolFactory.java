@@ -72,6 +72,7 @@ public class ProtocolFactory extends EFactoryImpl {
 			case ProtocolPackage.BIT_FIELD: return createBitField();
 			case ProtocolPackage.LIST_FIELD: return createListField();
 			case ProtocolPackage.COUNT_FIELD: return createCountField();
+			case ProtocolPackage.LENGTH_FIELD: return createLengthField();
 			case ProtocolPackage.PROTOCOL_MODEL: return createProtocolModel();
 			case ProtocolPackage.FORMATTER: return createFormatter();
 			default:
@@ -157,6 +158,16 @@ public class ProtocolFactory extends EFactoryImpl {
 	public CountField createCountField() {
 		CountField countField = new CountField();
 		return countField;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public LengthField createLengthField() {
+		LengthField lengthField = new LengthField();
+		return lengthField;
 	}
 
 	/**

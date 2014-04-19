@@ -16,6 +16,7 @@ import model.StringField
 import org.eclipse.jdt.core.ToolFactory
 import org.eclipse.jdt.core.formatter.CodeFormatter
 import org.eclipse.jface.text.Document
+import model.LengthField
 
 class NetworkProtocolGenerator {
 	private ProtocolModel model;
@@ -39,13 +40,15 @@ class NetworkProtocolGenerator {
 			return "List";
 		if (field instanceof CountField)
 			return "long";
+		if (field instanceof LengthField)
+			return "long";
 		if (field instanceof DataType)
 			return (field as DataType).typeName;
 		throw new RuntimeException("Cannot happen.");
 	}
-	
+
 	def String getTransient(Field field) {
-		return if (field.transientField) "transient" else "";
+		return if(field.transientField) "transient" else "";
 	}
 
 	def String getCollectionType(Field field) {
@@ -56,6 +59,10 @@ class NetworkProtocolGenerator {
 
 	def String countOf(Field field) {
 		return if(field instanceof CountField) "\"" + (field as CountField).ref.name + "\"" else "null";
+	}
+
+	def String lengthOf(Field field) {
+		return if(field instanceof LengthField) "\"" + (field as LengthField).ref.name + "\"" else "null";
 	}
 
 	def String formatterClass(Field field) {
@@ -131,7 +138,7 @@ import runtime.*;
 
 public class «protocol.typeName» implements Cloneable, OrderedSerializable {
 	«FOR v : protocol.fields»
-		«IF !(v instanceof CountField)»
+		«IF !(v instanceof CountField) && !(v instanceof LengthField)»
 			«generateVariableDef(v)»
 		«ENDIF»
 	«ENDFOR»
@@ -144,6 +151,8 @@ public class «protocol.typeName» implements Cloneable, OrderedSerializable {
 			«generateListAccessors(v.name, v.collectionType)»
 		«ELSEIF v instanceof CountField»
 			«generateCountGetter(v.name, (v as CountField).ref.name)»
+		«ELSEIF v instanceof LengthField»
+			«generateLengthGetter(v.name, (v as LengthField).ref.name)»
 		«ELSE»
 			«generateVariableGetter(v)»
 			«generateVariableSetter(v)»
@@ -175,7 +184,7 @@ public class «protocol.typeName» implements Cloneable, OrderedSerializable {
 			«FOR v : protocol.fields BEFORE '{' SEPARATOR ', ' AFTER '};'»
 					«IF !v.transientField»
 						new VariableProps("«v.name»", "«v.type»", "«v.collectionType»", «v.byteLen», «v.unbounded», «v.formatterClass», «v.
-		countOf»)
+		countOf», «v.lengthOf»)
 				«ENDIF»
 			«ENDFOR»
 	}
@@ -321,6 +330,12 @@ public List<«listType»> get«varName.capitalizeFirst»() {
 	def private generateCountGetter(String countName, String ref) '''
 public long get«countName.capitalizeFirst»() {
 	return «ref».size();
+}
+	'''
+
+	def private generateLengthGetter(String countName, String ref) '''
+public long get«countName.capitalizeFirst»() {
+	return «ref».length;
 }
 	'''
 

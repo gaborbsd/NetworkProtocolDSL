@@ -3,12 +3,14 @@ package parser;
 import java.util.HashMap;
 import java.util.Map;
 
+import model.BinaryField;
 import model.BitField;
 import model.BitFieldComponent;
 import model.CountField;
 import model.DataType;
 import model.Field;
 import model.Formatter;
+import model.LengthField;
 import model.ListField;
 import model.ProtocolFactory;
 import model.ProtocolModel;
@@ -19,6 +21,7 @@ import parser.NetworkProtocolParser.CountTypeContext;
 import parser.NetworkProtocolParser.EmbeddedTypeContext;
 import parser.NetworkProtocolParser.FormatterDefinitionContext;
 import parser.NetworkProtocolParser.IntTypeContext;
+import parser.NetworkProtocolParser.LenTypeContext;
 import parser.NetworkProtocolParser.ListTypeContext;
 import parser.NetworkProtocolParser.PackageDefinitionContext;
 import parser.NetworkProtocolParser.ProtocolDefinitionContext;
@@ -43,6 +46,8 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 	private Map<String, String> listReferences;
 
 	private Map<String, String> countReferences;
+
+	private Map<String, String> lengthReferences;
 
 	private Map<String, Formatter> formatterCache = new HashMap<String, Formatter>();
 
@@ -94,6 +99,7 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 		model.getProtocols().add(currentProtocol);
 		listReferences = new HashMap<String, String>();
 		countReferences = new HashMap<String, String>();
+		lengthReferences = new HashMap<String, String>();
 	}
 
 	@Override
@@ -113,6 +119,16 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 						if (((ListField) other).getName().equals(
 								countReferences.get(f.getName()))) {
 							((CountField) f).setRef((ListField) other);
+						}
+					}
+				}
+			}
+			if (f instanceof LengthField) {
+				for (Field other : currentProtocol.getFields()) {
+					if (other instanceof BinaryField) {
+						if (((BinaryField) other).getName().equals(
+								lengthReferences.get(f.getName()))) {
+							((LengthField) f).setRef((BinaryField) other);
 						}
 					}
 				}
@@ -237,6 +253,16 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 		// TODO: addField()
 		currentProtocol.getFields().add(currentField);
 		countReferences.put(currentFieldName, ctx.countedList.getText());
+	}
+
+	@Override
+	public void enterLenType(LenTypeContext ctx) {
+		currentField = factory.createLengthField();
+		currentField.setName(currentFieldName);
+		processVariable("Long", ctx.len.getText());
+		// TODO: addField()
+		currentProtocol.getFields().add(currentField);
+		lengthReferences.put(currentFieldName, ctx.countedField.getText());
 	}
 
 	@Override

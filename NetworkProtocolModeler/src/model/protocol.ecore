@@ -53,6 +53,9 @@
   <eClassifiers xsi:type="ecore:EClass" name="CountField" eSuperTypes="#//Field">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ref" lowerBound="1" eType="#//ListField"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LengthField" eSuperTypes="#//Field">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" lowerBound="1" eType="#//BinaryField"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ProtocolModel">
     <eStructuralFeatures xsi:type="ecore:EReference" name="protocols" upperBound="-1"
         eType="#//DataType" containment="true"/>
