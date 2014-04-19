@@ -106,13 +106,22 @@ public class ProtocolPackage extends EPackageImpl {
 	public static final int FIELD__UNBOUNDED = 3;
 
 	/**
+	 * The feature id for the '<em><b>Identity Field</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int FIELD__IDENTITY_FIELD = 4;
+
+	/**
 	 * The feature id for the '<em><b>Formatter</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	public static final int FIELD__FORMATTER = 4;
+	public static final int FIELD__FORMATTER = 5;
 
 	/**
 	 * The number of structural features of the '<em>Field</em>' class.
@@ -121,7 +130,7 @@ public class ProtocolPackage extends EPackageImpl {
 	 * @generated
 	 * @ordered
 	 */
-	public static final int FIELD_FEATURE_COUNT = 5;
+	public static final int FIELD_FEATURE_COUNT = 6;
 
 	/**
 	 * The number of operations of the '<em>Field</em>' class.
@@ -179,6 +188,15 @@ public class ProtocolPackage extends EPackageImpl {
 	public static final int DATA_TYPE__UNBOUNDED = FIELD__UNBOUNDED;
 
 	/**
+	 * The feature id for the '<em><b>Identity Field</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int DATA_TYPE__IDENTITY_FIELD = FIELD__IDENTITY_FIELD;
+
+	/**
 	 * The feature id for the '<em><b>Formatter</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -206,13 +224,22 @@ public class ProtocolPackage extends EPackageImpl {
 	public static final int DATA_TYPE__TYPE_NAME = FIELD_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Has Identity Field</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int DATA_TYPE__HAS_IDENTITY_FIELD = FIELD_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Data Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	public static final int DATA_TYPE_FEATURE_COUNT = FIELD_FEATURE_COUNT + 2;
+	public static final int DATA_TYPE_FEATURE_COUNT = FIELD_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of operations of the '<em>Data Type</em>' class.
@@ -268,6 +295,15 @@ public class ProtocolPackage extends EPackageImpl {
 	 * @ordered
 	 */
 	public static final int INTEGER_FIELD__UNBOUNDED = FIELD__UNBOUNDED;
+
+	/**
+	 * The feature id for the '<em><b>Identity Field</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int INTEGER_FIELD__IDENTITY_FIELD = FIELD__IDENTITY_FIELD;
 
 	/**
 	 * The feature id for the '<em><b>Formatter</b></em>' reference.
@@ -343,6 +379,15 @@ public class ProtocolPackage extends EPackageImpl {
 	public static final int BINARY_FIELD__UNBOUNDED = FIELD__UNBOUNDED;
 
 	/**
+	 * The feature id for the '<em><b>Identity Field</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BINARY_FIELD__IDENTITY_FIELD = FIELD__IDENTITY_FIELD;
+
+	/**
 	 * The feature id for the '<em><b>Formatter</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -414,6 +459,15 @@ public class ProtocolPackage extends EPackageImpl {
 	 * @ordered
 	 */
 	public static final int STRING_FIELD__UNBOUNDED = FIELD__UNBOUNDED;
+
+	/**
+	 * The feature id for the '<em><b>Identity Field</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int STRING_FIELD__IDENTITY_FIELD = FIELD__IDENTITY_FIELD;
 
 	/**
 	 * The feature id for the '<em><b>Formatter</b></em>' reference.
@@ -535,6 +589,15 @@ public class ProtocolPackage extends EPackageImpl {
 	public static final int BIT_FIELD__UNBOUNDED = FIELD__UNBOUNDED;
 
 	/**
+	 * The feature id for the '<em><b>Identity Field</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BIT_FIELD__IDENTITY_FIELD = FIELD__IDENTITY_FIELD;
+
+	/**
 	 * The feature id for the '<em><b>Formatter</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -617,6 +680,15 @@ public class ProtocolPackage extends EPackageImpl {
 	public static final int LIST_FIELD__UNBOUNDED = FIELD__UNBOUNDED;
 
 	/**
+	 * The feature id for the '<em><b>Identity Field</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LIST_FIELD__IDENTITY_FIELD = FIELD__IDENTITY_FIELD;
+
+	/**
 	 * The feature id for the '<em><b>Formatter</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -697,6 +769,15 @@ public class ProtocolPackage extends EPackageImpl {
 	 * @ordered
 	 */
 	public static final int COUNT_FIELD__UNBOUNDED = FIELD__UNBOUNDED;
+
+	/**
+	 * The feature id for the '<em><b>Identity Field</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int COUNT_FIELD__IDENTITY_FIELD = FIELD__IDENTITY_FIELD;
 
 	/**
 	 * The feature id for the '<em><b>Formatter</b></em>' reference.
@@ -1004,6 +1085,20 @@ public class ProtocolPackage extends EPackageImpl {
 	}
 
 	/**
+	 * Returns the meta object for the attribute '{@link model.DataType#getHasIdentityField <em>Has Identity Field</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Has Identity Field</em>'.
+	 * @see model.DataType#getHasIdentityField()
+	 * @see #getDataType()
+	 * @generated
+	 */
+	public EAttribute getDataType_HasIdentityField() {
+		return (EAttribute)dataTypeEClass.getEStructuralFeatures().get(2);
+	}
+
+
+	/**
 	 * Returns the meta object for class '{@link model.Field <em>Field</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1069,6 +1164,20 @@ public class ProtocolPackage extends EPackageImpl {
 
 
 	/**
+	 * Returns the meta object for the attribute '{@link model.Field#getIdentityField <em>Identity Field</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Identity Field</em>'.
+	 * @see model.Field#getIdentityField()
+	 * @see #getField()
+	 * @generated
+	 */
+	public EAttribute getField_IdentityField() {
+		return (EAttribute)fieldEClass.getEStructuralFeatures().get(4);
+	}
+
+
+	/**
 	 * Returns the meta object for the reference '{@link model.Field#getFormatter <em>Formatter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1078,7 +1187,7 @@ public class ProtocolPackage extends EPackageImpl {
 	 * @generated
 	 */
 	public EReference getField_Formatter() {
-		return (EReference)fieldEClass.getEStructuralFeatures().get(4);
+		return (EReference)fieldEClass.getEStructuralFeatures().get(5);
 	}
 
 
@@ -1353,12 +1462,14 @@ public class ProtocolPackage extends EPackageImpl {
 		dataTypeEClass = createEClass(DATA_TYPE);
 		createEReference(dataTypeEClass, DATA_TYPE__FIELDS);
 		createEAttribute(dataTypeEClass, DATA_TYPE__TYPE_NAME);
+		createEAttribute(dataTypeEClass, DATA_TYPE__HAS_IDENTITY_FIELD);
 
 		fieldEClass = createEClass(FIELD);
 		createEAttribute(fieldEClass, FIELD__BYTE_LEN);
 		createEAttribute(fieldEClass, FIELD__NAME);
 		createEAttribute(fieldEClass, FIELD__PACKAGE);
 		createEAttribute(fieldEClass, FIELD__UNBOUNDED);
+		createEAttribute(fieldEClass, FIELD__IDENTITY_FIELD);
 		createEReference(fieldEClass, FIELD__FORMATTER);
 
 		integerFieldEClass = createEClass(INTEGER_FIELD);
@@ -1429,12 +1540,14 @@ public class ProtocolPackage extends EPackageImpl {
 		initEClass(dataTypeEClass, DataType.class, "DataType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDataType_Fields(), this.getField(), null, "fields", null, 0, -1, DataType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDataType_TypeName(), ecorePackage.getEString(), "typeName", null, 0, 1, DataType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDataType_HasIdentityField(), ecorePackage.getEBooleanObject(), "hasIdentityField", "false", 0, 1, DataType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(fieldEClass, Field.class, "Field", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getField_ByteLen(), ecorePackage.getELongObject(), "byteLen", "0", 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getField_Name(), ecorePackage.getEString(), "name", "", 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getField_Package(), ecorePackage.getEString(), "package", "", 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getField_Unbounded(), ecorePackage.getEBooleanObject(), "unbounded", "false", 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getField_IdentityField(), ecorePackage.getEBooleanObject(), "identityField", "false", 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getField_Formatter(), this.getFormatter(), null, "formatter", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(integerFieldEClass, IntegerField.class, "IntegerField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1550,6 +1663,14 @@ public class ProtocolPackage extends EPackageImpl {
 		public static final EAttribute DATA_TYPE__TYPE_NAME = eINSTANCE.getDataType_TypeName();
 
 		/**
+		 * The meta object literal for the '<em><b>Has Identity Field</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		public static final EAttribute DATA_TYPE__HAS_IDENTITY_FIELD = eINSTANCE.getDataType_HasIdentityField();
+
+		/**
 		 * The meta object literal for the '{@link model.Field <em>Field</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1590,6 +1711,14 @@ public class ProtocolPackage extends EPackageImpl {
 		 * @generated
 		 */
 		public static final EAttribute FIELD__UNBOUNDED = eINSTANCE.getField_Unbounded();
+
+		/**
+		 * The meta object literal for the '<em><b>Identity Field</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		public static final EAttribute FIELD__IDENTITY_FIELD = eINSTANCE.getField_IdentityField();
 
 		/**
 		 * The meta object literal for the '<em><b>Formatter</b></em>' reference feature.

@@ -17,7 +17,7 @@ protocolDefinition
 
 variableDefinition
 :
-	name = ID ':' (
+	identitfyVar='*'? name = ID ':' (
 		intType |
 		stringType |
 		binaryType |

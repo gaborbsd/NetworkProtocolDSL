@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  *   <li>{@link model.Field#getName <em>Name</em>}</li>
  *   <li>{@link model.Field#getPackage <em>Package</em>}</li>
  *   <li>{@link model.Field#getUnbounded <em>Unbounded</em>}</li>
+ *   <li>{@link model.Field#getIdentityField <em>Identity Field</em>}</li>
  *   <li>{@link model.Field#getFormatter <em>Formatter</em>}</li>
  * </ul>
  * </p>
@@ -108,6 +109,26 @@ public abstract class Field extends MinimalEObjectImpl.Container implements EObj
 	 * @ordered
 	 */
 	protected Boolean unbounded = UNBOUNDED_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getIdentityField() <em>Identity Field</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIdentityField()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Boolean IDENTITY_FIELD_EDEFAULT = Boolean.FALSE;
+
+	/**
+	 * The cached value of the '{@link #getIdentityField() <em>Identity Field</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getIdentityField()
+	 * @generated
+	 * @ordered
+	 */
+	protected Boolean identityField = IDENTITY_FIELD_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getFormatter() <em>Formatter</em>}' reference.
@@ -263,6 +284,37 @@ public abstract class Field extends MinimalEObjectImpl.Container implements EObj
 	}
 
 	/**
+	 * Returns the value of the '<em><b>Identity Field</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Identity Field</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Identity Field</em>' attribute.
+	 * @see #setIdentityField(Boolean)
+	 * @see model.ProtocolPackage#getField_IdentityField()
+	 * @model default="false"
+	 * @generated
+	 */
+	public Boolean getIdentityField() {
+		return identityField;
+	}
+
+	/**
+	 * Sets the value of the '{@link model.Field#getIdentityField <em>Identity Field</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Identity Field</em>' attribute.
+	 * @see #getIdentityField()
+	 * @generated
+	 */
+	public void setIdentityField(Boolean newIdentityField) {
+		identityField = newIdentityField;
+	}
+
+	/**
 	 * Returns the value of the '<em><b>Formatter</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -323,6 +375,8 @@ public abstract class Field extends MinimalEObjectImpl.Container implements EObj
 				return getPackage();
 			case ProtocolPackage.FIELD__UNBOUNDED:
 				return getUnbounded();
+			case ProtocolPackage.FIELD__IDENTITY_FIELD:
+				return getIdentityField();
 			case ProtocolPackage.FIELD__FORMATTER:
 				if (resolve) return getFormatter();
 				return basicGetFormatter();
@@ -349,6 +403,9 @@ public abstract class Field extends MinimalEObjectImpl.Container implements EObj
 				return;
 			case ProtocolPackage.FIELD__UNBOUNDED:
 				setUnbounded((Boolean)newValue);
+				return;
+			case ProtocolPackage.FIELD__IDENTITY_FIELD:
+				setIdentityField((Boolean)newValue);
 				return;
 			case ProtocolPackage.FIELD__FORMATTER:
 				setFormatter((Formatter)newValue);
@@ -377,6 +434,9 @@ public abstract class Field extends MinimalEObjectImpl.Container implements EObj
 			case ProtocolPackage.FIELD__UNBOUNDED:
 				setUnbounded(UNBOUNDED_EDEFAULT);
 				return;
+			case ProtocolPackage.FIELD__IDENTITY_FIELD:
+				setIdentityField(IDENTITY_FIELD_EDEFAULT);
+				return;
 			case ProtocolPackage.FIELD__FORMATTER:
 				setFormatter((Formatter)null);
 				return;
@@ -400,6 +460,8 @@ public abstract class Field extends MinimalEObjectImpl.Container implements EObj
 				return PACKAGE_EDEFAULT == null ? package_ != null : !PACKAGE_EDEFAULT.equals(package_);
 			case ProtocolPackage.FIELD__UNBOUNDED:
 				return UNBOUNDED_EDEFAULT == null ? unbounded != null : !UNBOUNDED_EDEFAULT.equals(unbounded);
+			case ProtocolPackage.FIELD__IDENTITY_FIELD:
+				return IDENTITY_FIELD_EDEFAULT == null ? identityField != null : !IDENTITY_FIELD_EDEFAULT.equals(identityField);
 			case ProtocolPackage.FIELD__FORMATTER:
 				return formatter != null;
 		}
@@ -424,6 +486,8 @@ public abstract class Field extends MinimalEObjectImpl.Container implements EObj
 		result.append(package_);
 		result.append(", unbounded: ");
 		result.append(unbounded);
+		result.append(", identityField: ");
+		result.append(identityField);
 		result.append(')');
 		return result.toString();
 	}

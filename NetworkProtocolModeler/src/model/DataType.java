@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link model.DataType#getFields <em>Fields</em>}</li>
  *   <li>{@link model.DataType#getTypeName <em>Type Name</em>}</li>
+ *   <li>{@link model.DataType#getHasIdentityField <em>Has Identity Field</em>}</li>
  * </ul>
  * </p>
  *
@@ -61,6 +62,26 @@ public class DataType extends Field {
 	 * @ordered
 	 */
 	protected String typeName = TYPE_NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getHasIdentityField() <em>Has Identity Field</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getHasIdentityField()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Boolean HAS_IDENTITY_FIELD_EDEFAULT = Boolean.FALSE;
+
+	/**
+	 * The cached value of the '{@link #getHasIdentityField() <em>Has Identity Field</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getHasIdentityField()
+	 * @generated
+	 * @ordered
+	 */
+	protected Boolean hasIdentityField = HAS_IDENTITY_FIELD_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -133,6 +154,37 @@ public class DataType extends Field {
 	}
 
 	/**
+	 * Returns the value of the '<em><b>Has Identity Field</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Has Identity Field</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Has Identity Field</em>' attribute.
+	 * @see #setHasIdentityField(Boolean)
+	 * @see model.ProtocolPackage#getDataType_HasIdentityField()
+	 * @model default="false"
+	 * @generated
+	 */
+	public Boolean getHasIdentityField() {
+		return hasIdentityField;
+	}
+
+	/**
+	 * Sets the value of the '{@link model.DataType#getHasIdentityField <em>Has Identity Field</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Has Identity Field</em>' attribute.
+	 * @see #getHasIdentityField()
+	 * @generated
+	 */
+	public void setHasIdentityField(Boolean newHasIdentityField) {
+		hasIdentityField = newHasIdentityField;
+	}
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -158,6 +210,8 @@ public class DataType extends Field {
 				return getFields();
 			case ProtocolPackage.DATA_TYPE__TYPE_NAME:
 				return getTypeName();
+			case ProtocolPackage.DATA_TYPE__HAS_IDENTITY_FIELD:
+				return getHasIdentityField();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -178,6 +232,9 @@ public class DataType extends Field {
 			case ProtocolPackage.DATA_TYPE__TYPE_NAME:
 				setTypeName((String)newValue);
 				return;
+			case ProtocolPackage.DATA_TYPE__HAS_IDENTITY_FIELD:
+				setHasIdentityField((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -196,6 +253,9 @@ public class DataType extends Field {
 			case ProtocolPackage.DATA_TYPE__TYPE_NAME:
 				setTypeName(TYPE_NAME_EDEFAULT);
 				return;
+			case ProtocolPackage.DATA_TYPE__HAS_IDENTITY_FIELD:
+				setHasIdentityField(HAS_IDENTITY_FIELD_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -212,6 +272,8 @@ public class DataType extends Field {
 				return fields != null && !fields.isEmpty();
 			case ProtocolPackage.DATA_TYPE__TYPE_NAME:
 				return TYPE_NAME_EDEFAULT == null ? typeName != null : !TYPE_NAME_EDEFAULT.equals(typeName);
+			case ProtocolPackage.DATA_TYPE__HAS_IDENTITY_FIELD:
+				return HAS_IDENTITY_FIELD_EDEFAULT == null ? hasIdentityField != null : !HAS_IDENTITY_FIELD_EDEFAULT.equals(hasIdentityField);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -228,6 +290,8 @@ public class DataType extends Field {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (typeName: ");
 		result.append(typeName);
+		result.append(", hasIdentityField: ");
+		result.append(hasIdentityField);
 		result.append(')');
 		return result.toString();
 	}

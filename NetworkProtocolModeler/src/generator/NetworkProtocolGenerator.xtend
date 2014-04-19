@@ -158,6 +158,11 @@ public class «protocol.typeName» implements OrderedSerializable {
 			«ENDFOR»
 		«ENDIF»
 	«ENDFOR»
+	
+	«IF protocol.hasIdentityField»
+		«generateEquals(protocol)»
+		«generateHashCode(protocol)»
+	«ENDIF»
 
 	public VariableProps[] getSerializationOrder() {
 		return new VariableProps[]
@@ -180,6 +185,41 @@ public class «protocol.typeName» implements OrderedSerializable {
 					«v.name» = new byte[«v.byteLen»];
 				«ENDIF»
 			«ENDFOR»
+		}
+	'''
+	
+	def private generateEquals(DataType protocol) '''
+		@Override
+		public boolean equals(Object obj) {
+			if (obj == null)
+				return false;
+			if (!(obj instanceof «protocol.typeName»))
+				return false;
+			«protocol.typeName» other = («protocol.typeName»)obj;
+			
+			«FOR v : protocol.fields BEFORE 'return ' SEPARATOR ' & ' AFTER ';'»
+				«IF (v.identityField && (v instanceof IntegerField))»
+					(other.«v.name» == this.«v.name»)
+				«ELSEIF (v.identityField && !(v instanceof CountField))»
+					(other.«v.name».equals(this.«v.name»))
+				«ENDIF»
+			«ENDFOR»
+		}
+	'''
+	
+	def private generateHashCode(DataType protocol) '''
+		@Override
+		public int hashCode() {
+			int ret = 0;
+			«FOR v : protocol.fields»
+				«IF (v.identityField && (v instanceof IntegerField))»
+					ret += «v.name»;
+				«ELSEIF (v.identityField && !(v instanceof CountField))»
+					ret += «v.name».hashCode();
+				«ENDIF»
+			«ENDFOR»
+			ret *= 31;
+			return ret;
 		}
 	'''
 

@@ -12,7 +12,6 @@ import model.Formatter;
 import model.ListField;
 import model.ProtocolFactory;
 import model.ProtocolModel;
-import model.StringField;
 import parser.NetworkProtocolParser.BinaryTypeContext;
 import parser.NetworkProtocolParser.BitfieldDefinitionContext;
 import parser.NetworkProtocolParser.BitfieldTypeContext;
@@ -32,10 +31,11 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 	private ProtocolModel model = factory.createProtocolModel();
 
 	private String currentPackage = "";
-	
+
 	private DataType currentProtocol;
 	private Field currentField;
 	private String currentFieldName = "";
+	private boolean currentFieldIsIdentityField = false;
 
 	private Long bitFieldTotalLen;
 
@@ -143,12 +143,18 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 	@Override
 	public void enterVariableDefinition(VariableDefinitionContext ctx) {
 		currentFieldName = ctx.name.getText();
+		String identityVar = ctx.identitfyVar != null ? ctx.identitfyVar
+				.getText() : "";
+		currentFieldIsIdentityField = "*".equals(identityVar);
+		if (currentFieldIsIdentityField)
+			currentProtocol.setHasIdentityField(true);
 	}
 
 	@Override
 	public void enterBinaryType(BinaryTypeContext ctx) {
 		currentField = factory.createBinaryField();
 		currentField.setName(currentFieldName);
+		currentField.setIdentityField(currentFieldIsIdentityField);
 		processVariable(getJavaType(ctx.type.getText()), ctx.len.getText());
 		// TODO: addField()
 		currentProtocol.getFields().add(currentField);
@@ -158,6 +164,7 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 	public void enterStringType(StringTypeContext ctx) {
 		currentField = factory.createStringField();
 		currentField.setName(currentFieldName);
+		currentField.setIdentityField(currentFieldIsIdentityField);
 		processVariable(getJavaType(ctx.type.getText()), ctx.len.getText());
 		// TODO: addField()
 		currentProtocol.getFields().add(currentField);
@@ -167,6 +174,7 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 	public void enterIntType(IntTypeContext ctx) {
 		currentField = factory.createIntegerField();
 		currentField.setName(currentFieldName);
+		currentField.setIdentityField(currentFieldIsIdentityField);
 		processVariable(getJavaType(ctx.type.getText()), ctx.len.getText());
 		// TODO: addField()
 		currentProtocol.getFields().add(currentField);
@@ -176,6 +184,7 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 	public void exitEmbeddedType(EmbeddedTypeContext ctx) {
 		currentField = factory.createDataType();
 		currentField.setName(currentFieldName);
+		currentField.setIdentityField(currentFieldIsIdentityField);
 		currentField.setByteLen(0l);
 		currentField.setUnbounded(false);
 		((DataType) currentField).setTypeName(ctx.type.getText());
@@ -187,6 +196,7 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 	public void enterBitfieldType(BitfieldTypeContext ctx) {
 		currentField = factory.createBitField();
 		currentField.setName(currentFieldName);
+		currentField.setIdentityField(currentFieldIsIdentityField);
 		currentField.setUnbounded(false);
 		// TODO: addField()
 		currentProtocol.getFields().add(currentField);
@@ -202,6 +212,7 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 	public void enterListType(ListTypeContext ctx) {
 		currentField = factory.createListField();
 		currentField.setName(currentFieldName);
+		currentField.setIdentityField(currentFieldIsIdentityField);
 		currentField.setUnbounded(true);
 		currentField.setByteLen(0l);
 		// TODO: addField()
