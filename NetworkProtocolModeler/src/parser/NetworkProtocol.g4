@@ -17,7 +17,7 @@ protocolDefinition
 
 variableDefinition
 :
-	identitfyVar='*'? name = ID ':' (
+	trans='transient'? identityVar='*'? name = ID ':' (
 		intType |
 		stringType |
 		binaryType |

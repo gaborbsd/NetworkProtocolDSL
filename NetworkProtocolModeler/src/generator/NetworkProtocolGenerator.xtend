@@ -43,6 +43,10 @@ class NetworkProtocolGenerator {
 			return (field as DataType).typeName;
 		throw new RuntimeException("Cannot happen.");
 	}
+	
+	def String getTransient(Field field) {
+		return if (field.transientField) "transient" else "";
+	}
 
 	def String getCollectionType(Field field) {
 		if (field instanceof ListField)
@@ -169,8 +173,10 @@ public class «protocol.typeName» implements Cloneable, OrderedSerializable {
 	public VariableProps[] getSerializationOrder() {
 		return new VariableProps[]
 			«FOR v : protocol.fields BEFORE '{' SEPARATOR ', ' AFTER '};'»
-				new VariableProps("«v.name»", "«v.type»", "«v.collectionType»", «v.byteLen», «v.unbounded», «v.formatterClass», «v.
+					«IF !v.transientField»
+						new VariableProps("«v.name»", "«v.type»", "«v.collectionType»", «v.byteLen», «v.unbounded», «v.formatterClass», «v.
 		countOf»)
+				«ENDIF»
 			«ENDFOR»
 	}
 }
@@ -240,9 +246,9 @@ public class «protocol.typeName» implements Cloneable, OrderedSerializable {
 
 	def private generateVariableDef(Field variable) '''
 		«IF variable instanceof ListField»
-			private «variable.type»<«variable.collectionType»> «variable.name»;
+			private «variable.transient» «variable.type»<«variable.collectionType»> «variable.name»;
 		«ELSE»
-			private «variable.type» «variable.name»;
+			private «variable.transient» «variable.type» «variable.name»;
 		«ENDIF»
 	'''
 

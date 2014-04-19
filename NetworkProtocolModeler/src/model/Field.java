@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  *   <li>{@link model.Field#getPackage <em>Package</em>}</li>
  *   <li>{@link model.Field#getUnbounded <em>Unbounded</em>}</li>
  *   <li>{@link model.Field#getIdentityField <em>Identity Field</em>}</li>
+ *   <li>{@link model.Field#getTransientField <em>Transient Field</em>}</li>
  *   <li>{@link model.Field#getFormatter <em>Formatter</em>}</li>
  * </ul>
  * </p>
@@ -129,6 +130,26 @@ public abstract class Field extends MinimalEObjectImpl.Container implements EObj
 	 * @ordered
 	 */
 	protected Boolean identityField = IDENTITY_FIELD_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getTransientField() <em>Transient Field</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTransientField()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Boolean TRANSIENT_FIELD_EDEFAULT = Boolean.FALSE;
+
+	/**
+	 * The cached value of the '{@link #getTransientField() <em>Transient Field</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTransientField()
+	 * @generated
+	 * @ordered
+	 */
+	protected Boolean transientField = TRANSIENT_FIELD_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getFormatter() <em>Formatter</em>}' reference.
@@ -315,6 +336,37 @@ public abstract class Field extends MinimalEObjectImpl.Container implements EObj
 	}
 
 	/**
+	 * Returns the value of the '<em><b>Transient Field</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Transient Field</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Transient Field</em>' attribute.
+	 * @see #setTransientField(Boolean)
+	 * @see model.ProtocolPackage#getField_TransientField()
+	 * @model default="false"
+	 * @generated
+	 */
+	public Boolean getTransientField() {
+		return transientField;
+	}
+
+	/**
+	 * Sets the value of the '{@link model.Field#getTransientField <em>Transient Field</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Transient Field</em>' attribute.
+	 * @see #getTransientField()
+	 * @generated
+	 */
+	public void setTransientField(Boolean newTransientField) {
+		transientField = newTransientField;
+	}
+
+	/**
 	 * Returns the value of the '<em><b>Formatter</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -377,6 +429,8 @@ public abstract class Field extends MinimalEObjectImpl.Container implements EObj
 				return getUnbounded();
 			case ProtocolPackage.FIELD__IDENTITY_FIELD:
 				return getIdentityField();
+			case ProtocolPackage.FIELD__TRANSIENT_FIELD:
+				return getTransientField();
 			case ProtocolPackage.FIELD__FORMATTER:
 				if (resolve) return getFormatter();
 				return basicGetFormatter();
@@ -406,6 +460,9 @@ public abstract class Field extends MinimalEObjectImpl.Container implements EObj
 				return;
 			case ProtocolPackage.FIELD__IDENTITY_FIELD:
 				setIdentityField((Boolean)newValue);
+				return;
+			case ProtocolPackage.FIELD__TRANSIENT_FIELD:
+				setTransientField((Boolean)newValue);
 				return;
 			case ProtocolPackage.FIELD__FORMATTER:
 				setFormatter((Formatter)newValue);
@@ -437,6 +494,9 @@ public abstract class Field extends MinimalEObjectImpl.Container implements EObj
 			case ProtocolPackage.FIELD__IDENTITY_FIELD:
 				setIdentityField(IDENTITY_FIELD_EDEFAULT);
 				return;
+			case ProtocolPackage.FIELD__TRANSIENT_FIELD:
+				setTransientField(TRANSIENT_FIELD_EDEFAULT);
+				return;
 			case ProtocolPackage.FIELD__FORMATTER:
 				setFormatter((Formatter)null);
 				return;
@@ -462,6 +522,8 @@ public abstract class Field extends MinimalEObjectImpl.Container implements EObj
 				return UNBOUNDED_EDEFAULT == null ? unbounded != null : !UNBOUNDED_EDEFAULT.equals(unbounded);
 			case ProtocolPackage.FIELD__IDENTITY_FIELD:
 				return IDENTITY_FIELD_EDEFAULT == null ? identityField != null : !IDENTITY_FIELD_EDEFAULT.equals(identityField);
+			case ProtocolPackage.FIELD__TRANSIENT_FIELD:
+				return TRANSIENT_FIELD_EDEFAULT == null ? transientField != null : !TRANSIENT_FIELD_EDEFAULT.equals(transientField);
 			case ProtocolPackage.FIELD__FORMATTER:
 				return formatter != null;
 		}
@@ -488,6 +550,8 @@ public abstract class Field extends MinimalEObjectImpl.Container implements EObj
 		result.append(unbounded);
 		result.append(", identityField: ");
 		result.append(identityField);
+		result.append(", transientField: ");
+		result.append(transientField);
 		result.append(')');
 		return result.toString();
 	}

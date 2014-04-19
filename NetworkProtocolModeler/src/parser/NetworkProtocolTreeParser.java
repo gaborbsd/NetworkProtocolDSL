@@ -36,6 +36,7 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 	private Field currentField;
 	private String currentFieldName = "";
 	private boolean currentFieldIsIdentityField = false;
+	private boolean currentFieldIsTransient = false;
 
 	private Long bitFieldTotalLen;
 
@@ -143,9 +144,11 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 	@Override
 	public void enterVariableDefinition(VariableDefinitionContext ctx) {
 		currentFieldName = ctx.name.getText();
-		String identityVar = ctx.identitfyVar != null ? ctx.identitfyVar
+		String identityVar = ctx.identityVar != null ? ctx.identityVar
 				.getText() : "";
+		String transientVar = ctx.trans != null ? ctx.trans.getText() : "";
 		currentFieldIsIdentityField = "*".equals(identityVar);
+		currentFieldIsTransient = "transient".equals(transientVar);
 		if (currentFieldIsIdentityField)
 			currentProtocol.setHasIdentityField(true);
 	}
@@ -155,6 +158,7 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 		currentField = factory.createBinaryField();
 		currentField.setName(currentFieldName);
 		currentField.setIdentityField(currentFieldIsIdentityField);
+		currentField.setTransientField(currentFieldIsTransient);
 		processVariable(getJavaType(ctx.type.getText()), ctx.len.getText());
 		// TODO: addField()
 		currentProtocol.getFields().add(currentField);
@@ -165,6 +169,7 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 		currentField = factory.createStringField();
 		currentField.setName(currentFieldName);
 		currentField.setIdentityField(currentFieldIsIdentityField);
+		currentField.setTransientField(currentFieldIsTransient);
 		processVariable(getJavaType(ctx.type.getText()), ctx.len.getText());
 		// TODO: addField()
 		currentProtocol.getFields().add(currentField);
@@ -175,6 +180,7 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 		currentField = factory.createIntegerField();
 		currentField.setName(currentFieldName);
 		currentField.setIdentityField(currentFieldIsIdentityField);
+		currentField.setTransientField(currentFieldIsTransient);
 		processVariable(getJavaType(ctx.type.getText()), ctx.len.getText());
 		// TODO: addField()
 		currentProtocol.getFields().add(currentField);
@@ -185,6 +191,7 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 		currentField = factory.createDataType();
 		currentField.setName(currentFieldName);
 		currentField.setIdentityField(currentFieldIsIdentityField);
+		currentField.setTransientField(currentFieldIsTransient);
 		currentField.setByteLen(0l);
 		currentField.setUnbounded(false);
 		((DataType) currentField).setTypeName(ctx.type.getText());
@@ -197,6 +204,7 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 		currentField = factory.createBitField();
 		currentField.setName(currentFieldName);
 		currentField.setIdentityField(currentFieldIsIdentityField);
+		currentField.setTransientField(currentFieldIsTransient);
 		currentField.setUnbounded(false);
 		// TODO: addField()
 		currentProtocol.getFields().add(currentField);
@@ -213,6 +221,7 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 		currentField = factory.createListField();
 		currentField.setName(currentFieldName);
 		currentField.setIdentityField(currentFieldIsIdentityField);
+		currentField.setTransientField(currentFieldIsTransient);
 		currentField.setUnbounded(true);
 		currentField.setByteLen(0l);
 		// TODO: addField()
