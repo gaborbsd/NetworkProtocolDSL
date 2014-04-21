@@ -242,7 +242,7 @@ public class «protocol.typeName» implements Cloneable, OrderedSerializable {
 
 	def private generateClone(DataType protocol) '''
 		@Override
-		protected Object clone() throws CloneNotSupportedException {
+		public Object clone() throws CloneNotSupportedException {
 			«protocol.typeName» clone = («protocol.typeName»)super.clone();
 			«FOR v : protocol.fields»
 				«IF (v.identityField && !(v instanceof CountField) && !(v instanceof IntegerField) && !(v instanceof StringField))»
