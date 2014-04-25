@@ -165,7 +165,7 @@ public class «protocol.typeName» implements Cloneable, OrderedSerializable {
 				«generateBitFieldGetter(v.name, f.name, offset, f.bitLength)»
 				«generateBitFieldSetter(v.name, f.name, offset, f.bitLength)»
 				«{
-		offset += f.bitLength
+		offset = offset + f.bitLength
 		''
 	}»
 			«ENDFOR»
