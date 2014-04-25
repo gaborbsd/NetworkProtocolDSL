@@ -106,32 +106,27 @@ public class NetworkProtocolTreeParser extends NetworkProtocolBaseListener {
 	public void exitProtocolDefinition(ProtocolDefinitionContext ctx) {
 		for (Field f : currentProtocol.getFields()) {
 			if (f instanceof ListField) {
-				for (DataType dt : model.getProtocols()) {
-					if (dt.getTypeName()
-							.equals(listReferences.get(f.getName()))) {
-						((ListField) f).setElementType(dt);
-					}
-				}
+				String refTypeName = listReferences.get(f.getName());
+				DataType dt = model.getProtocols().stream()
+						.filter(p -> p.getTypeName().equals(refTypeName))
+						.findFirst().get();
+				((ListField) f).setElementType(dt);
 			}
 			if (f instanceof CountField) {
-				for (Field other : currentProtocol.getFields()) {
-					if (other instanceof ListField) {
-						if (((ListField) other).getName().equals(
-								countReferences.get(f.getName()))) {
-							((CountField) f).setRef((ListField) other);
-						}
-					}
-				}
+				String refName = countReferences.get(f.getName());
+				ListField other = (ListField) currentProtocol.getFields()
+						.stream().filter(r -> r instanceof ListField)
+						.filter(r -> r.getName().equals(refName)).findFirst()
+						.get();
+				((CountField) f).setRef(other);
 			}
 			if (f instanceof LengthField) {
-				for (Field other : currentProtocol.getFields()) {
-					if (other instanceof BinaryField) {
-						if (((BinaryField) other).getName().equals(
-								lengthReferences.get(f.getName()))) {
-							((LengthField) f).setRef((BinaryField) other);
-						}
-					}
-				}
+				String refName = lengthReferences.get(f.getName());
+				BinaryField other = (BinaryField) currentProtocol.getFields()
+						.stream().filter(r -> r instanceof BinaryField)
+						.filter(r -> r.getName().equals(refName)).findFirst()
+						.get();
+				((LengthField) f).setRef(other);
 			}
 		}
 		for (Formatter formatter : formatterCache.values()) {
