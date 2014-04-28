@@ -272,7 +272,7 @@ public «variable.type» get«variable.name.capitalizeFirst»() {
 public void set«variable.name.capitalizeFirst»(«variable.type» «variable.name») {
 	«IF variable.byteLen > 0»
 		«IF variable.type.equals("long")»
-		if (Long.highestOneBit(«variable.name») > «Math.pow(2, variable.byteLen - 1)»)
+		if (Long.highestOneBit(«variable.name») > «Math.pow(2, variable.byteLen - 1) * 8»)
 			throw new IllegalArgumentException("Specified value " + «variable.name» + " is out of range.");
 		«ENDIF»
 		«IF variable.type.equals("String")»
