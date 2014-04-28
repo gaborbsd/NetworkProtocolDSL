@@ -41,7 +41,7 @@ binaryType:
 ;
 
 embeddedType:
-	(type = ID)
+	type = ID
 ;
 
 bitfieldType:
