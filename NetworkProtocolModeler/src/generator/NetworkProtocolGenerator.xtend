@@ -3,20 +3,10 @@ package generator
 import java.io.File
 import java.io.FileWriter
 import java.util.StringTokenizer
-import model.BinaryField
-import model.BitField
-import model.CountField
-import model.DataType
-import model.Field
-import model.Formatter
-import model.IntegerField
-import model.ListField
 import model.ProtocolModel
-import model.StringField
 import org.eclipse.jdt.core.ToolFactory
 import org.eclipse.jdt.core.formatter.CodeFormatter
 import org.eclipse.jface.text.Document
-import model.LengthField
 
 class NetworkProtocolGenerator {
 	private ProtocolModel model;
@@ -27,49 +17,9 @@ class NetworkProtocolGenerator {
 		this.basePath = basePath
 	}
 
-	def String getType(Field field) {
-		if (field instanceof BinaryField)
-			return "byte[]";
-		if (field instanceof BitField)
-			return "byte[]";
-		if (field instanceof IntegerField)
-			return "long";
-		if (field instanceof StringField)
-			return "String";
-		if (field instanceof ListField)
-			return "List";
-		if (field instanceof CountField)
-			return "long";
-		if (field instanceof LengthField)
-			return "long";
-		if (field instanceof DataType)
-			return (field as DataType).typeName;
-		throw new RuntimeException("Cannot happen.");
-	}
-
-	def String getTransient(Field field) {
-		return if(field.transientField) "transient" else "";
-	}
-
-	def String getCollectionType(Field field) {
-		if (field instanceof ListField)
-			return (field.elementType as DataType).typeName;
-		return null;
-	}
-
-	def String countOf(Field field) {
-		return if(field instanceof CountField) "\"" + (field as CountField).ref.name + "\"" else "null";
-	}
-
-	def String lengthOf(Field field) {
-		return if(field instanceof LengthField) "\"" + (field as LengthField).ref.name + "\"" else "null";
-	}
-
-	def String formatterClass(Field field) {
-		return if(field.formatter != null) "\"" + field.formatter.name + "\"" else "null";
-	}
-
 	def process() {
+		var dataTypeGenerator = new DataTypeGeneratorImpl
+
 		for (protocol : model.protocols) {
 			var pkgPath = new StringBuilder();
 
@@ -85,7 +35,7 @@ class NetworkProtocolGenerator {
 			pkgPath.append(protocol.typeName)
 			pkgPath.append(".java")
 
-			var String code = generateProtocol(protocol).toString
+			var String code = dataTypeGenerator.generate(protocol);
 			var codeFormatter = ToolFactory.createCodeFormatter(null)
 			var textEdit = codeFormatter.format(CodeFormatter.K_COMPILATION_UNIT, code, 0, code.length(), 0, "\n")
 			var doc = new Document(code)
@@ -97,6 +47,7 @@ class NetworkProtocolGenerator {
 			writer.close
 		}
 
+		var formatterGenerator = new FormatterSkeletonGenerator
 		for (formatter : model.formatters) {
 			var pkgPath = new StringBuilder();
 
@@ -113,7 +64,7 @@ class NetworkProtocolGenerator {
 			pkgPath.append(".java")
 
 			if (!(new File(pkgPath.toString).exists)) {
-				var String code = generateFormatterSkeleton(formatter).toString
+				var String code = formatterGenerator.generate(formatter)
 				var codeFormatter = ToolFactory.createCodeFormatter(null)
 				var textEdit = codeFormatter.format(CodeFormatter.K_COMPILATION_UNIT, code, 0, code.length(), 0, "\n")
 				var doc = new Document(code)
@@ -125,265 +76,5 @@ class NetworkProtocolGenerator {
 				writer.close
 			}
 		}
-	}
-
-	def private generateProtocol(DataType protocol) '''
-«IF protocol.package != null && !protocol.package.equals("")»
-package «protocol.package»;
-
-«ENDIF»
-import java.util.*;
-
-import runtime.*;
-
-public class «protocol.typeName» implements Cloneable, OrderedSerializable {
-	«FOR v : protocol.fields»
-		«IF !(v instanceof CountField) && !(v instanceof LengthField)»
-			«generateVariableDef(v)»
-		«ENDIF»
-	«ENDFOR»
-	
-	«generateInitialization(protocol)»
-	
-	«FOR v : protocol.fields»
-	
-		«IF v instanceof ListField»
-			«generateListAccessors(v.name, v.collectionType)»
-		«ELSEIF v instanceof CountField»
-			«generateCountGetter(v.name, (v as CountField).ref.name)»
-		«ELSEIF v instanceof LengthField»
-			«generateLengthGetter(v.name, (v as LengthField).ref.name)»
-		«ELSE»
-			«generateVariableGetter(v)»
-			«generateVariableSetter(v)»
-			
-		«ENDIF»
-		
-		«IF v instanceof BitField»
-			«var long offset = 0»
-			«FOR f : (v as BitField).components»
-				«generateBitFieldGetter(v.name, f.name, offset, f.bitLength)»
-				«generateBitFieldSetter(v.name, f.name, offset, f.bitLength)»
-				«{
-		offset = offset + f.bitLength
-		''
-	}»
-			«ENDFOR»
-		«ENDIF»
-	«ENDFOR»
-	
-	«IF protocol.hasIdentityField»
-		«generateEquals(protocol)»
-		«generateHashCode(protocol)»
-	«ENDIF»
-	
-		«generateClone(protocol)»
-
-	public VariableProps[] getSerializationOrder() {
-		return new VariableProps[]
-			«FOR v : protocol.fields BEFORE '{' SEPARATOR ', ' AFTER '};'»
-					«IF !v.transientField»
-						new VariableProps("«v.name»", "«v.type»", "«v.collectionType»", «v.byteLen», «v.unbounded», «v.formatterClass», «v.
-		countOf», «v.lengthOf»)
-				«ENDIF»
-			«ENDFOR»
-	}
-}
-	'''
-
-	def private generateInitialization(DataType protocol) '''
-		{
-			«FOR v : protocol.fields»
-				«IF v instanceof ListField»
-					«v.name» = new ArrayList<>();
-				«ELSEIF v instanceof BitField»
-					«v.name» = new byte[«v.byteLen»];
-				«ELSEIF v instanceof BinaryField»
-					«v.name» = new byte[«v.byteLen»];
-				«ENDIF»
-			«ENDFOR»
-		}
-	'''
-
-	def private generateEquals(DataType protocol) '''
-		@Override
-		public boolean equals(Object obj) {
-			if (obj == null)
-				return false;
-			if (!(obj instanceof «protocol.typeName»))
-				return false;
-			«protocol.typeName» other = («protocol.typeName»)obj;
-			
-			«FOR v : protocol.fields BEFORE 'return ' SEPARATOR ' & ' AFTER ';'»
-				«IF (v.identityField && (v instanceof IntegerField))»
-					(other.«v.name» == this.«v.name»)
-				«ELSEIF (v.identityField && !(v instanceof CountField))»
-					(other.«v.name».equals(this.«v.name»))
-				«ENDIF»
-			«ENDFOR»
-		}
-	'''
-
-	def private generateHashCode(DataType protocol) '''
-		@Override
-		public int hashCode() {
-			int ret = 0;
-			«FOR v : protocol.fields»
-				«IF (v.identityField && (v instanceof IntegerField))»
-					ret += «v.name»;
-				«ELSEIF (v.identityField && !(v instanceof CountField))»
-					ret += «v.name».hashCode();
-				«ENDIF»
-			«ENDFOR»
-			ret *= 31;
-			return ret;
-		}
-	'''
-
-	def private generateClone(DataType protocol) '''
-		@Override
-		public Object clone() throws CloneNotSupportedException {
-			«protocol.typeName» clone = («protocol.typeName»)super.clone();
-			«FOR v : protocol.fields»
-				«IF (v.identityField && !(v instanceof CountField) && !(v instanceof IntegerField) && !(v instanceof StringField))»
-					clone.«v.name» = («v.type»)«v.name».clone();
-				«ENDIF»
-			«ENDFOR»
-			return clone;
-		}
-	'''
-
-	def private generateVariableDef(Field variable) '''
-		«IF variable instanceof ListField»
-			private «variable.transient» «variable.type»<«variable.collectionType»> «variable.name»;
-		«ELSE»
-			private «variable.transient» «variable.type» «variable.name»;
-		«ENDIF»
-	'''
-
-	def private generateVariableGetter(Field variable) '''
-public «variable.type» get«variable.name.capitalizeFirst»() {
-	return this.«variable.name»;
-}
-
-	'''
-
-	def private generateVariableSetter(Field variable) '''
-public void set«variable.name.capitalizeFirst»(«variable.type» «variable.name») {
-	«IF variable.byteLen > 0»
-		«IF variable.type.equals("long")»
-		if (Long.highestOneBit(«variable.name») > «Math.pow(2, variable.byteLen - 1) * 8»)
-			throw new IllegalArgumentException("Specified value " + «variable.name» + " is out of range.");
-		«ENDIF»
-		«IF variable.type.equals("String")»
-		if («variable.name».getBytes().length > «variable.byteLen»)
-			throw new IllegalArgumentException("Specified value " + «variable.name» + " does not fit in string field.");
-		«ENDIF»
-		«IF variable.type.equals("Byte[]")»
-		if («variable.name».length > «variable.byteLen»)
-			throw new IllegalArgumentException("Specified value " + «variable.name» + " does not fit in string field.");
-		«ENDIF»
-	«ENDIF»
-	this.«variable.name» = «variable.name»;
-}
-
-	'''
-
-	def private generateBitFieldGetter(String bitField, String component, long offset, long len) '''
-public long get«component.capitalizeFirst»() {
-	return «bitField»[«offset / 8»] | («len.bitMaskForLen» << «8 - len - (offset % 8)»);
-}
-		'''
-
-	def private generateBitFieldSetter(String bitField, String component, Long offset, Long len) '''
-public void set«component.capitalizeFirst»(long value) {
-	if (Long.highestOneBit(value) > «Math.pow(2, len - 1)»)
-		throw new IllegalArgumentException("Specified value " + value + " is out of range.");
-			
-	«bitField»[«offset / 8»] = (byte)(«bitField»[«offset / 8»] & ~(«len.bitMaskForLen» << «8 - len - (offset % 8)»));
-	«bitField»[«offset / 8»] = (byte)(«bitField»[«offset / 8»] | (value << «8 - len - (offset % 8)»));
-}
-		'''
-
-	def private generateListAccessors(String varName, String listType) '''
-public void add«varName.singularize.capitalizeFirst»(«listType» e) {
-	«varName».add(e);
-}
-
-public «listType» get«varName.singularize.capitalizeFirst»(int no) {
-	return «varName».get(no);
-}
-
-public void clear«varName.capitalizeFirst»() {
-	«varName».clear();
-}
-
-public void remove«varName.singularize.capitalizeFirst»(int no) {
-	«varName».remove(no);
-}
-
-public List<«listType»> get«varName.capitalizeFirst»() {
-	return Collections.unmodifiableList(«varName»);
-}
-	'''
-
-	def private generateCountGetter(String countName, String ref) '''
-public long get«countName.capitalizeFirst»() {
-	return «ref».size();
-}
-	'''
-
-	def private generateLengthGetter(String countName, String ref) '''
-public long get«countName.capitalizeFirst»() {
-	return «ref».length;
-}
-	'''
-
-	def private generateFormatterSkeleton(Formatter formatter) '''
-package «formatter.package»;
-
-import runtime.*;
-
-public class «formatter.name» implements Formatter<String> {
-	@Override
-	public byte[] toBytes(String t) {
-		// TODO: implement formatter logic here
-		return null;
-	}
-	
-	@Override
-	public int parseFromBytes(byte[] bytes, int off, String value) {
-		// TODO: implement formatter logic here
-		// bytes: bytebuffer to parse from
-		// off: offset where parsing must start
-		// value: parsed data as String
-		// return value: bytes consumed from the buffer
-		
-		return 0;
-	}
-}
-	'''
-
-	def private String bitMaskForLen(long len) {
-		var sb = new StringBuffer("0b");
-		var count = len;
-		while (count > 0) {
-			sb.append('1')
-			count = count - 1
-		}
-		return sb.toString
-	}
-
-	def private String singularize(String str) {
-		if (str.substring(str.length - 3, str.length).equals("ies"))
-			return str.substring(0, str.length - 3) + "y";
-		if (str.substring(str.length - 1, str.length).equals("s"))
-			return str.substring(0, str.length - 1)
-		return str;
-	}
-
-	def private String capitalizeFirst(String str) {
-		var first = Character.toUpperCase(str.charAt(0));
-		return first + str.substring(1);
 	}
 }
