@@ -2,6 +2,8 @@
  */
 package model;
 
+import java.lang.reflect.InvocationTargetException;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
@@ -414,6 +416,66 @@ public abstract class Field extends MinimalEObjectImpl.Container implements EObj
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @model kind="operation" required="true"
+	 * @generated NOT
+	 */
+	public String getDefinitionTemplate() {
+		return "SimpleFieldDefinitionGenerator";
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated NOT
+	 */
+	public String getInitTemplate() {
+		return "DummyFieldInitGenerator";
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated NOT
+	 */
+	public String getAccessorTemplate() {
+		return "SimpleFieldAccessorGenerator";
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" required="true"
+	 * @generated NOT
+	 */
+	public String getEqualsTemplate() {
+		return "RefEqualityFieldGenerator";
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" required="true"
+	 * @generated NOT
+	 */
+	public String getHashcodeTemplate() {
+		return "RefHashcodeFieldGenerator";
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation" required="true"
+	 * @generated NOT
+	 */
+	public String getCloneTemplate() {
+		return "RefCloneFieldGenerator";
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -528,6 +590,30 @@ public abstract class Field extends MinimalEObjectImpl.Container implements EObj
 				return formatter != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case ProtocolPackage.FIELD___GET_DEFINITION_TEMPLATE:
+				return getDefinitionTemplate();
+			case ProtocolPackage.FIELD___GET_INIT_TEMPLATE:
+				return getInitTemplate();
+			case ProtocolPackage.FIELD___GET_ACCESSOR_TEMPLATE:
+				return getAccessorTemplate();
+			case ProtocolPackage.FIELD___GET_EQUALS_TEMPLATE:
+				return getEqualsTemplate();
+			case ProtocolPackage.FIELD___GET_HASHCODE_TEMPLATE:
+				return getHashcodeTemplate();
+			case ProtocolPackage.FIELD___GET_CLONE_TEMPLATE:
+				return getCloneTemplate();
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

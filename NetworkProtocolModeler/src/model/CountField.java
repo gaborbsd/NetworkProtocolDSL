@@ -40,6 +40,16 @@ public class CountField extends Field {
 	protected CountField() {
 		super();
 	}
+	
+	@Override
+	public String getAccessorTemplate() {
+		return "CountFieldAccessorGenerator";
+	}
+	
+	@Override
+	public String getCloneTemplate() {
+		return "DummyCloneFieldGenerator";
+	}
 
 	/**
 	 * <!-- begin-user-doc -->

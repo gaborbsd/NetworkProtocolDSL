@@ -41,6 +41,11 @@ public class ListField extends Field {
 		super();
 	}
 
+	@Override
+	public String getAccessorTemplate() {
+		return "ListFieldAccessorGenerator";
+	}
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

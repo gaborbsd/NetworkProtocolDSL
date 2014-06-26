@@ -40,6 +40,11 @@ public class LengthField extends Field {
 	protected LengthField() {
 		super();
 	}
+	
+	@Override
+	public String getAccessorTemplate() {
+		return "LengthFieldAccessorGenerator";
+	}
 
 	/**
 	 * <!-- begin-user-doc -->

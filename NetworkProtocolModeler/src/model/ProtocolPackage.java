@@ -4,6 +4,7 @@ package model;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -142,13 +143,67 @@ public class ProtocolPackage extends EPackageImpl {
 	public static final int FIELD_FEATURE_COUNT = 7;
 
 	/**
+	 * The operation id for the '<em>Get Definition Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int FIELD___GET_DEFINITION_TEMPLATE = 0;
+
+	/**
+	 * The operation id for the '<em>Get Init Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int FIELD___GET_INIT_TEMPLATE = 1;
+
+	/**
+	 * The operation id for the '<em>Get Accessor Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int FIELD___GET_ACCESSOR_TEMPLATE = 2;
+
+	/**
+	 * The operation id for the '<em>Get Equals Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int FIELD___GET_EQUALS_TEMPLATE = 3;
+
+	/**
+	 * The operation id for the '<em>Get Hashcode Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int FIELD___GET_HASHCODE_TEMPLATE = 4;
+
+	/**
+	 * The operation id for the '<em>Get Clone Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int FIELD___GET_CLONE_TEMPLATE = 5;
+
+	/**
 	 * The number of operations of the '<em>Field</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	public static final int FIELD_OPERATION_COUNT = 0;
+	public static final int FIELD_OPERATION_COUNT = 6;
 
 	/**
 	 * The meta object id for the '{@link model.DataType <em>Data Type</em>}' class.
@@ -260,6 +315,60 @@ public class ProtocolPackage extends EPackageImpl {
 	public static final int DATA_TYPE_FEATURE_COUNT = FIELD_FEATURE_COUNT + 3;
 
 	/**
+	 * The operation id for the '<em>Get Definition Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int DATA_TYPE___GET_DEFINITION_TEMPLATE = FIELD___GET_DEFINITION_TEMPLATE;
+
+	/**
+	 * The operation id for the '<em>Get Init Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int DATA_TYPE___GET_INIT_TEMPLATE = FIELD___GET_INIT_TEMPLATE;
+
+	/**
+	 * The operation id for the '<em>Get Accessor Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int DATA_TYPE___GET_ACCESSOR_TEMPLATE = FIELD___GET_ACCESSOR_TEMPLATE;
+
+	/**
+	 * The operation id for the '<em>Get Equals Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int DATA_TYPE___GET_EQUALS_TEMPLATE = FIELD___GET_EQUALS_TEMPLATE;
+
+	/**
+	 * The operation id for the '<em>Get Hashcode Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int DATA_TYPE___GET_HASHCODE_TEMPLATE = FIELD___GET_HASHCODE_TEMPLATE;
+
+	/**
+	 * The operation id for the '<em>Get Clone Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int DATA_TYPE___GET_CLONE_TEMPLATE = FIELD___GET_CLONE_TEMPLATE;
+
+	/**
 	 * The number of operations of the '<em>Data Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -349,6 +458,60 @@ public class ProtocolPackage extends EPackageImpl {
 	 * @ordered
 	 */
 	public static final int INTEGER_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Get Definition Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int INTEGER_FIELD___GET_DEFINITION_TEMPLATE = FIELD___GET_DEFINITION_TEMPLATE;
+
+	/**
+	 * The operation id for the '<em>Get Init Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int INTEGER_FIELD___GET_INIT_TEMPLATE = FIELD___GET_INIT_TEMPLATE;
+
+	/**
+	 * The operation id for the '<em>Get Accessor Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int INTEGER_FIELD___GET_ACCESSOR_TEMPLATE = FIELD___GET_ACCESSOR_TEMPLATE;
+
+	/**
+	 * The operation id for the '<em>Get Equals Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int INTEGER_FIELD___GET_EQUALS_TEMPLATE = FIELD___GET_EQUALS_TEMPLATE;
+
+	/**
+	 * The operation id for the '<em>Get Hashcode Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int INTEGER_FIELD___GET_HASHCODE_TEMPLATE = FIELD___GET_HASHCODE_TEMPLATE;
+
+	/**
+	 * The operation id for the '<em>Get Clone Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int INTEGER_FIELD___GET_CLONE_TEMPLATE = FIELD___GET_CLONE_TEMPLATE;
 
 	/**
 	 * The number of operations of the '<em>Integer Field</em>' class.
@@ -442,6 +605,60 @@ public class ProtocolPackage extends EPackageImpl {
 	public static final int BINARY_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 0;
 
 	/**
+	 * The operation id for the '<em>Get Definition Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BINARY_FIELD___GET_DEFINITION_TEMPLATE = FIELD___GET_DEFINITION_TEMPLATE;
+
+	/**
+	 * The operation id for the '<em>Get Init Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BINARY_FIELD___GET_INIT_TEMPLATE = FIELD___GET_INIT_TEMPLATE;
+
+	/**
+	 * The operation id for the '<em>Get Accessor Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BINARY_FIELD___GET_ACCESSOR_TEMPLATE = FIELD___GET_ACCESSOR_TEMPLATE;
+
+	/**
+	 * The operation id for the '<em>Get Equals Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BINARY_FIELD___GET_EQUALS_TEMPLATE = FIELD___GET_EQUALS_TEMPLATE;
+
+	/**
+	 * The operation id for the '<em>Get Hashcode Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BINARY_FIELD___GET_HASHCODE_TEMPLATE = FIELD___GET_HASHCODE_TEMPLATE;
+
+	/**
+	 * The operation id for the '<em>Get Clone Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BINARY_FIELD___GET_CLONE_TEMPLATE = FIELD___GET_CLONE_TEMPLATE;
+
+	/**
 	 * The number of operations of the '<em>Binary Field</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -531,6 +748,60 @@ public class ProtocolPackage extends EPackageImpl {
 	 * @ordered
 	 */
 	public static final int STRING_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Get Definition Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int STRING_FIELD___GET_DEFINITION_TEMPLATE = FIELD___GET_DEFINITION_TEMPLATE;
+
+	/**
+	 * The operation id for the '<em>Get Init Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int STRING_FIELD___GET_INIT_TEMPLATE = FIELD___GET_INIT_TEMPLATE;
+
+	/**
+	 * The operation id for the '<em>Get Accessor Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int STRING_FIELD___GET_ACCESSOR_TEMPLATE = FIELD___GET_ACCESSOR_TEMPLATE;
+
+	/**
+	 * The operation id for the '<em>Get Equals Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int STRING_FIELD___GET_EQUALS_TEMPLATE = FIELD___GET_EQUALS_TEMPLATE;
+
+	/**
+	 * The operation id for the '<em>Get Hashcode Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int STRING_FIELD___GET_HASHCODE_TEMPLATE = FIELD___GET_HASHCODE_TEMPLATE;
+
+	/**
+	 * The operation id for the '<em>Get Clone Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int STRING_FIELD___GET_CLONE_TEMPLATE = FIELD___GET_CLONE_TEMPLATE;
 
 	/**
 	 * The number of operations of the '<em>String Field</em>' class.
@@ -679,6 +950,60 @@ public class ProtocolPackage extends EPackageImpl {
 	public static final int BIT_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 1;
 
 	/**
+	 * The operation id for the '<em>Get Definition Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BIT_FIELD___GET_DEFINITION_TEMPLATE = FIELD___GET_DEFINITION_TEMPLATE;
+
+	/**
+	 * The operation id for the '<em>Get Init Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BIT_FIELD___GET_INIT_TEMPLATE = FIELD___GET_INIT_TEMPLATE;
+
+	/**
+	 * The operation id for the '<em>Get Accessor Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BIT_FIELD___GET_ACCESSOR_TEMPLATE = FIELD___GET_ACCESSOR_TEMPLATE;
+
+	/**
+	 * The operation id for the '<em>Get Equals Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BIT_FIELD___GET_EQUALS_TEMPLATE = FIELD___GET_EQUALS_TEMPLATE;
+
+	/**
+	 * The operation id for the '<em>Get Hashcode Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BIT_FIELD___GET_HASHCODE_TEMPLATE = FIELD___GET_HASHCODE_TEMPLATE;
+
+	/**
+	 * The operation id for the '<em>Get Clone Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BIT_FIELD___GET_CLONE_TEMPLATE = FIELD___GET_CLONE_TEMPLATE;
+
+	/**
 	 * The number of operations of the '<em>Bit Field</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -777,6 +1102,60 @@ public class ProtocolPackage extends EPackageImpl {
 	 * @ordered
 	 */
 	public static final int LIST_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Get Definition Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LIST_FIELD___GET_DEFINITION_TEMPLATE = FIELD___GET_DEFINITION_TEMPLATE;
+
+	/**
+	 * The operation id for the '<em>Get Init Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LIST_FIELD___GET_INIT_TEMPLATE = FIELD___GET_INIT_TEMPLATE;
+
+	/**
+	 * The operation id for the '<em>Get Accessor Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LIST_FIELD___GET_ACCESSOR_TEMPLATE = FIELD___GET_ACCESSOR_TEMPLATE;
+
+	/**
+	 * The operation id for the '<em>Get Equals Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LIST_FIELD___GET_EQUALS_TEMPLATE = FIELD___GET_EQUALS_TEMPLATE;
+
+	/**
+	 * The operation id for the '<em>Get Hashcode Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LIST_FIELD___GET_HASHCODE_TEMPLATE = FIELD___GET_HASHCODE_TEMPLATE;
+
+	/**
+	 * The operation id for the '<em>Get Clone Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LIST_FIELD___GET_CLONE_TEMPLATE = FIELD___GET_CLONE_TEMPLATE;
 
 	/**
 	 * The number of operations of the '<em>List Field</em>' class.
@@ -879,6 +1258,60 @@ public class ProtocolPackage extends EPackageImpl {
 	public static final int COUNT_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 1;
 
 	/**
+	 * The operation id for the '<em>Get Definition Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int COUNT_FIELD___GET_DEFINITION_TEMPLATE = FIELD___GET_DEFINITION_TEMPLATE;
+
+	/**
+	 * The operation id for the '<em>Get Init Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int COUNT_FIELD___GET_INIT_TEMPLATE = FIELD___GET_INIT_TEMPLATE;
+
+	/**
+	 * The operation id for the '<em>Get Accessor Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int COUNT_FIELD___GET_ACCESSOR_TEMPLATE = FIELD___GET_ACCESSOR_TEMPLATE;
+
+	/**
+	 * The operation id for the '<em>Get Equals Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int COUNT_FIELD___GET_EQUALS_TEMPLATE = FIELD___GET_EQUALS_TEMPLATE;
+
+	/**
+	 * The operation id for the '<em>Get Hashcode Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int COUNT_FIELD___GET_HASHCODE_TEMPLATE = FIELD___GET_HASHCODE_TEMPLATE;
+
+	/**
+	 * The operation id for the '<em>Get Clone Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int COUNT_FIELD___GET_CLONE_TEMPLATE = FIELD___GET_CLONE_TEMPLATE;
+
+	/**
 	 * The number of operations of the '<em>Count Field</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -977,6 +1410,60 @@ public class ProtocolPackage extends EPackageImpl {
 	 * @ordered
 	 */
 	public static final int LENGTH_FIELD_FEATURE_COUNT = FIELD_FEATURE_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Get Definition Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LENGTH_FIELD___GET_DEFINITION_TEMPLATE = FIELD___GET_DEFINITION_TEMPLATE;
+
+	/**
+	 * The operation id for the '<em>Get Init Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LENGTH_FIELD___GET_INIT_TEMPLATE = FIELD___GET_INIT_TEMPLATE;
+
+	/**
+	 * The operation id for the '<em>Get Accessor Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LENGTH_FIELD___GET_ACCESSOR_TEMPLATE = FIELD___GET_ACCESSOR_TEMPLATE;
+
+	/**
+	 * The operation id for the '<em>Get Equals Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LENGTH_FIELD___GET_EQUALS_TEMPLATE = FIELD___GET_EQUALS_TEMPLATE;
+
+	/**
+	 * The operation id for the '<em>Get Hashcode Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LENGTH_FIELD___GET_HASHCODE_TEMPLATE = FIELD___GET_HASHCODE_TEMPLATE;
+
+	/**
+	 * The operation id for the '<em>Get Clone Template</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LENGTH_FIELD___GET_CLONE_TEMPLATE = FIELD___GET_CLONE_TEMPLATE;
 
 	/**
 	 * The number of operations of the '<em>Length Field</em>' class.
@@ -1385,6 +1872,84 @@ public class ProtocolPackage extends EPackageImpl {
 
 
 	/**
+	 * Returns the meta object for the '{@link model.Field#getDefinitionTemplate() <em>Get Definition Template</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Definition Template</em>' operation.
+	 * @see model.Field#getDefinitionTemplate()
+	 * @generated
+	 */
+	public EOperation getField__GetDefinitionTemplate() {
+		return fieldEClass.getEOperations().get(0);
+	}
+
+
+	/**
+	 * Returns the meta object for the '{@link model.Field#getInitTemplate() <em>Get Init Template</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Init Template</em>' operation.
+	 * @see model.Field#getInitTemplate()
+	 * @generated
+	 */
+	public EOperation getField__GetInitTemplate() {
+		return fieldEClass.getEOperations().get(1);
+	}
+
+
+	/**
+	 * Returns the meta object for the '{@link model.Field#getAccessorTemplate() <em>Get Accessor Template</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Accessor Template</em>' operation.
+	 * @see model.Field#getAccessorTemplate()
+	 * @generated
+	 */
+	public EOperation getField__GetAccessorTemplate() {
+		return fieldEClass.getEOperations().get(2);
+	}
+
+
+	/**
+	 * Returns the meta object for the '{@link model.Field#getEqualsTemplate() <em>Get Equals Template</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Equals Template</em>' operation.
+	 * @see model.Field#getEqualsTemplate()
+	 * @generated
+	 */
+	public EOperation getField__GetEqualsTemplate() {
+		return fieldEClass.getEOperations().get(3);
+	}
+
+
+	/**
+	 * Returns the meta object for the '{@link model.Field#getHashcodeTemplate() <em>Get Hashcode Template</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Hashcode Template</em>' operation.
+	 * @see model.Field#getHashcodeTemplate()
+	 * @generated
+	 */
+	public EOperation getField__GetHashcodeTemplate() {
+		return fieldEClass.getEOperations().get(4);
+	}
+
+
+	/**
+	 * Returns the meta object for the '{@link model.Field#getCloneTemplate() <em>Get Clone Template</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Clone Template</em>' operation.
+	 * @see model.Field#getCloneTemplate()
+	 * @generated
+	 */
+	public EOperation getField__GetCloneTemplate() {
+		return fieldEClass.getEOperations().get(5);
+	}
+
+
+	/**
 	 * Returns the meta object for class '{@link model.IntegerField <em>Integer Field</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1692,6 +2257,12 @@ public class ProtocolPackage extends EPackageImpl {
 		createEAttribute(fieldEClass, FIELD__IDENTITY_FIELD);
 		createEAttribute(fieldEClass, FIELD__TRANSIENT_FIELD);
 		createEReference(fieldEClass, FIELD__FORMATTER);
+		createEOperation(fieldEClass, FIELD___GET_DEFINITION_TEMPLATE);
+		createEOperation(fieldEClass, FIELD___GET_INIT_TEMPLATE);
+		createEOperation(fieldEClass, FIELD___GET_ACCESSOR_TEMPLATE);
+		createEOperation(fieldEClass, FIELD___GET_EQUALS_TEMPLATE);
+		createEOperation(fieldEClass, FIELD___GET_HASHCODE_TEMPLATE);
+		createEOperation(fieldEClass, FIELD___GET_CLONE_TEMPLATE);
 
 		integerFieldEClass = createEClass(INTEGER_FIELD);
 
@@ -1775,6 +2346,18 @@ public class ProtocolPackage extends EPackageImpl {
 		initEAttribute(getField_IdentityField(), ecorePackage.getEBooleanObject(), "identityField", "false", 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getField_TransientField(), ecorePackage.getEBooleanObject(), "transientField", "false", 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getField_Formatter(), this.getFormatter(), null, "formatter", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEOperation(getField__GetDefinitionTemplate(), ecorePackage.getEString(), "getDefinitionTemplate", 1, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getField__GetInitTemplate(), ecorePackage.getEString(), "getInitTemplate", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getField__GetAccessorTemplate(), ecorePackage.getEString(), "getAccessorTemplate", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getField__GetEqualsTemplate(), ecorePackage.getEString(), "getEqualsTemplate", 1, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getField__GetHashcodeTemplate(), ecorePackage.getEString(), "getHashcodeTemplate", 1, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getField__GetCloneTemplate(), ecorePackage.getEString(), "getCloneTemplate", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(integerFieldEClass, IntegerField.class, "IntegerField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1964,6 +2547,54 @@ public class ProtocolPackage extends EPackageImpl {
 		 * @generated
 		 */
 		public static final EReference FIELD__FORMATTER = eINSTANCE.getField_Formatter();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Definition Template</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		public static final EOperation FIELD___GET_DEFINITION_TEMPLATE = eINSTANCE.getField__GetDefinitionTemplate();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Init Template</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		public static final EOperation FIELD___GET_INIT_TEMPLATE = eINSTANCE.getField__GetInitTemplate();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Accessor Template</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		public static final EOperation FIELD___GET_ACCESSOR_TEMPLATE = eINSTANCE.getField__GetAccessorTemplate();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Equals Template</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		public static final EOperation FIELD___GET_EQUALS_TEMPLATE = eINSTANCE.getField__GetEqualsTemplate();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Hashcode Template</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		public static final EOperation FIELD___GET_HASHCODE_TEMPLATE = eINSTANCE.getField__GetHashcodeTemplate();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Clone Template</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		public static final EOperation FIELD___GET_CLONE_TEMPLATE = eINSTANCE.getField__GetCloneTemplate();
 
 		/**
 		 * The meta object literal for the '{@link model.IntegerField <em>Integer Field</em>}' class.
