@@ -2,6 +2,9 @@
  */
 package model;
 
+import generator.BitFieldAccessorGenerator;
+import generator.FieldGenerator;
+
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -48,8 +51,8 @@ public class BitField extends Field {
 	}
 
 	@Override
-	public String getAccessorTemplate() {
-		return "BitFieldAccessorGenerator";
+	public FieldGenerator getAccessorTemplate() {
+		return BitFieldAccessorGenerator.getInstance();
 	}
 
 	/**

@@ -2,8 +2,10 @@
  */
 package model;
 
+import generator.FieldGenerator;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -1567,6 +1569,16 @@ public class ProtocolPackage extends EPackageImpl {
 	public static final int FORMATTER_OPERATION_COUNT = 0;
 
 	/**
+	 * The meta object id for the '<em>Field Generator</em>' data type.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see generator.FieldGenerator
+	 * @see model.ProtocolPackage#getFieldGenerator()
+	 * @generated
+	 */
+	public static final int FIELD_GENERATOR = 12;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1649,6 +1661,13 @@ public class ProtocolPackage extends EPackageImpl {
 	 * @generated
 	 */
 	private EClass formatterEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EDataType fieldGeneratorEDataType = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -2215,6 +2234,20 @@ public class ProtocolPackage extends EPackageImpl {
 
 
 	/**
+	 * Returns the meta object for data type '{@link generator.FieldGenerator <em>Field Generator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for data type '<em>Field Generator</em>'.
+	 * @see generator.FieldGenerator
+	 * @model instanceClass="generator.FieldGenerator" serializeable="false"
+	 * @generated
+	 */
+	public EDataType getFieldGenerator() {
+		return fieldGeneratorEDataType;
+	}
+
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2293,6 +2326,9 @@ public class ProtocolPackage extends EPackageImpl {
 		formatterEClass = createEClass(FORMATTER);
 		createEAttribute(formatterEClass, FORMATTER__NAME);
 		createEAttribute(formatterEClass, FORMATTER__PACKAGE);
+
+		// Create data types
+		fieldGeneratorEDataType = createEDataType(FIELD_GENERATOR);
 	}
 
 	/**
@@ -2347,17 +2383,17 @@ public class ProtocolPackage extends EPackageImpl {
 		initEAttribute(getField_TransientField(), ecorePackage.getEBooleanObject(), "transientField", "false", 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getField_Formatter(), this.getFormatter(), null, "formatter", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEOperation(getField__GetDefinitionTemplate(), ecorePackage.getEString(), "getDefinitionTemplate", 1, 1, IS_UNIQUE, IS_ORDERED);
+		initEOperation(getField__GetDefinitionTemplate(), this.getFieldGenerator(), "getDefinitionTemplate", 1, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEOperation(getField__GetInitTemplate(), ecorePackage.getEString(), "getInitTemplate", 0, 1, IS_UNIQUE, IS_ORDERED);
+		initEOperation(getField__GetInitTemplate(), this.getFieldGenerator(), "getInitTemplate", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEOperation(getField__GetAccessorTemplate(), ecorePackage.getEString(), "getAccessorTemplate", 0, 1, IS_UNIQUE, IS_ORDERED);
+		initEOperation(getField__GetAccessorTemplate(), this.getFieldGenerator(), "getAccessorTemplate", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEOperation(getField__GetEqualsTemplate(), ecorePackage.getEString(), "getEqualsTemplate", 1, 1, IS_UNIQUE, IS_ORDERED);
+		initEOperation(getField__GetEqualsTemplate(), this.getFieldGenerator(), "getEqualsTemplate", 1, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEOperation(getField__GetHashcodeTemplate(), ecorePackage.getEString(), "getHashcodeTemplate", 1, 1, IS_UNIQUE, IS_ORDERED);
+		initEOperation(getField__GetHashcodeTemplate(), this.getFieldGenerator(), "getHashcodeTemplate", 1, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEOperation(getField__GetCloneTemplate(), ecorePackage.getEString(), "getCloneTemplate", 1, 1, IS_UNIQUE, IS_ORDERED);
+		initEOperation(getField__GetCloneTemplate(), this.getFieldGenerator(), "getCloneTemplate", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(integerFieldEClass, IntegerField.class, "IntegerField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -2388,6 +2424,9 @@ public class ProtocolPackage extends EPackageImpl {
 		initEClass(formatterEClass, Formatter.class, "Formatter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getFormatter_Name(), ecorePackage.getEString(), "name", "", 0, 1, Formatter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getFormatter_Package(), ecorePackage.getEString(), "package", "", 0, 1, Formatter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		// Initialize data types
+		initEDataType(fieldGeneratorEDataType, FieldGenerator.class, "FieldGenerator", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -2775,6 +2814,16 @@ public class ProtocolPackage extends EPackageImpl {
 		 * @generated
 		 */
 		public static final EAttribute FORMATTER__PACKAGE = eINSTANCE.getFormatter_Package();
+
+		/**
+		 * The meta object literal for the '<em>Field Generator</em>' data type.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see generator.FieldGenerator
+		 * @see model.ProtocolPackage#getFieldGenerator()
+		 * @generated
+		 */
+		public static final EDataType FIELD_GENERATOR = eINSTANCE.getFieldGenerator();
 
 	}
 

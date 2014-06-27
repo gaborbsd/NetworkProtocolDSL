@@ -1,18 +1,25 @@
 package generator
 
-import generator.DataTypeGenerator
-import model.DataType
-import model.Field
 import model.BinaryField
 import model.BitField
-import model.IntegerField
-import model.StringField
-import model.ListField
 import model.CountField
+import model.DataType
+import model.Field
+import model.IntegerField
 import model.LengthField
-import java.lang.reflect.Constructor
+import model.ListField
+import model.StringField
 
 class DataTypeGeneratorImpl implements DataTypeGenerator {
+	private static var DataTypeGeneratorImpl INSTANCE = null;
+	
+	def DataTypeGeneratorImpl() {}
+	
+	def static public DataTypeGeneratorImpl getInstance() {
+		if (INSTANCE == null)
+			INSTANCE = new DataTypeGeneratorImpl
+		return INSTANCE
+	}
 
 	override generate(DataType dt) '''
 «IF dt.package != null && !dt.package.equals("")»
@@ -25,15 +32,15 @@ import runtime.*;
 
 public class «dt.typeName» implements Cloneable, OrderedSerializable {
 	«FOR v : dt.fields»
-		«callFieldTemplate(v.definitionTemplate, v)»
+		«v.definitionTemplate.generate(v)»
 	«ENDFOR»
 	
 	«FOR v : dt.fields BEFORE '{' AFTER '}'»
-		«callFieldTemplate(v.initTemplate, v)»
+		«v.initTemplate.generate(v)»
 	«ENDFOR»
 	
 	«FOR v : dt.fields»
-		«callFieldTemplate(v.accessorTemplate, v)»
+		«v.accessorTemplate.generate(v)»
 	«ENDFOR»
 	
 	«IF dt.hasIdentityField»
@@ -46,7 +53,7 @@ public class «dt.typeName» implements Cloneable, OrderedSerializable {
 			«dt.typeName» other = («dt.typeName»)obj;
 			
 			«FOR v : dt.fields BEFORE 'return ' SEPARATOR ' && ' AFTER ';'»
-				«callFieldTemplate(v.equalsTemplate, v)»
+				«v.equalsTemplate.generate(v)»
 			«ENDFOR»
 		}
 		
@@ -54,7 +61,7 @@ public class «dt.typeName» implements Cloneable, OrderedSerializable {
 		public int hashCode() {
 			int ret = 0;
 			«FOR v : dt.fields»
-				«callFieldTemplate(v.hashcodeTemplate, v)»
+				«v.hashcodeTemplate.generate(v)»
 			«ENDFOR»
 			ret *= 31;
 			return ret;
@@ -65,7 +72,7 @@ public class «dt.typeName» implements Cloneable, OrderedSerializable {
 	public Object clone() throws CloneNotSupportedException {
 		«dt.typeName» clone = («dt.typeName»)super.clone();
 		«FOR v : dt.fields»
-			«callFieldTemplate(v.cloneTemplate, v)»
+			«v.cloneTemplate.generate(v)»
 		«ENDFOR»
 		return clone;
 	}
@@ -118,13 +125,5 @@ public class «dt.typeName» implements Cloneable, OrderedSerializable {
 		if (field instanceof ListField)
 			return (field.elementType as DataType).typeName;
 		return null;
-	}
-
-	def String callFieldTemplate(String templateName, Field argument) {
-		var String templateFullName = "generator." + templateName;
-		var Class<?> templateClass = Class.forName(templateFullName);
-		var Constructor<?> templateConstructor = templateClass.getConstructor();
-		var FieldGenerator template = templateConstructor.newInstance() as FieldGenerator;
-		return template.generate(argument);
 	}
 }

@@ -5,6 +5,15 @@ import model.Field
 import model.LengthField
 
 class LengthFieldAccessorGenerator implements FieldGenerator {
+	private static var LengthFieldAccessorGenerator INSTANCE = null;
+	
+	def LengthFieldAccessorGenerator() {}
+	
+	def static public LengthFieldAccessorGenerator getInstance() {
+		if (INSTANCE == null)
+			INSTANCE = new LengthFieldAccessorGenerator
+		return INSTANCE
+	}
 
 	override generate(Field f) '''
 	«var LengthField cf = f as LengthField»

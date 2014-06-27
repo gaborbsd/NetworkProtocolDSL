@@ -2,6 +2,11 @@
  */
 package model;
 
+import generator.DummyCloneFieldGenerator;
+import generator.FieldGenerator;
+import generator.NumeralHashcodeFieldGenerator;
+import generator.RefEqualityFieldGenerator;
+
 import org.eclipse.emf.ecore.EClass;
 
 /**
@@ -16,7 +21,6 @@ import org.eclipse.emf.ecore.EClass;
 public class IntegerField extends Field {
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected IntegerField() {
@@ -25,7 +29,6 @@ public class IntegerField extends Field {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -34,18 +37,18 @@ public class IntegerField extends Field {
 	}
 
 	@Override
-	public String getEqualsTemplate() {
-		return "RefEqualityFieldGenerator";
+	public FieldGenerator getEqualsTemplate() {
+		return RefEqualityFieldGenerator.getInstance();
 	}
 
 	@Override
-	public String getHashcodeTemplate() {
-		return "NumeralHashcodeFieldGenerator";
+	public FieldGenerator getHashcodeTemplate() {
+		return NumeralHashcodeFieldGenerator.getInstance();
 	}
 
 	@Override
-	public String getCloneTemplate() {
-		return "DummyCloneFieldGenerator";
+	public FieldGenerator getCloneTemplate() {
+		return DummyCloneFieldGenerator.getInstance();
 	}
 
 } // IntegerField

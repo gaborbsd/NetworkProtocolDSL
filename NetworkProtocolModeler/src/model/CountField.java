@@ -2,6 +2,10 @@
  */
 package model;
 
+import generator.CountFieldAccessorGenerator;
+import generator.DummyCloneFieldGenerator;
+import generator.FieldGenerator;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
@@ -42,13 +46,13 @@ public class CountField extends Field {
 	}
 	
 	@Override
-	public String getAccessorTemplate() {
-		return "CountFieldAccessorGenerator";
+	public FieldGenerator getAccessorTemplate() {
+		return CountFieldAccessorGenerator.getInstance();
 	}
 	
 	@Override
-	public String getCloneTemplate() {
-		return "DummyCloneFieldGenerator";
+	public FieldGenerator getCloneTemplate() {
+		return DummyCloneFieldGenerator.getInstance();
 	}
 
 	/**

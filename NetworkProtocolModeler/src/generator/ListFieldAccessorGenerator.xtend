@@ -11,6 +11,15 @@ import model.LengthField
 import model.DataType
 
 class ListFieldAccessorGenerator implements FieldGenerator {
+	private static var ListFieldAccessorGenerator INSTANCE = null;
+	
+	def ListFieldAccessorGenerator() {}
+	
+	def static public ListFieldAccessorGenerator getInstance() {
+		if (INSTANCE == null)
+			INSTANCE = new ListFieldAccessorGenerator
+		return INSTANCE
+	}
 
 	override generate(Field f) '''
 	«var ListField lf = f as ListField»

@@ -13,12 +13,12 @@
         defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Field" abstract="true">
-    <eOperations name="getDefinitionTemplate" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eOperations name="getInitTemplate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eOperations name="getAccessorTemplate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eOperations name="getEqualsTemplate" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eOperations name="getHashcodeTemplate" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eOperations name="getCloneTemplate" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eOperations name="getDefinitionTemplate" lowerBound="1" eType="#//FieldGenerator"/>
+    <eOperations name="getInitTemplate" eType="#//FieldGenerator"/>
+    <eOperations name="getAccessorTemplate" eType="#//FieldGenerator"/>
+    <eOperations name="getEqualsTemplate" lowerBound="1" eType="#//FieldGenerator"/>
+    <eOperations name="getHashcodeTemplate" lowerBound="1" eType="#//FieldGenerator"/>
+    <eOperations name="getCloneTemplate" lowerBound="1" eType="#//FieldGenerator"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="byteLen" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELongObject"
         defaultValueLiteral="0"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
@@ -74,4 +74,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="package" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral=""/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="FieldGenerator" instanceClassName="generator.FieldGenerator"
+      serializable="false"/>
 </ecore:EPackage>

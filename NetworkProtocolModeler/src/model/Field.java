@@ -2,11 +2,19 @@
  */
 package model;
 
+import generator.DummyFieldInitGenerator;
+import generator.FieldGenerator;
+import generator.RefCloneFieldGenerator;
+import generator.RefEqualityFieldGenerator;
+import generator.RefHashcodeFieldGenerator;
+import generator.SimpleFieldAccessorGenerator;
+import generator.SimpleFieldDefinitionGenerator;
+
 import java.lang.reflect.InvocationTargetException;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
@@ -416,61 +424,61 @@ public abstract class Field extends MinimalEObjectImpl.Container implements EObj
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model kind="operation" required="true"
+	 * @model kind="operation" dataType="model.FieldGenerator" required="true"
 	 * @generated NOT
 	 */
-	public String getDefinitionTemplate() {
-		return "SimpleFieldDefinitionGenerator";
+	public FieldGenerator getDefinitionTemplate() {
+		return SimpleFieldDefinitionGenerator.getInstance();
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model kind="operation"
+	 * @model kind="operation" dataType="model.FieldGenerator"
 	 * @generated NOT
 	 */
-	public String getInitTemplate() {
-		return "DummyFieldInitGenerator";
+	public FieldGenerator getInitTemplate() {
+		return DummyFieldInitGenerator.getInstance();
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model kind="operation"
+	 * @model kind="operation" dataType="model.FieldGenerator"
 	 * @generated NOT
 	 */
-	public String getAccessorTemplate() {
-		return "SimpleFieldAccessorGenerator";
+	public FieldGenerator getAccessorTemplate() {
+		return SimpleFieldAccessorGenerator.getInstance();
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model kind="operation" required="true"
+	 * @model kind="operation" dataType="model.FieldGenerator" required="true"
 	 * @generated NOT
 	 */
-	public String getEqualsTemplate() {
-		return "RefEqualityFieldGenerator";
+	public FieldGenerator getEqualsTemplate() {
+		return RefEqualityFieldGenerator.getInstance();
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model kind="operation" required="true"
+	 * @model kind="operation" dataType="model.FieldGenerator" required="true"
 	 * @generated NOT
 	 */
-	public String getHashcodeTemplate() {
-		return "RefHashcodeFieldGenerator";
+	public FieldGenerator getHashcodeTemplate() {
+		return RefHashcodeFieldGenerator.getInstance();
 	}
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model kind="operation" required="true"
+	 * @model kind="operation" dataType="model.FieldGenerator" required="true"
 	 * @generated NOT
 	 */
-	public String getCloneTemplate() {
-		return "RefCloneFieldGenerator";
+	public FieldGenerator getCloneTemplate() {
+		return RefCloneFieldGenerator.getInstance();
 	}
 
 	/**

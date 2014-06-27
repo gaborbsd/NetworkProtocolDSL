@@ -11,6 +11,15 @@ import model.LengthField
 import model.DataType
 
 class SimpleFieldDefinitionGenerator implements FieldGenerator {
+	private static var SimpleFieldDefinitionGenerator INSTANCE = null;
+	
+	def SimpleFieldDefinitionGenerator() {}
+	
+	def static public SimpleFieldDefinitionGenerator getInstance() {
+		if (INSTANCE == null)
+			INSTANCE = new SimpleFieldDefinitionGenerator
+		return INSTANCE
+	}
 
 	override generate(Field f) '''
 		«IF f instanceof ListField»

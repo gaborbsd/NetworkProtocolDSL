@@ -12,6 +12,16 @@ import model.LengthField
 import model.DataType
 
 class BitFieldAccessorGenerator implements FieldGenerator {
+	private static var BitFieldAccessorGenerator INSTANCE = null;
+	
+	def BitFieldAccessorGenerator() {}
+	
+	def static public BitFieldAccessorGenerator getInstance() {
+		if (INSTANCE == null)
+			INSTANCE = new BitFieldAccessorGenerator
+		return INSTANCE
+	}
+	
 	override generate(Field f) '''
 public «f.type» get«f.name.capitalizeFirst»() {
 	return this.«f.name»;

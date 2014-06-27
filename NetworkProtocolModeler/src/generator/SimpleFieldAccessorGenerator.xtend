@@ -12,6 +12,15 @@ import model.LengthField
 import model.DataType
 
 class SimpleFieldAccessorGenerator implements FieldGenerator {
+	private static var SimpleFieldAccessorGenerator INSTANCE = null;
+	
+	def SimpleFieldAccessorGenerator() {}
+	
+	def static public SimpleFieldAccessorGenerator getInstance() {
+		if (INSTANCE == null)
+			INSTANCE = new SimpleFieldAccessorGenerator
+		return INSTANCE
+	}
 
 	override generate(Field f) '''
 public «f.type» get«f.name.capitalizeFirst»() {

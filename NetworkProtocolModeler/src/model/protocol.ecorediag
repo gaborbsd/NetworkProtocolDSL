@@ -279,6 +279,13 @@
     <element xmi:type="ecore:EAnnotation" href="protocol.ecore#//%http:%2F%2Fwww.eclipse.org%2FOCL%2FImport%"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_pAU0gsxjEeOf6bzqQz-CLw" x="732" y="56"/>
   </children>
+  <children xmi:type="notation:Node" xmi:id="_mrSbsP13EeOBl53AGihbdA" type="1004">
+    <children xmi:type="notation:Node" xmi:id="_mroZ8P13EeOBl53AGihbdA" type="4008"/>
+    <children xmi:type="notation:Node" xmi:id="_mrugkP13EeOBl53AGihbdA" type="4009"/>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_mrTCwP13EeOBl53AGihbdA" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EDataType" href="protocol.ecore#//FieldGenerator"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_mrTCwf13EeOBl53AGihbdA" x="732" y="108"/>
+  </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_o9fi8MxjEeOf6bzqQz-CLw"/>
   <element xmi:type="ecore:EPackage" href="protocol.ecore#/"/>
   <edges xmi:type="notation:Edge" xmi:id="_pAlTMMxjEeOf6bzqQz-CLw" type="3002" source="_o-VQcMxjEeOf6bzqQz-CLw" target="_o_jYcMxjEeOf6bzqQz-CLw">

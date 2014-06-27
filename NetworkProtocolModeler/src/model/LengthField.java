@@ -2,6 +2,9 @@
  */
 package model;
 
+import generator.FieldGenerator;
+import generator.LengthFieldAccessorGenerator;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
@@ -42,8 +45,8 @@ public class LengthField extends Field {
 	}
 	
 	@Override
-	public String getAccessorTemplate() {
-		return "LengthFieldAccessorGenerator";
+	public FieldGenerator getAccessorTemplate() {
+		return LengthFieldAccessorGenerator.getInstance();
 	}
 
 	/**
