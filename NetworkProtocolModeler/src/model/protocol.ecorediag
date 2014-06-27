@@ -80,6 +80,10 @@
         <element xmi:type="ecore:EOperation" href="protocol.ecore#//Field/getCloneTemplate"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_Nir3EforEeOQSccz4S1-_A"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_K1EuEP4MEeOBl53AGihbdA" type="2002">
+        <element xmi:type="ecore:EOperation" href="protocol.ecore#//Field/getJavaType"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_K1FVIP4MEeOBl53AGihbdA"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_o_j_hsxjEeOf6bzqQz-CLw"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_o_j_h8xjEeOf6bzqQz-CLw"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_o_j_iMxjEeOf6bzqQz-CLw"/>

@@ -160,4 +160,8 @@ public class BitField extends Field {
 		return super.eIsSet(featureID);
 	}
 
+	@Override
+	public String getJavaType() {
+		return "byte[]";
+	}
 } // BitField

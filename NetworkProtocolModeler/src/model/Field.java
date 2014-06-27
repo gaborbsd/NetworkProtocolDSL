@@ -484,6 +484,16 @@ public abstract class Field extends MinimalEObjectImpl.Container implements EObj
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @model kind="operation" required="true"
+	 * @generated
+	 */
+	public String getJavaType() {
+		return "long";
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -620,6 +630,8 @@ public abstract class Field extends MinimalEObjectImpl.Container implements EObj
 				return getHashcodeTemplate();
 			case ProtocolPackage.FIELD___GET_CLONE_TEMPLATE:
 				return getCloneTemplate();
+			case ProtocolPackage.FIELD___GET_JAVA_TYPE:
+				return getJavaType();
 		}
 		return super.eInvoke(operationID, arguments);
 	}

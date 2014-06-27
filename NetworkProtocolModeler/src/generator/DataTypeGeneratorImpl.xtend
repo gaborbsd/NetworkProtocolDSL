@@ -1,14 +1,10 @@
 package generator
 
-import model.BinaryField
-import model.BitField
 import model.CountField
 import model.DataType
 import model.Field
-import model.IntegerField
 import model.LengthField
 import model.ListField
-import model.StringField
 
 class DataTypeGeneratorImpl implements DataTypeGenerator {
 	private static var DataTypeGeneratorImpl INSTANCE = null;
@@ -81,33 +77,13 @@ public class «dt.typeName» implements Cloneable, OrderedSerializable {
 		return new VariableProps[]
 			«FOR v : dt.fields BEFORE '{' SEPARATOR ', ' AFTER '};'»
 					«IF !v.transientField»
-						new VariableProps("«v.name»", "«v.type»", "«v.collectionType»", «v.byteLen», «v.unbounded», «v.formatterClass», «v.
+						new VariableProps("«v.name»", "«v.javaType»", "«v.collectionType»", «v.byteLen», «v.unbounded», «v.formatterClass», «v.
 		countOf», «v.lengthOf»)
 				«ENDIF»
 			«ENDFOR»
 	}
 	
 '''
-
-	def String getType(Field field) {
-		if (field instanceof BinaryField)
-			return "byte[]";
-		if (field instanceof BitField)
-			return "byte[]";
-		if (field instanceof IntegerField)
-			return "long";
-		if (field instanceof StringField)
-			return "String";
-		if (field instanceof ListField)
-			return "List";
-		if (field instanceof CountField)
-			return "long";
-		if (field instanceof LengthField)
-			return "long";
-		if (field instanceof DataType)
-			return (field as DataType).typeName;
-		throw new RuntimeException("Cannot happen.");
-	}
 
 	def String countOf(Field field) {
 		return if(field instanceof CountField) "\"" + (field as CountField).ref.name + "\"" else "null";

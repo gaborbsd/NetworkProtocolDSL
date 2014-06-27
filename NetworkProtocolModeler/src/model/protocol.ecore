@@ -19,6 +19,7 @@
     <eOperations name="getEqualsTemplate" lowerBound="1" eType="#//FieldGenerator"/>
     <eOperations name="getHashcodeTemplate" lowerBound="1" eType="#//FieldGenerator"/>
     <eOperations name="getCloneTemplate" lowerBound="1" eType="#//FieldGenerator"/>
+    <eOperations name="getJavaType" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="byteLen" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELongObject"
         defaultValueLiteral="0"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"

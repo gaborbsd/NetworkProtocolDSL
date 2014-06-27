@@ -33,5 +33,9 @@ public class StringField extends Field {
 	protected EClass eStaticClass() {
 		return ProtocolPackage.Literals.STRING_FIELD;
 	}
-
+	
+	@Override
+	public String getJavaType() {
+		return "String";
+	}
 } // StringField

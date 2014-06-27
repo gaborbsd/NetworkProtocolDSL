@@ -34,4 +34,8 @@ public class BinaryField extends Field {
 		return ProtocolPackage.Literals.BINARY_FIELD;
 	}
 
+	@Override
+	public String getJavaType() {
+		return "byte[]";
+	}
 } // BinaryField

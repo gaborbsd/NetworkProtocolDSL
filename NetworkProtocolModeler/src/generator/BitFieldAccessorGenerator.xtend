@@ -1,15 +1,7 @@
 package generator
 
-import generator.FieldGenerator
-import model.Field
-import model.BinaryField
 import model.BitField
-import model.IntegerField
-import model.StringField
-import model.ListField
-import model.CountField
-import model.LengthField
-import model.DataType
+import model.Field
 
 class BitFieldAccessorGenerator implements FieldGenerator {
 	private static var BitFieldAccessorGenerator INSTANCE = null;
@@ -23,11 +15,11 @@ class BitFieldAccessorGenerator implements FieldGenerator {
 	}
 	
 	override generate(Field f) '''
-public «f.type» get«f.name.capitalizeFirst»() {
+public «f.javaType» get«f.name.capitalizeFirst»() {
 	return this.«f.name»;
 }
 
-public void set«f.name.capitalizeFirst»(«f.type» «f.name») {
+public void set«f.name.capitalizeFirst»(«f.javaType» «f.name») {
 	this.«f.name» = «f.name»;
 }
 
@@ -71,25 +63,5 @@ public void set«component.capitalizeFirst»(long value) {
 	def private String capitalizeFirst(String str) {
 		var first = Character.toUpperCase(str.charAt(0));
 		return first + str.substring(1);
-	}
-
-	def String getType(Field field) {
-		if (field instanceof BinaryField)
-			return "byte[]";
-		if (field instanceof BitField)
-			return "byte[]";
-		if (field instanceof IntegerField)
-			return "long";
-		if (field instanceof StringField)
-			return "String";
-		if (field instanceof ListField)
-			return "List";
-		if (field instanceof CountField)
-			return "long";
-		if (field instanceof LengthField)
-			return "long";
-		if (field instanceof DataType)
-			return (field as DataType).typeName;
-		throw new RuntimeException("Cannot happen.");
 	}
 }

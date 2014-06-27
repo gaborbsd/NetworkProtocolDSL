@@ -162,5 +162,10 @@ public class ListField extends Field {
 		}
 		return super.eIsSet(featureID);
 	}
+	
+	@Override
+	public String getJavaType() {
+		return "List<" + elementType.getJavaType() + ">";
+	}
 
 } // ListField

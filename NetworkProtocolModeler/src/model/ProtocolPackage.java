@@ -199,13 +199,22 @@ public class ProtocolPackage extends EPackageImpl {
 	public static final int FIELD___GET_CLONE_TEMPLATE = 5;
 
 	/**
+	 * The operation id for the '<em>Get Java Type</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int FIELD___GET_JAVA_TYPE = 6;
+
+	/**
 	 * The number of operations of the '<em>Field</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	public static final int FIELD_OPERATION_COUNT = 6;
+	public static final int FIELD_OPERATION_COUNT = 7;
 
 	/**
 	 * The meta object id for the '{@link model.DataType <em>Data Type</em>}' class.
@@ -371,6 +380,15 @@ public class ProtocolPackage extends EPackageImpl {
 	public static final int DATA_TYPE___GET_CLONE_TEMPLATE = FIELD___GET_CLONE_TEMPLATE;
 
 	/**
+	 * The operation id for the '<em>Get Java Type</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int DATA_TYPE___GET_JAVA_TYPE = FIELD___GET_JAVA_TYPE;
+
+	/**
 	 * The number of operations of the '<em>Data Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -514,6 +532,15 @@ public class ProtocolPackage extends EPackageImpl {
 	 * @ordered
 	 */
 	public static final int INTEGER_FIELD___GET_CLONE_TEMPLATE = FIELD___GET_CLONE_TEMPLATE;
+
+	/**
+	 * The operation id for the '<em>Get Java Type</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int INTEGER_FIELD___GET_JAVA_TYPE = FIELD___GET_JAVA_TYPE;
 
 	/**
 	 * The number of operations of the '<em>Integer Field</em>' class.
@@ -661,6 +688,15 @@ public class ProtocolPackage extends EPackageImpl {
 	public static final int BINARY_FIELD___GET_CLONE_TEMPLATE = FIELD___GET_CLONE_TEMPLATE;
 
 	/**
+	 * The operation id for the '<em>Get Java Type</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BINARY_FIELD___GET_JAVA_TYPE = FIELD___GET_JAVA_TYPE;
+
+	/**
 	 * The number of operations of the '<em>Binary Field</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -804,6 +840,15 @@ public class ProtocolPackage extends EPackageImpl {
 	 * @ordered
 	 */
 	public static final int STRING_FIELD___GET_CLONE_TEMPLATE = FIELD___GET_CLONE_TEMPLATE;
+
+	/**
+	 * The operation id for the '<em>Get Java Type</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int STRING_FIELD___GET_JAVA_TYPE = FIELD___GET_JAVA_TYPE;
 
 	/**
 	 * The number of operations of the '<em>String Field</em>' class.
@@ -1006,6 +1051,15 @@ public class ProtocolPackage extends EPackageImpl {
 	public static final int BIT_FIELD___GET_CLONE_TEMPLATE = FIELD___GET_CLONE_TEMPLATE;
 
 	/**
+	 * The operation id for the '<em>Get Java Type</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int BIT_FIELD___GET_JAVA_TYPE = FIELD___GET_JAVA_TYPE;
+
+	/**
 	 * The number of operations of the '<em>Bit Field</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1158,6 +1212,15 @@ public class ProtocolPackage extends EPackageImpl {
 	 * @ordered
 	 */
 	public static final int LIST_FIELD___GET_CLONE_TEMPLATE = FIELD___GET_CLONE_TEMPLATE;
+
+	/**
+	 * The operation id for the '<em>Get Java Type</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LIST_FIELD___GET_JAVA_TYPE = FIELD___GET_JAVA_TYPE;
 
 	/**
 	 * The number of operations of the '<em>List Field</em>' class.
@@ -1314,6 +1377,15 @@ public class ProtocolPackage extends EPackageImpl {
 	public static final int COUNT_FIELD___GET_CLONE_TEMPLATE = FIELD___GET_CLONE_TEMPLATE;
 
 	/**
+	 * The operation id for the '<em>Get Java Type</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int COUNT_FIELD___GET_JAVA_TYPE = FIELD___GET_JAVA_TYPE;
+
+	/**
 	 * The number of operations of the '<em>Count Field</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1466,6 +1538,15 @@ public class ProtocolPackage extends EPackageImpl {
 	 * @ordered
 	 */
 	public static final int LENGTH_FIELD___GET_CLONE_TEMPLATE = FIELD___GET_CLONE_TEMPLATE;
+
+	/**
+	 * The operation id for the '<em>Get Java Type</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	public static final int LENGTH_FIELD___GET_JAVA_TYPE = FIELD___GET_JAVA_TYPE;
 
 	/**
 	 * The number of operations of the '<em>Length Field</em>' class.
@@ -1969,6 +2050,19 @@ public class ProtocolPackage extends EPackageImpl {
 
 
 	/**
+	 * Returns the meta object for the '{@link model.Field#getJavaType() <em>Get Java Type</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Java Type</em>' operation.
+	 * @see model.Field#getJavaType()
+	 * @generated
+	 */
+	public EOperation getField__GetJavaType() {
+		return fieldEClass.getEOperations().get(6);
+	}
+
+
+	/**
 	 * Returns the meta object for class '{@link model.IntegerField <em>Integer Field</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2296,6 +2390,7 @@ public class ProtocolPackage extends EPackageImpl {
 		createEOperation(fieldEClass, FIELD___GET_EQUALS_TEMPLATE);
 		createEOperation(fieldEClass, FIELD___GET_HASHCODE_TEMPLATE);
 		createEOperation(fieldEClass, FIELD___GET_CLONE_TEMPLATE);
+		createEOperation(fieldEClass, FIELD___GET_JAVA_TYPE);
 
 		integerFieldEClass = createEClass(INTEGER_FIELD);
 
@@ -2394,6 +2489,8 @@ public class ProtocolPackage extends EPackageImpl {
 		initEOperation(getField__GetHashcodeTemplate(), this.getFieldGenerator(), "getHashcodeTemplate", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEOperation(getField__GetCloneTemplate(), this.getFieldGenerator(), "getCloneTemplate", 1, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getField__GetJavaType(), ecorePackage.getEString(), "getJavaType", 1, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(integerFieldEClass, IntegerField.class, "IntegerField", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -2634,6 +2731,14 @@ public class ProtocolPackage extends EPackageImpl {
 		 * @generated
 		 */
 		public static final EOperation FIELD___GET_CLONE_TEMPLATE = eINSTANCE.getField__GetCloneTemplate();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Java Type</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		public static final EOperation FIELD___GET_JAVA_TYPE = eINSTANCE.getField__GetJavaType();
 
 		/**
 		 * The meta object literal for the '{@link model.IntegerField <em>Integer Field</em>}' class.
