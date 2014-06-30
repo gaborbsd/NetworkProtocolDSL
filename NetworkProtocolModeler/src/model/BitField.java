@@ -2,8 +2,8 @@
  */
 package model;
 
-import generator.BitFieldAccessorGenerator;
 import generator.FieldGenerator;
+import generator.accessor.BitFieldAccessorGenerator;
 
 import java.util.Collection;
 

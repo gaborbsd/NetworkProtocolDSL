@@ -1,6 +1,7 @@
-package generator
+package generator.equals
 
 import model.Field
+import generator.FieldGenerator
 
 class RefEqualityFieldGenerator implements FieldGenerator {
 	private static var RefEqualityFieldGenerator INSTANCE = null;

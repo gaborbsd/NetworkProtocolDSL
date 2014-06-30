@@ -1,6 +1,7 @@
-package generator
+package generator.hashcode
 
 import model.Field
+import generator.FieldGenerator
 
 class NumeralHashcodeFieldGenerator implements FieldGenerator {
 	private static var NumeralHashcodeFieldGenerator INSTANCE = null;

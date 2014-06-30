@@ -1,7 +1,8 @@
-package generator
+package generator.accessor
 
 import model.Field
 import model.ListField
+import generator.FieldGenerator
 
 class ListFieldAccessorGenerator implements FieldGenerator {
 	private static var ListFieldAccessorGenerator INSTANCE = null;

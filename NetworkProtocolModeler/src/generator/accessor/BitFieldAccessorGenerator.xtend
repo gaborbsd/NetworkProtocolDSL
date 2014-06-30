@@ -1,7 +1,8 @@
-package generator
+package generator.accessor
 
 import model.BitField
 import model.Field
+import generator.FieldGenerator
 
 class BitFieldAccessorGenerator implements FieldGenerator {
 	private static var BitFieldAccessorGenerator INSTANCE = null;

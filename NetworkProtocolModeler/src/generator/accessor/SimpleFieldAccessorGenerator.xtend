@@ -1,6 +1,7 @@
-package generator
+package generator.accessor
 
 import model.Field
+import generator.FieldGenerator
 
 class SimpleFieldAccessorGenerator implements FieldGenerator {
 	private static var SimpleFieldAccessorGenerator INSTANCE = null;

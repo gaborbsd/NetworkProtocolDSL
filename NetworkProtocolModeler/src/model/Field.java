@@ -2,13 +2,13 @@
  */
 package model;
 
-import generator.DummyFieldInitGenerator;
 import generator.FieldGenerator;
-import generator.RefCloneFieldGenerator;
-import generator.RefEqualityFieldGenerator;
-import generator.RefHashcodeFieldGenerator;
-import generator.SimpleFieldAccessorGenerator;
-import generator.SimpleFieldDefinitionGenerator;
+import generator.accessor.SimpleFieldAccessorGenerator;
+import generator.clone.RefCloneFieldGenerator;
+import generator.equals.RefEqualityFieldGenerator;
+import generator.hashcode.RefHashcodeFieldGenerator;
+import generator.vardef.SimpleFieldDefinitionGenerator;
+import generator.varinit.DummyFieldInitGenerator;
 
 import java.lang.reflect.InvocationTargetException;
 

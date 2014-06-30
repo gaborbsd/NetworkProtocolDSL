@@ -2,9 +2,9 @@
  */
 package model;
 
-import generator.CountFieldAccessorGenerator;
-import generator.DummyCloneFieldGenerator;
 import generator.FieldGenerator;
+import generator.accessor.CountFieldAccessorGenerator;
+import generator.clone.DummyCloneFieldGenerator;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;

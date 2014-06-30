@@ -3,7 +3,7 @@
 package model;
 
 import generator.FieldGenerator;
-import generator.ListFieldAccessorGenerator;
+import generator.accessor.ListFieldAccessorGenerator;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;

@@ -1,6 +1,7 @@
-package generator
+package generator.hashcode
 
 import model.Field
+import generator.FieldGenerator
 
 class RefHashcodeFieldGenerator implements FieldGenerator {
 	private static var RefHashcodeFieldGenerator INSTANCE = null;

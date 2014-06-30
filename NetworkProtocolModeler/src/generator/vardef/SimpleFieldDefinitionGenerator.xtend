@@ -1,8 +1,9 @@
-package generator
+package generator.vardef
 
 import model.DataType
 import model.Field
 import model.ListField
+import generator.FieldGenerator
 
 class SimpleFieldDefinitionGenerator implements FieldGenerator {
 	private static var SimpleFieldDefinitionGenerator INSTANCE = null;

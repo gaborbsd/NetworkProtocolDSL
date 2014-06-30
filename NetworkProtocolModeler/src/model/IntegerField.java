@@ -2,10 +2,10 @@
  */
 package model;
 
-import generator.DummyCloneFieldGenerator;
 import generator.FieldGenerator;
-import generator.NumeralHashcodeFieldGenerator;
-import generator.RefEqualityFieldGenerator;
+import generator.clone.DummyCloneFieldGenerator;
+import generator.equals.RefEqualityFieldGenerator;
+import generator.hashcode.NumeralHashcodeFieldGenerator;
 
 import org.eclipse.emf.ecore.EClass;
 

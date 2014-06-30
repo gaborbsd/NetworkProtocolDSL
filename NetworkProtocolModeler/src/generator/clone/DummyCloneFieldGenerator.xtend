@@ -1,6 +1,7 @@
-package generator
+package generator.clone
 
 import model.Field
+import generator.FieldGenerator
 
 class DummyCloneFieldGenerator implements FieldGenerator {
 	private static var DummyCloneFieldGenerator INSTANCE = null;

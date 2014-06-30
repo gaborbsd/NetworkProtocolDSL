@@ -1,4 +1,4 @@
-package generator
+package generator.varinit
 
 import generator.FieldGenerator
 import model.Field

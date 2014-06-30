@@ -1,6 +1,7 @@
-package generator
+package generator.equals
 
 import model.Field
+import generator.FieldGenerator
 
 class SemanticEqualityFieldGenerator implements FieldGenerator {
 	private static var SemanticEqualityFieldGenerator INSTANCE = null;
