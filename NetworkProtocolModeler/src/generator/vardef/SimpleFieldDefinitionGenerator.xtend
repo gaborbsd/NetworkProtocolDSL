@@ -1,9 +1,9 @@
 package generator.vardef
 
-import model.DataType
-import model.Field
-import model.ListField
 import generator.FieldGenerator
+import model.Field
+
+import static extension generator.util.FieldExtension.*
 
 class SimpleFieldDefinitionGenerator implements FieldGenerator {
 	private static var SimpleFieldDefinitionGenerator INSTANCE = null;
@@ -19,14 +19,4 @@ class SimpleFieldDefinitionGenerator implements FieldGenerator {
 	override generate(Field f) '''
 		private «f.transient» «f.javaType» «f.name»;
 	'''
-
-	def String getTransient(Field field) {
-		return if(field.transientField) "transient" else "";
-	}
-
-	def String getCollectionType(Field field) {
-		if (field instanceof ListField)
-			return (field.elementType as DataType).typeName;
-		return null;
-	}
 }

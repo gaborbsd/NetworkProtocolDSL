@@ -4,6 +4,8 @@ import generator.FieldGenerator
 import model.Field
 import model.LengthField
 
+import static extension generator.util.StringExtension.*
+
 class LengthFieldAccessorGenerator implements FieldGenerator {
 	private static var LengthFieldAccessorGenerator INSTANCE = null;
 	
@@ -21,10 +23,4 @@ public long get«cf.name.capitalizeFirst»() {
 	return «cf.ref.name».length;
 }
 	'''
-
-	def private String capitalizeFirst(String str) {
-		var first = Character.toUpperCase(str.charAt(0));
-		return first + str.substring(1);
-	}
-
 }

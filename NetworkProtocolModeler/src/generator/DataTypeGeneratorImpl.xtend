@@ -1,10 +1,8 @@
 package generator
 
-import model.CountField
 import model.DataType
-import model.Field
-import model.LengthField
-import model.ListField
+
+import static extension generator.util.FieldExtension.*
 
 class DataTypeGeneratorImpl implements DataTypeGenerator {
 	private static var DataTypeGeneratorImpl INSTANCE = null;
@@ -84,22 +82,4 @@ public class «dt.typeName» implements Cloneable, OrderedSerializable {
 	}
 	
 '''
-
-	def String countOf(Field field) {
-		return if(field instanceof CountField) "\"" + (field as CountField).ref.name + "\"" else "null";
-	}
-
-	def String lengthOf(Field field) {
-		return if(field instanceof LengthField) "\"" + (field as LengthField).ref.name + "\"" else "null";
-	}
-
-	def String formatterClass(Field field) {
-		return if(field.formatter != null) "\"" + field.formatter.name + "\"" else "null";
-	}
-
-	def String getCollectionType(Field field) {
-		if (field instanceof ListField)
-			return (field.elementType as DataType).typeName;
-		return null;
-	}
 }

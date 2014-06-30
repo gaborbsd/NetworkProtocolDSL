@@ -4,6 +4,9 @@ import model.BitField
 import model.Field
 import generator.FieldGenerator
 
+import static extension generator.util.LongExtension.*
+import static extension generator.util.StringExtension.*
+
 class BitFieldAccessorGenerator implements FieldGenerator {
 	private static var BitFieldAccessorGenerator INSTANCE = null;
 	
@@ -50,19 +53,4 @@ public void set«component.capitalizeFirst»(long value) {
 	«bitField»[«offset / 8»] = (byte)(«bitField»[«offset / 8»] | (value << «8 - len - (offset % 8)»));
 }
 		'''
-
-	def private String bitMaskForLen(long len) {
-		var sb = new StringBuffer("0b");
-		var count = len;
-		while (count > 0) {
-			sb.append('1')
-			count = count - 1
-		}
-		return sb.toString
-	}
-
-	def private String capitalizeFirst(String str) {
-		var first = Character.toUpperCase(str.charAt(0));
-		return first + str.substring(1);
-	}
 }

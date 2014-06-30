@@ -4,6 +4,8 @@ import generator.FieldGenerator
 import model.Field
 import model.CountField
 
+import static extension generator.util.StringExtension.*
+
 class CountFieldAccessorGenerator implements FieldGenerator {
 	private static var CountFieldAccessorGenerator INSTANCE = null;
 	
@@ -21,9 +23,4 @@ public long get«cf.name.capitalizeFirst»() {
 	return «cf.ref.name».size();
 }
 	'''
-
-	def private String capitalizeFirst(String str) {
-		var first = Character.toUpperCase(str.charAt(0));
-		return first + str.substring(1);
-	}
 }

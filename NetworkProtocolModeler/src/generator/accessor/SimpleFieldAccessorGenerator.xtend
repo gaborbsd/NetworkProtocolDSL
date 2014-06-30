@@ -3,6 +3,8 @@ package generator.accessor
 import model.Field
 import generator.FieldGenerator
 
+import static extension generator.util.StringExtension.*
+
 class SimpleFieldAccessorGenerator implements FieldGenerator {
 	private static var SimpleFieldAccessorGenerator INSTANCE = null;
 	
@@ -37,9 +39,4 @@ public void set«f.name.capitalizeFirst»(«f.javaType» «f.name») {
 	this.«f.name» = «f.name»;
 }
 	'''
-
-	def private String capitalizeFirst(String str) {
-		var first = Character.toUpperCase(str.charAt(0));
-		return first + str.substring(1);
-	}
 }

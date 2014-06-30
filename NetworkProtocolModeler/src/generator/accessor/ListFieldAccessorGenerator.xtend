@@ -4,6 +4,8 @@ import model.Field
 import model.ListField
 import generator.FieldGenerator
 
+import static extension generator.util.StringExtension.*
+
 class ListFieldAccessorGenerator implements FieldGenerator {
 	private static var ListFieldAccessorGenerator INSTANCE = null;
 	
@@ -38,17 +40,4 @@ public List<«lf.elementType.javaType»> get«f.name.capitalizeFirst»() {
 	return Collections.unmodifiableList(«f.name»);
 }
 	'''
-
-	def private String singularize(String str) {
-		if (str.substring(str.length - 3, str.length).equals("ies"))
-			return str.substring(0, str.length - 3) + "y";
-		if (str.substring(str.length - 1, str.length).equals("s"))
-			return str.substring(0, str.length - 1)
-		return str;
-	}
-
-	def private String capitalizeFirst(String str) {
-		var first = Character.toUpperCase(str.charAt(0));
-		return first + str.substring(1);
-	}
 }
