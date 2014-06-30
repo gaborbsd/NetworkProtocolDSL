@@ -4,6 +4,7 @@ package model;
 
 import generator.FieldGenerator;
 import generator.accessor.BitFieldAccessorGenerator;
+import generator.varinit.ByteArrayInitGenerator;
 
 import java.util.Collection;
 
@@ -48,6 +49,11 @@ public class BitField extends Field {
 	 */
 	protected BitField() {
 		super();
+	}
+
+	@Override
+	public FieldGenerator getInitTemplate() {
+		return ByteArrayInitGenerator.getInstance();
 	}
 
 	@Override

@@ -2,6 +2,9 @@
  */
 package model;
 
+import generator.FieldGenerator;
+import generator.varinit.ByteArrayInitGenerator;
+
 import org.eclipse.emf.ecore.EClass;
 
 /**
@@ -22,6 +25,11 @@ public class BinaryField extends Field {
 	 */
 	protected BinaryField() {
 		super();
+	}
+	
+	@Override
+	public FieldGenerator getInitTemplate() {
+		return ByteArrayInitGenerator.getInstance();
 	}
 
 	/**

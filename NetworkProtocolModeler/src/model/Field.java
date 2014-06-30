@@ -5,7 +5,7 @@ package model;
 import generator.FieldGenerator;
 import generator.accessor.SimpleFieldAccessorGenerator;
 import generator.clone.RefCloneFieldGenerator;
-import generator.equals.RefEqualityFieldGenerator;
+import generator.equals.SemanticEqualityFieldGenerator;
 import generator.hashcode.RefHashcodeFieldGenerator;
 import generator.vardef.SimpleFieldDefinitionGenerator;
 import generator.varinit.DummyFieldInitGenerator;
@@ -458,7 +458,7 @@ public abstract class Field extends MinimalEObjectImpl.Container implements EObj
 	 * @generated NOT
 	 */
 	public FieldGenerator getEqualsTemplate() {
-		return RefEqualityFieldGenerator.getInstance();
+		return SemanticEqualityFieldGenerator.getInstance();
 	}
 
 	/**

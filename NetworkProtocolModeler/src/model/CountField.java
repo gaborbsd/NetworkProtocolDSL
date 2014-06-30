@@ -5,6 +5,7 @@ package model;
 import generator.FieldGenerator;
 import generator.accessor.CountFieldAccessorGenerator;
 import generator.clone.DummyCloneFieldGenerator;
+import generator.vardef.DummyFieldDefinitionGenerator;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -44,7 +45,12 @@ public class CountField extends Field {
 	protected CountField() {
 		super();
 	}
-	
+
+	@Override
+	public FieldGenerator getDefinitionTemplate() {
+		return DummyFieldDefinitionGenerator.getInstance();
+	}
+
 	@Override
 	public FieldGenerator getAccessorTemplate() {
 		return CountFieldAccessorGenerator.getInstance();

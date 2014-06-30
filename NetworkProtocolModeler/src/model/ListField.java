@@ -4,6 +4,7 @@ package model;
 
 import generator.FieldGenerator;
 import generator.accessor.ListFieldAccessorGenerator;
+import generator.varinit.ListFieldInitGenerator;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -44,6 +45,11 @@ public class ListField extends Field {
 		super();
 	}
 
+	@Override
+	public FieldGenerator getInitTemplate() {
+		return ListFieldInitGenerator.getInstance();
+	}
+	
 	@Override
 	public FieldGenerator getAccessorTemplate() {
 		return ListFieldAccessorGenerator.getInstance();
