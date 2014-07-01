@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Protokit by gaborbsd</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Protokit</h1>
+        <p></p>
+
+        <p class="view"><a href="https://github.com/gaborbsd/ProtoKit">View the Project on GitHub <small>gaborbsd/ProtoKit</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/gaborbsd/ProtoKit/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/gaborbsd/ProtoKit/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/gaborbsd/ProtoKit">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="protokit" class="anchor" href="#protokit"><span class="octicon octicon-link"></span></a>ProtoKit</h1>
+
+<p>ProtoKit is a Domain-Specific Language (DSL) and an accompanying code generator tool for modeling application-level network protocols and generating Java classes to support the protocol in applications. ProtoKit is simple and has a limited functionality but it is useful in practice. Unlike other modeling languages, it does not model interactions in the protocol but focuses only on the message structure. Developing application-level protocols involves mostly this latter task, since the establishment of the connection and other complex interactions are handled by lower layers.</p>
+
+<p>So what does ProtoKit actually do? With a concise and simple model, the messages are modeled and ProtoKit generates classes that represent the messages and can be serialized/deserialized with a runtime framework. One can argue that this is quite easy to implement manually but there is a slight paradigm mismatch between the serialization of OO classes and network messages. Namely, the following functionalities are not so trivial to map to OO classes:</p>
+
+<ul>
+<li>Network messages often use bitfields to save on bandwidth.</li>
+<li>There can be length fields that indicate the length of a variable-length field so that it can be deserialized easily.</li>
+<li>The mapping to the serialized bytestream is strictly specified, general frameworks cannot be used, and so on...
+To overcome these difficulties, ProtoKit takes the concise model and generates the message classes. On one hand, this spares the monotone work of hand-writing these classes and on the other hand, the code generator generates accessors for bitfields and other special features. The logic for the serialization is also included.</li>
+</ul><h2>
+<a name="modeling-a-protocol" class="anchor" href="#modeling-a-protocol"><span class="octicon octicon-link"></span></a>Modeling a Protocol</h2>
+
+<p>To do...</p>
+
+<h2>
+<a name="running-the-generator" class="anchor" href="#running-the-generator"><span class="octicon octicon-link"></span></a>Running the Generator</h2>
+
+<p>To do...</p>
+
+<h2>
+<a name="using-the-generated-classes" class="anchor" href="#using-the-generated-classes"><span class="octicon octicon-link"></span></a>Using the Generated Classes</h2>
+
+<p>To do...</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/gaborbsd">gaborbsd</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
